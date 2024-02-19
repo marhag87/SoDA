@@ -1,0 +1,13 @@
+## Interface: 11500
+## Title: Season of Discovery Alts
+## Notes: Keep track of your alts in Season of Discovery
+## Author: marrtin
+## Version: 0.1.0
+## SavedVariables: SoDADB
+
+embeds.xml
+
+Core.lua
+Basic.lua
+Currency.lua
+Gui.lua

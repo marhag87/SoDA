@@ -1,0 +1,3 @@
+[submodule "Libs/Ace3"]
+	path = SoDA/Libs/Ace3
+	url = https://github.com/WoWUIDev/Ace3
