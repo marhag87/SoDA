@@ -8,12 +8,12 @@ function SoDA:Gui()
     for _ in pairs(self.db.global.characters) do
         numChararcters = numChararcters + 1
     end
-    local width = (numChararcters * 200) + 50
+    local width = (numChararcters * 120) + 40
     f:SetWidth(width)
 
     for guid,character in pairs(self.db.global.characters) do
         local group = self.aceGui:Create("SimpleGroup")
-        group:SetWidth(200)
+        group:SetWidth(120)
         local character = character[1]
 
         -- Basic
@@ -29,6 +29,11 @@ function SoDA:Gui()
         -- Runes
         local runes = SoDA:GetRunesGui(character)
         group:AddChild(runes)
+        group:AddChild(SoDA:Spacer())
+
+        -- Raids
+        local raids = SoDA:GetRaidsGui(character)
+        group:AddChild(raids)
         group:AddChild(SoDA:Spacer())
 
         f:AddChild(group)

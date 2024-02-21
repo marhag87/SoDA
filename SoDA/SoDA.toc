@@ -12,6 +12,7 @@ Basic.lua
 Currency.lua
 Gui.lua
 Runes.lua
+Raids.lua
 
 Runes\Druid.lua
 Runes\Paladin.lua

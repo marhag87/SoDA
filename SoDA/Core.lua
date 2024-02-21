@@ -17,6 +17,7 @@ function SoDA:SaveData()
     character.currency = SoDA:GetCurrency()
     self.loggedInCharacter = character -- TODO: Runes has dependencies, how to handle?
     character.runes = SoDA:GetRunes()
+    character.raids = SoDA:GetRaids()
     if self.db.global.characters == nil then
         self.db.global.characters = {}
     end
