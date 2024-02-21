@@ -15,6 +15,8 @@ function SoDA:GetBasicGui(character)
 
     -- Character name
     local characterName = self.aceGui:Create("Label")
+    local r, g, b, _ = GetClassColor(character.basic.class)
+    characterName:SetColor(r, g, b)
     characterName:SetText(character.basic.name)
 
     group:AddChild(characterName)

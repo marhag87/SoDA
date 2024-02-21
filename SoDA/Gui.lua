@@ -19,15 +19,24 @@ function SoDA:Gui()
         -- Basic
         local basic = SoDA:GetBasicGui(character)
         group:AddChild(basic)
+        group:AddChild(SoDA:Spacer())
 
         -- Currency
         local currency = SoDA:GetCurrencyGui(character)
         group:AddChild(currency)
+        group:AddChild(SoDA:Spacer())
 
         -- Runes
         local runes = SoDA:GetRunesGui(character)
         group:AddChild(runes)
+        group:AddChild(SoDA:Spacer())
 
         f:AddChild(group)
     end
+end
+
+function SoDA:Spacer()
+    local spacer = self.aceGui:Create("Label")
+    spacer:SetText(" ")
+    return spacer
 end

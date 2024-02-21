@@ -24,7 +24,8 @@ function SoDA:GetCurrencyGui(character)
 
     -- Gold
     local characterCopper = self.aceGui:Create("Label")
-    characterCopper:SetText(character.currency.copper)
+    local moneyString = GetMoneyString(character.currency.copper)
+    characterCopper:SetText(moneyString)
     group:AddChild(characterCopper)
 
     return group
