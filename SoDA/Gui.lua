@@ -14,7 +14,6 @@ function SoDA:Gui()
     for guid,character in pairs(self.db.global.characters) do
         local group = self.aceGui:Create("SimpleGroup")
         group:SetWidth(120)
-        local character = character[1]
 
         -- Basic
         local basic = SoDA:GetBasicGui(character)

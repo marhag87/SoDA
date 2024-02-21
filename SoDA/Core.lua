@@ -4,6 +4,7 @@ function SoDA:OnInitialize()
     self.db = LibStub("AceDB-3.0"):New("SoDADB")
     self.aceGui = LibStub("AceGUI-3.0")
     SoDA:RegisterEvent("PLAYER_LOGIN")
+    SoDA:RegisterEvent("ENGRAVING_MODE_CHANGED")
 end
 
 function SoDA:PLAYER_LOGIN()
@@ -11,17 +12,20 @@ function SoDA:PLAYER_LOGIN()
     SoDA:Gui()
 end
 
+function SoDA:ENGRAVING_MODE_CHANGED()
+    self.db.global.characters[self.loggedInCharacter].runes = SoDA:GetRunes()
+end
+
 function SoDA:SaveData()
-    local character = {}
-    character.basic = SoDA:GetBasicInformation()
-    character.currency = SoDA:GetCurrency()
-    self.loggedInCharacter = character -- TODO: Runes has dependencies, how to handle?
-    character.runes = SoDA:GetRunes()
-    character.raids = SoDA:GetRaids()
     if self.db.global.characters == nil then
         self.db.global.characters = {}
     end
-    self.db.global.characters[character.basic.guid] = {character}
-
-    self.loggedInCharacter = character
+    local basic = SoDA:GetBasicInformation()
+    if self.db.global.characters[basic.guid] == nil then
+        self.db.global.characters[basic.guid] = {}
+    end
+    self.db.global.characters[basic.guid].basic = basic
+    self.db.global.characters[basic.guid].currency = SoDA:GetCurrency()
+    self.db.global.characters[basic.guid].raids = SoDA:GetRaids() -- TODO: Raids are not loaded at login, when can we fetch?
+    self.loggedInCharacter = basic.guid
 end

@@ -1,11 +1,9 @@
 function SoDA:GetRaids()
     local raids = {}
     local numSavedInstances = GetNumSavedInstances()
-    SoDA:Print(numSavedInstances)
     if numSavedInstances > 0 then
         for i=1, numSavedInstances do
             local name, lockoutId, reset, difficultyId, locked, extended, instanceIDMostSig, isRaid, maxPlayers, difficultyName, numEncounters, encounterProgress, extendDisabled, instanceId = GetSavedInstanceInfo(i)
-            SoDA:Print(name)
             if instanceId == 90 then -- Gnomeregan
                 local gnomeregan = {}
                 gnomeregan.secondsLeft = reset -- This will not tick down, should set a time for when it will be reset
