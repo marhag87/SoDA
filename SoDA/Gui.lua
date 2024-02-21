@@ -24,6 +24,10 @@ function SoDA:Gui()
         local currency = SoDA:GetCurrencyGui(character)
         group:AddChild(currency)
 
+        -- Runes
+        local runes = SoDA:GetRunesGui(character)
+        group:AddChild(runes)
+
         f:AddChild(group)
     end
 end

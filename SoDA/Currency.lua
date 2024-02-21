@@ -11,7 +11,21 @@ function SoDA:GetCopper()
 end
 
 function SoDA:GetCurrencyGui(character)
+    local group = self.aceGui:Create("SimpleGroup")
+
+    if character.currency == nil then
+        return group
+    end
+
+    -- Header
+    local currencyHeader = self.aceGui:Create("Label")
+    currencyHeader:SetText("Currency")
+    group:AddChild(currencyHeader)
+
+    -- Gold
     local characterCopper = self.aceGui:Create("Label")
     characterCopper:SetText(character.currency.copper)
-    return characterCopper
+    group:AddChild(characterCopper)
+
+    return group
 end

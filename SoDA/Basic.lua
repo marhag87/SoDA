@@ -9,6 +9,10 @@ end
 function SoDA:GetBasicGui(character)
     local group = self.aceGui:Create("SimpleGroup")
 
+    if character.basic == nil then
+        return group
+    end
+
     -- Character name
     local characterName = self.aceGui:Create("Label")
     characterName:SetText(character.basic.name)
