@@ -9,3 +9,9 @@ function SoDA:GetCopper()
     local copper = GetMoney()
     return copper
 end
+
+function SoDA:GetCurrencyGui(character)
+    local characterCopper = self.aceGui:Create("Label")
+    characterCopper:SetText(character.currency.copper)
+    return characterCopper
+end

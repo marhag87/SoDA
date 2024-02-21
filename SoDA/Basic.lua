@@ -5,3 +5,14 @@ function SoDA:GetBasicInformation()
     basic.level = UnitLevel("player")
     return basic
 end
+
+function SoDA:GetBasicGui(character)
+    local group = self.aceGui:Create("SimpleGroup")
+
+    -- Character name
+    local characterName = self.aceGui:Create("Label")
+    characterName:SetText(character.basic.name)
+
+    group:AddChild(characterName)
+    return group
+end

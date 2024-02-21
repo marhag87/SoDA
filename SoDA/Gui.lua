@@ -1,7 +1,6 @@
 function SoDA:Gui()
-    local AceGUI = LibStub("AceGUI-3.0")
-    local f = AceGUI:Create("Frame")
-    f:SetCallback("OnClose",function(widget) AceGUI:Release(widget) end)
+    local f = self.aceGui:Create("Frame")
+    f:SetCallback("OnClose",function(widget) self.aceGui:Release(widget) end)
     f:SetTitle("Season of Discovery Alts")
     f:SetLayout("Flow")
 
@@ -13,20 +12,18 @@ function SoDA:Gui()
     f:SetWidth(width)
 
     for guid,character in pairs(self.db.global.characters) do
-        local group = AceGUI:Create("InlineGroup")
-        
+        local group = self.aceGui:Create("SimpleGroup")
         group:SetWidth(200)
         local character = character[1]
 
-        -- Name label
-        local characterName = AceGUI:Create("Label")
-        characterName:SetText(character.basic.name)
-        group:AddChild(characterName)
+        -- Basic
+        local basic = SoDA:GetBasicGui(character)
+        group:AddChild(basic)
+
         -- Currency
-        local characterCopper = AceGUI:Create("Label")
-        characterCopper:SetText(character.currency.copper)
-        group:AddChild(characterCopper)
-        
+        local currency = SoDA:GetCurrencyGui(character)
+        group:AddChild(currency)
+
         f:AddChild(group)
     end
 end
