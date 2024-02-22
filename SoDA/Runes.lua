@@ -3,6 +3,7 @@ function SoDA:GetRunes()
     runes.numRunesKnown = C_Engraving.GetNumRunesKnown()
     local availableRunes = {
         ["DRUID"] = SoDA:DruidRunes(),
+        ["HUNTER"] = SoDA:HunterRunes(),
         ["PALADIN"] = SoDA:PaladinRunes(),
         ["ROGUE"] = SoDA:RogueRunes(),
         ["WARRIOR"] = SoDA:WarriorRunes(),
@@ -43,7 +44,7 @@ function SoDA:GetRunesGui(character)
 
     -- Runes known
     local runesKnown = self.aceGui:Create("Label")
-    if numRunesKnown == numRunesAvailable then
+    if numRunesKnown == numRunesAvailable and numRunesKnown ~= "?" then
         runesKnown:SetColor(0, 1, 0)
     end
     runesKnown:SetText(numRunesKnown .. "/" .. numRunesAvailable)

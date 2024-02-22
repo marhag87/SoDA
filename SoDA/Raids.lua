@@ -42,7 +42,11 @@ function SoDA:GetRaidsGui(character)
     if gnomereganEncounterProgress == gnomereganNumEncounters then
         gnomereganLock:SetColor(0, 1, 0)
     end
-    gnomereganLock:SetText(gnomereganName .. " " .. gnomereganEncounterProgress .. "/" .. gnomereganNumEncounters)
+    if gnomereganEncounterProgress == "?" then
+        gnomereganLock:SetText(gnomereganName)
+    else
+        gnomereganLock:SetText(gnomereganName .. " " .. gnomereganEncounterProgress .. "/" .. gnomereganNumEncounters)
+    end
     group:AddChild(gnomereganLock)
     -- TODO: Add time until reset
 
