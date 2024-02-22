@@ -20,8 +20,16 @@ end
 function SoDA:GetRaidsGui(character)
     local group = self.aceGui:Create("SimpleGroup")
 
-    if character.raids == nil then
-        return group
+    local gnomereganEncounterProgress = "?"
+    local gnomereganNumEncounters = "6"
+    local gnomereganName = "Gnomeregan"
+
+    if character.raids ~= nil then
+        if character.raids.gnomeregan ~= nil then
+            gnomereganEncounterProgress = character.raids.gnomeregan.encounterProgress
+            gnomereganNumEncounters = character.raids.gnomeregan.numEncounters
+            gnomereganName = character.raids.gnomeregan.name
+        end
     end
 
     -- Header
@@ -30,16 +38,13 @@ function SoDA:GetRaidsGui(character)
     group:AddChild(currencyHeader)
 
     -- Gnomeregan
-    if character.raids.gnomeregan ~= nil then
-        local gnomereganLock = self.aceGui:Create("Label")
-        if character.raids.gnomeregan.encounterProgress == character.raids.gnomeregan.numEncounters then
-            gnomereganLock:SetColor(0, 1, 0)
-        end
-        gnomereganLock:SetText(character.raids.gnomeregan.name .. " " .. character.raids.gnomeregan.encounterProgress .. "/" .. character.raids.gnomeregan.numEncounters)
-        group:AddChild(gnomereganLock)
-
-        -- Add time until reset
+    local gnomereganLock = self.aceGui:Create("Label")
+    if gnomereganEncounterProgress == gnomereganNumEncounters then
+        gnomereganLock:SetColor(0, 1, 0)
     end
+    gnomereganLock:SetText(gnomereganName .. " " .. gnomereganEncounterProgress .. "/" .. gnomereganNumEncounters)
+    group:AddChild(gnomereganLock)
+    -- TODO: Add time until reset
 
     return group
 end

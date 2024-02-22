@@ -5,11 +5,11 @@ function SoDA:OnInitialize()
     self.aceGui = LibStub("AceGUI-3.0")
     SoDA:RegisterEvent("PLAYER_LOGIN")
     SoDA:RegisterEvent("ENGRAVING_MODE_CHANGED")
+    SoDA:RegisterChatCommand("soda", "Gui")
 end
 
 function SoDA:PLAYER_LOGIN()
     SoDA:SaveData()
-    SoDA:Gui()
 end
 
 function SoDA:ENGRAVING_MODE_CHANGED()

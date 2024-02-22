@@ -28,9 +28,12 @@ end
 
 function SoDA:GetRunesGui(character)
     local group = self.aceGui:Create("SimpleGroup")
+    local numRunesKnown = "?"
+    local numRunesAvailable = "?"
 
-    if character.runes == nil then
-        return group
+    if character.runes ~= nil then
+        numRunesKnown = character.runes.numRunesKnown
+        numRunesAvailable = character.runes.numRunesAvailable
     end
 
     -- Header
@@ -39,9 +42,9 @@ function SoDA:GetRunesGui(character)
     group:AddChild(currencyHeader)
 
     -- Runes known
-    local numRunesKnown = self.aceGui:Create("Label")
-    numRunesKnown:SetText(character.runes.numRunesKnown .. "/" .. character.runes.numRunesAvailable)
-    group:AddChild(numRunesKnown)
+    local runesKnown = self.aceGui:Create("Label")
+    runesKnown:SetText(numRunesKnown .. "/" .. numRunesAvailable)
+    group:AddChild(runesKnown)
 
     return group
 end
