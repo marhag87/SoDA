@@ -5,15 +5,28 @@ function SoDA:OnInitialize()
     self.aceGui = LibStub("AceGUI-3.0")
     SoDA:RegisterEvent("PLAYER_ENTERING_WORLD")
     SoDA:RegisterEvent("ENGRAVING_MODE_CHANGED")
-    SoDA:RegisterChatCommand("soda", "Gui")
+    SoDA:RegisterEvent("QUEST_TURNED_IN")
+    SoDA:RegisterChatCommand("soda", "ToggleGui")
 end
 
 function SoDA:PLAYER_ENTERING_WORLD()
     SoDA:SaveData()
 end
 
+function SoDA:QUEST_TURNED_IN()
+    C_Timer.After(1, function()
+        SoDA:SaveData()
+    end)
+end
+
 function SoDA:ENGRAVING_MODE_CHANGED()
     self.db.global.characters[self.loggedInCharacter].runes = SoDA:GetRunes()
+end
+
+function SoDA:ToggleGui()
+    -- TODO: Toggle
+    SoDA:SaveData()
+    SoDA:Gui()
 end
 
 function SoDA:SaveData()
