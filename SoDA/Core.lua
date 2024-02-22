@@ -32,6 +32,10 @@ end
 
 function SoDA:ToggleGui()
     -- TODO: Toggle
+    -- TODO: Minimap icon
+    -- TODO: Filter/remove characters
+    -- TODO: LUA linting
+    -- TODO: Auto release to curseforge/wago
     SoDA:SaveData()
     SoDA:Gui()
 end
@@ -50,4 +54,5 @@ function SoDA:SaveData()
     self.db.global.characters[basic.guid].factions = SoDA:GetFactions()
     self.db.global.characters[basic.guid].pvp = SoDA:GetPvP()
     self.db.global.characters[basic.guid].books = SoDA:GetBooks()
+    -- TODO: Professions (epic crafting quests, progress, timers)
 end

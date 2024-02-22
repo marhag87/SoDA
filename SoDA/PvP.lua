@@ -7,6 +7,9 @@ function SoDA:GetPvP()
     local questId = ashenvaleWeeklyId[faction]
     pvp.ashenvaleWeekly = C_QuestLog.IsQuestFlaggedCompleted(questId)
     pvp.ashenvaleWeeklyResetAt = time() + C_DateAndTime.GetSecondsUntilWeeklyReset()
+
+    -- TODO: Blood Moon coins
+
     return pvp
 end
 

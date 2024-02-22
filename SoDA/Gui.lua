@@ -11,6 +11,8 @@ function SoDA:Gui()
     local width = (numChararcters * 120) + 40
     f:SetWidth(width)
 
+    -- TODO: Left spacer
+
     local characters = self.db.global.characters
     for guid,character in SoDA:spairs(characters, function(t, a, b) return t[b].basic.level < t[a].basic.level end) do
         local group = self.aceGui:Create("SimpleGroup")
@@ -50,6 +52,8 @@ function SoDA:Gui()
         local factions = SoDA:GetFactionsGui(character)
         group:AddChild(factions)
         group:AddChild(SoDA:Spacer())
+
+        -- TODO: Font size, separators
 
         f:AddChild(group)
     end

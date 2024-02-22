@@ -5,6 +5,11 @@ function SoDA:GetBasicInformation()
     basic.level = UnitLevel("player")
     basic.faction, basic.factionLocalized = UnitFactionGroup("player")
     basic.realm = GetRealmName()
+
+    -- TODO: Sleeping bag
+    -- TODO: Rested %
+    -- TODO: Mount
+
     return basic
 end
 
