@@ -35,6 +35,11 @@ function SoDA:Gui()
         group:AddChild(raids)
         group:AddChild(SoDA:Spacer())
 
+        -- PvP
+        local pvp = SoDA:GetPvPGui(character)
+        group:AddChild(pvp)
+        group:AddChild(SoDA:Spacer())
+
         f:AddChild(group)
     end
 end

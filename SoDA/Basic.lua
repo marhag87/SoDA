@@ -3,6 +3,7 @@ function SoDA:GetBasicInformation()
     basic.guid = UnitGUID("player")
     _, basic.class, _, basic.race, _, basic.name, _ = GetPlayerInfoByGUID(basic.guid)
     basic.level = UnitLevel("player")
+    basic.faction, basic.factionLocalized = UnitFactionGroup("player")
     return basic
 end
 

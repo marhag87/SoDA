@@ -13,6 +13,7 @@ Currency.lua
 Gui.lua
 Runes.lua
 Raids.lua
+PvP.lua
 
 Runes\Druid.lua
 Runes\Hunter.lua
