@@ -2,11 +2,12 @@ function SoDA:GetRunes()
     local runes = {}
     runes.numRunesKnown = C_Engraving.GetNumRunesKnown()
     local availableRunes = {
-        ["DRUID"] = SoDA:DruidRunes(),
-        ["HUNTER"] = SoDA:HunterRunes(),
-        ["MAGE"] = SoDA:MageRunes(),
+        ["DRUID"]   = SoDA:DruidRunes(),
+        ["HUNTER"]  = SoDA:HunterRunes(),
+        ["MAGE"]    = SoDA:MageRunes(),
         ["PALADIN"] = SoDA:PaladinRunes(),
-        ["ROGUE"] = SoDA:RogueRunes(),
+        ["PRIEST"]  = SoDA:PriestRunes(),
+        ["ROGUE"]   = SoDA:RogueRunes(),
         ["WARRIOR"] = SoDA:WarriorRunes(),
     }
     local numRunesAvailable = 0

@@ -18,5 +18,6 @@ Runes\Druid.lua
 Runes\Hunter.lua
 Runes\Mage.lua
 Runes\Paladin.lua
+Runes\Priest.lua
 Runes\Rogue.lua
 Runes\Warrior.lua
