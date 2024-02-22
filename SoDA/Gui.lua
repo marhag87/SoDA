@@ -31,6 +31,11 @@ function SoDA:Gui()
         group:AddChild(runes)
         group:AddChild(SoDA:Spacer())
 
+        -- Books
+        local books = SoDA:GetBooksGui(character)
+        group:AddChild(books)
+        group:AddChild(SoDA:Spacer())
+
         -- Raids
         local raids = SoDA:GetRaidsGui(character)
         group:AddChild(raids)

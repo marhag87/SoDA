@@ -36,9 +36,9 @@ function SoDA:GetRunesGui(character)
     local numRunesAvailable = runes.numRunesAvailable or "?"
 
     -- Header
-    local currencyHeader = self.aceGui:Create("Label")
-    currencyHeader:SetText("Runes")
-    group:AddChild(currencyHeader)
+    local runesHeader = self.aceGui:Create("Label")
+    runesHeader:SetText("Runes")
+    group:AddChild(runesHeader)
 
     -- Runes known
     local runesKnown = self.aceGui:Create("Label")

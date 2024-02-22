@@ -1,0 +1,76 @@
+function SoDA:GetBooks()
+    local availableBooks = {
+        ["DRUID"]   = {
+            { ["spell"] = "417123" }, -- Enhanced Restoration
+            { ["spell"] = "437138" }, -- Revive
+            { ["spell"] = "436956" }, -- Deeper Wilds
+        },
+        ["HUNTER"]   = {
+            { ["spell"] = "415423" }, -- Aspect of the Viper
+        },
+        ["MAGE"]   = {
+            { ["spell"] = "436949" }, -- Expanded Intellect
+        },
+        ["PALADIN"]   = {
+            { ["spell"] = "435984" }, -- Enhanced Blessings
+        },
+        ["PRIEST"]   = {
+            { ["spell"] = "401977" }, -- Shadowfiend
+            { ["spell"] = "436951" }, -- Increased Fortitude
+        },
+        ["ROGUE"]   = {
+            { ["spell"] = "438040" }, -- Redirect
+        },
+        ["SHAMAN"]   = {
+            { ["spell"] = "437009" }, -- Totemic Projection
+        },
+        ["WARLOCK"]   = {
+            { ["spell"] = "437169" }, -- Portal of Summoning
+            { ["spell"] = "437032" }, -- Soul Harvesting
+        },
+        ["WARRIOR"]   = {
+            { ["spell"] = "403215" }, -- Commanding Shout
+        },
+    }
+    local books = {}
+    books.numBooksAvailable = 0
+    books.numBooksKnown = 0
+    books.bookMap = {}
+    for class,classBooks in pairs(availableBooks) do
+        if class == self.db.global.characters[self.loggedInCharacter].basic.class then
+            for _,v in ipairs(classBooks) do
+                books.numBooksAvailable = books.numBooksAvailable + 1
+                local name, _ = GetSpellInfo(v.spell)
+                local isKnown = IsSpellKnown(v.spell)
+                if isKnown then
+                    books.numBooksKnown = books.numBooksKnown + 1
+                end
+                table.insert(books.bookMap, {["spell"] = v.spell, ["known"] = isKnown})
+            end
+        end
+    end
+
+    return books
+end
+
+function SoDA:GetBooksGui(character)
+    local group = self.aceGui:Create("SimpleGroup")
+    local books = character.books or {}
+    local numBooksKnown = books.numBooksKnown or "?"
+    local numBooksAvailable = books.numBooksAvailable or "?"
+
+    -- Header
+    local booksHeader = self.aceGui:Create("Label")
+    booksHeader:SetText("Books")
+    group:AddChild(booksHeader)
+
+    -- Books known
+    local booksKnown = self.aceGui:Create("Label")
+    if numBooksKnown == numBooksAvailable and numBooksKnown ~= "?" then
+        booksKnown:SetColor(0, 1, 0)
+    end
+    booksKnown:SetText(numBooksKnown .. "/" .. numBooksAvailable)
+    group:AddChild(booksKnown)
+
+    return group
+end

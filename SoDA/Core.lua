@@ -44,4 +44,5 @@ function SoDA:SaveData()
     self.db.global.characters[basic.guid].factions = SoDA:GetFactions()
     self.db.global.characters[basic.guid].raids = SoDA:GetRaids() -- TODO: Raids are not loaded at login, when can we fetch?
     self.db.global.characters[basic.guid].pvp = SoDA:GetPvP()
+    self.db.global.characters[basic.guid].books = SoDA:GetBooks()
 end
