@@ -11,7 +11,8 @@ function SoDA:Gui()
     local width = (numChararcters * 120) + 40
     f:SetWidth(width)
 
-    for guid,character in pairs(self.db.global.characters) do
+    local characters = self.db.global.characters
+    for guid,character in SoDA:spairs(characters, function(t, a, b) return t[b].basic.level < t[a].basic.level end) do
         local group = self.aceGui:Create("SimpleGroup")
         group:SetWidth(120)
 

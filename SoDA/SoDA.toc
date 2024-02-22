@@ -15,6 +15,7 @@ Runes.lua
 Raids.lua
 PvP.lua
 Factions.lua
+Utils.lua
 
 Runes\Druid.lua
 Runes\Hunter.lua
