@@ -30,5 +30,17 @@ function SoDA:GetPvPGui(character)
     ashenvaleWeekly:SetText("Ashenvale weekly")
     group:AddChild(ashenvaleWeekly)
 
+    -- WSG Rep
+    local factions = character.factions or {}
+    local wsg = factions.wsg or {
+        ["name"] = "WSG",
+        ["standingId"] = 4,
+        ["earnedValue"] = 0,
+        ["bottomValue"] = 0,
+        ["topValue"] = 3000,
+    }
+    local wsgGroup = SoDA:FactionGui(wsg)
+    group:AddChild(wsgGroup)
+
     return group
 end

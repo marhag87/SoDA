@@ -7,6 +7,8 @@ function SoDA:GetFactions()
         faction.name, _, faction.standingId, faction.bottomValue, faction.topValue, faction.earnedValue, _, _, _, _, _, _, _, factionId, _, _ = GetFactionInfo(i)
         if factionId == 2587 then factions.phaseOne = faction end -- Durotar Supply and Logistics
         if factionId == 2586 then factions.phaseOne = faction end -- Azeroth Commerce Authority
+        if factionId == 890 then factions.wsg = faction end -- Silverwing Sentinels
+        if factionId == 889 then factions.wsg = faction end -- Warsong Outriders
     end
     return factions
 end
@@ -28,20 +30,29 @@ function SoDA:GetFactionsGui(character)
     factionsHeader:SetText("Factions")
     group:AddChild(factionsHeader)
 
-    -- ACA/DSL name
-    local phaseOneLabel = self.aceGui:Create("Label")
-    local standing = getglobal("FACTION_STANDING_LABEL"..phaseOne.standingId)
-    local name = phaseOne.name
-    if string.len(phaseOne.name) > 13 then
-        name = string.sub(phaseOne.name, 1, 13) .. "..."
+    -- Phase one faction, ACA/DSL
+    local phaseOneGroup = SoDA:FactionGui(phaseOne)
+    group:AddChild(phaseOneGroup)
+
+    return group
+end
+
+function SoDA:FactionGui(faction)
+    local group = self.aceGui:Create("SimpleGroup")
+
+    -- Faction name
+    local factionLabel = self.aceGui:Create("Label")
+    local standing = getglobal("FACTION_STANDING_LABEL" .. faction.standingId)
+    local name = faction.name
+    if string.len(faction.name) > 13 then
+        name = string.sub(faction.name, 1, 13) .. "..."
     end
-    phaseOneLabel:SetText(name)
-    group:AddChild(phaseOneLabel)
+    factionLabel:SetText(name)
+    group:AddChild(factionLabel)
 
-    -- ACA/DSL standing
-    local phaseOneStanding = self.aceGui:Create("Label")
-    phaseOneStanding:SetText(standing .. " " .. phaseOne.earnedValue)
-    group:AddChild(phaseOneStanding)
-
+    -- Faction standing
+    local factionStanding = self.aceGui:Create("Label")
+    factionStanding:SetText(standing .. " " .. faction.earnedValue - faction.bottomValue)
+    group:AddChild(factionStanding)
     return group
 end
