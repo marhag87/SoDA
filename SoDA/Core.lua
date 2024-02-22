@@ -6,12 +6,14 @@ function SoDA:OnInitialize()
     SoDA:RegisterEvent("PLAYER_ENTERING_WORLD")
     SoDA:RegisterEvent("ENGRAVING_MODE_CHANGED")
     SoDA:RegisterEvent("QUEST_TURNED_IN")
+    SoDA:RegisterEvent("UPDATE_INSTANCE_INFO")
     SoDA:RegisterChatCommand("soda", "ToggleGui")
     self.maxLevel = 40
 end
 
 function SoDA:PLAYER_ENTERING_WORLD()
     SoDA:SaveData()
+    RequestRaidInfo()
 end
 
 function SoDA:QUEST_TURNED_IN()
@@ -22,6 +24,10 @@ end
 
 function SoDA:ENGRAVING_MODE_CHANGED()
     self.db.global.characters[self.loggedInCharacter].runes = SoDA:GetRunes()
+end
+
+function SoDA:UPDATE_INSTANCE_INFO()
+    self.db.global.characters[self.loggedInCharacter].raids = SoDA:GetRaids()
 end
 
 function SoDA:ToggleGui()
@@ -42,7 +48,6 @@ function SoDA:SaveData()
     self.loggedInCharacter = basic.guid
     self.db.global.characters[basic.guid].currency = SoDA:GetCurrency()
     self.db.global.characters[basic.guid].factions = SoDA:GetFactions()
-    self.db.global.characters[basic.guid].raids = SoDA:GetRaids() -- TODO: Raids are not loaded at login, when can we fetch?
     self.db.global.characters[basic.guid].pvp = SoDA:GetPvP()
     self.db.global.characters[basic.guid].books = SoDA:GetBooks()
 end

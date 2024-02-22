@@ -3,7 +3,7 @@ function SoDA:GetRaids()
     local numSavedInstances = GetNumSavedInstances()
     if numSavedInstances > 0 then
         for i=1, numSavedInstances do
-            local name, lockoutId, reset, difficultyId, locked, extended, instanceIDMostSig, isRaid, maxPlayers, difficultyName, numEncounters, encounterProgress, extendDisabled, instanceId = GetSavedInstanceInfo(i)
+            local name, _, reset, _, _, _, _, _, _, _, numEncounters, encounterProgress, _, instanceId = GetSavedInstanceInfo(i)
             if instanceId == 48 then -- Blackfathom Deeps
                 local bfd = {}
                 bfd.resetAt = time() + reset

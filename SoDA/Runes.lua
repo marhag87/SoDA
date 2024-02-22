@@ -48,5 +48,8 @@ function SoDA:GetRunesGui(character)
     runesKnown:SetText(numRunesKnown .. "/" .. numRunesAvailable)
     group:AddChild(runesKnown)
 
+    -- TODO: Grizzby
+    -- TODO: Dark Riders
+
     return group
 end
