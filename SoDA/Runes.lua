@@ -9,6 +9,7 @@ function SoDA:GetRunes()
         ["PRIEST"]  = SoDA:PriestRunes(),
         ["ROGUE"]   = SoDA:RogueRunes(),
         ["SHAMAN"]  = SoDA:ShamanRunes(),
+        ["WARLOCK"] = SoDA:WarlockRunes(),
         ["WARRIOR"] = SoDA:WarriorRunes(),
     }
     local numRunesAvailable = 0

@@ -21,4 +21,5 @@ Runes\Paladin.lua
 Runes\Priest.lua
 Runes\Rogue.lua
 Runes\Shaman.lua
+Runes\Warlock.lua
 Runes\Warrior.lua
