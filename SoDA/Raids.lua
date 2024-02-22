@@ -20,19 +20,18 @@ end
 function SoDA:GetRaidsGui(character)
     local group = self.aceGui:Create("SimpleGroup")
 
-    local gnomereganEncounterProgress = "?"
-    local gnomereganNumEncounters = "6"
-    local gnomereganName = "Gnomeregan"
-    local gnomereganResetAt = 0
+    local gnomeregan = {
+        ["encounterProgress"] = "?",
+        ["numEncounters"] = 6,
+        ["name"] = "Gnomeregan",
+        ["resetAt"] = 0,
+    }
 
     if character.raids ~= nil then
         if character.raids.gnomeregan ~= nil then
-            gnomereganEncounterProgress = character.raids.gnomeregan.encounterProgress
-            gnomereganNumEncounters = character.raids.gnomeregan.numEncounters
-            gnomereganName = character.raids.gnomeregan.name
-            gnomereganResetAt = character.raids.gnomeregan.resetAt
-            if time() > gnomereganResetAt then
-                gnomereganEncounterProgress = "?"
+            gnomeregan = character.raids.gnomeregan
+            if time() > gnomeregan.resetAt then
+                gnomeregan.encounterProgress = "?"
             end
         end
     end
@@ -44,13 +43,13 @@ function SoDA:GetRaidsGui(character)
 
     -- Gnomeregan
     local gnomereganLock = self.aceGui:Create("Label")
-    if gnomereganEncounterProgress == gnomereganNumEncounters and time() < gnomereganResetAt then
+    if gnomeregan.encounterProgress == gnomeregan.numEncounters and time() < gnomeregan.resetAt then
         gnomereganLock:SetColor(0, 1, 0)
     end
-    if gnomereganEncounterProgress == "?" then
-        gnomereganLock:SetText(gnomereganName)
+    if gnomeregan.encounterProgress == "?" then
+        gnomereganLock:SetText(gnomeregan.name)
     else
-        gnomereganLock:SetText(gnomereganName .. " " .. gnomereganEncounterProgress .. "/" .. gnomereganNumEncounters)
+        gnomereganLock:SetText(gnomeregan.name .. " " .. gnomeregan.encounterProgress .. "/" .. gnomeregan.numEncounters)
     end
     group:AddChild(gnomereganLock)
 
