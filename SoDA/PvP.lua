@@ -42,5 +42,17 @@ function SoDA:GetPvPGui(character)
     local wsgGroup = SoDA:FactionGui(wsg)
     group:AddChild(wsgGroup)
 
+    -- AB Rep
+    local factions = character.factions or {}
+    local ab = factions.ab or {
+        ["name"] = "AB",
+        ["standingId"] = 4,
+        ["earnedValue"] = 0,
+        ["bottomValue"] = 0,
+        ["topValue"] = 3000,
+    }
+    local abGroup = SoDA:FactionGui(ab)
+    group:AddChild(abGroup)
+
     return group
 end
