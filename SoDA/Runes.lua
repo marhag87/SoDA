@@ -43,6 +43,9 @@ function SoDA:GetRunesGui(character)
 
     -- Runes known
     local runesKnown = self.aceGui:Create("Label")
+    if numRunesKnown == numRunesAvailable then
+        runesKnown:SetColor(0, 1, 0)
+    end
     runesKnown:SetText(numRunesKnown .. "/" .. numRunesAvailable)
     group:AddChild(runesKnown)
 
