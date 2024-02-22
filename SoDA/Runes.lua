@@ -4,14 +4,13 @@ function SoDA:GetRunes()
     local availableRunes = {
         ["DRUID"] = SoDA:DruidRunes(),
         ["HUNTER"] = SoDA:HunterRunes(),
+        ["MAGE"] = SoDA:MageRunes(),
         ["PALADIN"] = SoDA:PaladinRunes(),
         ["ROGUE"] = SoDA:RogueRunes(),
         ["WARRIOR"] = SoDA:WarriorRunes(),
     }
     local numRunesAvailable = 0
     local runeMap = {}
-    -- TODO: Runes are not loaded, is there an event we can wait for?
-    -- https://warcraft.wiki.gg/wiki/Category:API_namespaces/C_Engraving
     for class,classRunes in pairs(availableRunes) do
         if class == self.db.global.characters[self.loggedInCharacter].basic.class then
             for _,v in ipairs(classRunes) do
