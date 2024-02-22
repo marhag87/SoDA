@@ -28,13 +28,15 @@ end
 function SoDA:GetRaidsGui(character)
     local group = self.aceGui:Create("SimpleGroup")
 
+    local raids = character.raids or {}
+
     -- Header
     local currencyHeader = self.aceGui:Create("Label")
     currencyHeader:SetText("Raids")
     group:AddChild(currencyHeader)
 
     -- Blackfathom Deeps
-    local bfd = character.raids.bfd or {
+    local bfd = raids.bfd or {
         ["encounterProgress"] = nil,
         ["numEncounters"] = 7,
         ["name"] = "Blackfathom Deeps",
@@ -44,7 +46,7 @@ function SoDA:GetRaidsGui(character)
     group:AddChild(bfdLock)
 
     -- Gnomeregan
-    local gnomeregan = character.raids.gnomeregan or {
+    local gnomeregan = raids.gnomeregan or {
         ["encounterProgress"] = nil,
         ["numEncounters"] = 6,
         ["name"] = "Gnomeregan",

@@ -13,12 +13,9 @@ end
 function SoDA:GetPvPGui(character)
     local group = self.aceGui:Create("SimpleGroup")
 
-    local ashenvaleWeeklyDone = false
-    local ashenvaleWeeklyResetAt = 0
-    if character.pvp ~= nil then
-        ashenvaleWeeklyDone = character.pvp.ashenvaleWeekly
-        ashenvaleWeeklyResetAt = character.pvp.ashenvaleWeeklyResetAt
-    end
+    local pvp = character.pvp or {}
+    local ashenvaleWeeklyDone = pvp.ashenvaleWeekly or false
+    local ashenvaleWeeklyResetAt = pvp.ashenvaleWeeklyResetAt or 0
 
     -- Header
     local pvpHeader = self.aceGui:Create("Label")

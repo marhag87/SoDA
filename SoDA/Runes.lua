@@ -31,13 +31,9 @@ end
 
 function SoDA:GetRunesGui(character)
     local group = self.aceGui:Create("SimpleGroup")
-    local numRunesKnown = "?"
-    local numRunesAvailable = "?"
-
-    if character.runes ~= nil then
-        numRunesKnown = character.runes.numRunesKnown
-        numRunesAvailable = character.runes.numRunesAvailable
-    end
+    local runes = character.runes or {}
+    local numRunesKnown = runes.numRunesKnown or "?"
+    local numRunesAvailable = runes.numRunesAvailable or "?"
 
     -- Header
     local currencyHeader = self.aceGui:Create("Label")
