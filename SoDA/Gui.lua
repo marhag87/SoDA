@@ -40,6 +40,11 @@ function SoDA:Gui()
         group:AddChild(pvp)
         group:AddChild(SoDA:Spacer())
 
+        -- Factions
+        local factions = SoDA:GetFactionsGui(character)
+        group:AddChild(factions)
+        group:AddChild(SoDA:Spacer())
+
         f:AddChild(group)
     end
 end
