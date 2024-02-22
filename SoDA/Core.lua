@@ -7,6 +7,7 @@ function SoDA:OnInitialize()
     SoDA:RegisterEvent("ENGRAVING_MODE_CHANGED")
     SoDA:RegisterEvent("QUEST_TURNED_IN")
     SoDA:RegisterChatCommand("soda", "ToggleGui")
+    self.maxLevel = 40
 end
 
 function SoDA:PLAYER_ENTERING_WORLD()
