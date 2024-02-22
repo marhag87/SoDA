@@ -6,7 +6,7 @@ function SoDA:GetRaids()
             local name, lockoutId, reset, difficultyId, locked, extended, instanceIDMostSig, isRaid, maxPlayers, difficultyName, numEncounters, encounterProgress, extendDisabled, instanceId = GetSavedInstanceInfo(i)
             if instanceId == 90 then -- Gnomeregan
                 local gnomeregan = {}
-                gnomeregan.secondsLeft = reset -- This will not tick down, should set a time for when it will be reset
+                gnomeregan.resetAt = time() + reset
                 gnomeregan.encounterProgress = encounterProgress
                 gnomeregan.numEncounters = numEncounters
                 gnomeregan.name = name
@@ -23,12 +23,17 @@ function SoDA:GetRaidsGui(character)
     local gnomereganEncounterProgress = "?"
     local gnomereganNumEncounters = "6"
     local gnomereganName = "Gnomeregan"
+    local gnomereganResetAt = 0
 
     if character.raids ~= nil then
         if character.raids.gnomeregan ~= nil then
             gnomereganEncounterProgress = character.raids.gnomeregan.encounterProgress
             gnomereganNumEncounters = character.raids.gnomeregan.numEncounters
             gnomereganName = character.raids.gnomeregan.name
+            gnomereganResetAt = character.raids.gnomeregan.resetAt
+            if time() > gnomereganResetAt then
+                gnomereganEncounterProgress = "?"
+            end
         end
     end
 
@@ -39,7 +44,7 @@ function SoDA:GetRaidsGui(character)
 
     -- Gnomeregan
     local gnomereganLock = self.aceGui:Create("Label")
-    if gnomereganEncounterProgress == gnomereganNumEncounters then
+    if gnomereganEncounterProgress == gnomereganNumEncounters and time() < gnomereganResetAt then
         gnomereganLock:SetColor(0, 1, 0)
     end
     if gnomereganEncounterProgress == "?" then
@@ -48,7 +53,6 @@ function SoDA:GetRaidsGui(character)
         gnomereganLock:SetText(gnomereganName .. " " .. gnomereganEncounterProgress .. "/" .. gnomereganNumEncounters)
     end
     group:AddChild(gnomereganLock)
-    -- TODO: Add time until reset
 
     return group
 end
