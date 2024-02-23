@@ -5,8 +5,8 @@ function SoDA:GetBasicInformation()
     basic.level = UnitLevel("player")
     basic.faction, basic.factionLocalized = UnitFactionGroup("player")
     basic.realm = GetRealmName()
+    basic.sleepingBagQuestDone = C_QuestLog.IsQuestFlaggedCompleted(79976)
 
-    -- TODO: Sleeping bag
     -- TODO: Rested %
     -- TODO: Mount
 
@@ -39,6 +39,18 @@ function SoDA:GetBasicGui(character)
     end
     characterLevel:SetText(character.basic.level)
     group:AddChild(characterLevel)
+
+    -- Sleeping Bag
+    local sleepingBag = self.aceGui:Create("Label")
+    name, _ = GetItemInfo(211527)
+    if string.len(name) > 17 then
+        name = string.sub(name, 1, 17) .. "..."
+    end
+    sleepingBag:SetText(name)
+    if character.basic.sleepingBagQuestDone then
+        sleepingBag:SetColor(0, 1, 0)
+    end
+    group:AddChild(sleepingBag)
 
     return group
 end
