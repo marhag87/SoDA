@@ -63,6 +63,9 @@ function SoDA:RaidLock(raid)
     if time() > raid.resetAt then
         raid.encounterProgress = nil
     end
+    if raid.encounterProgress ~= nil and raid.encounterProgress > 0 then
+        raidLock:SetColor(1, 1, 0.3)
+    end
     if raid.encounterProgress == raid.numEncounters and time() < raid.resetAt then
         raidLock:SetColor(0, 1, 0)
     end
