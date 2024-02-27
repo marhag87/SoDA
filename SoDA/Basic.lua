@@ -7,7 +7,14 @@ function SoDA:GetBasicInformation()
     basic.realm = GetRealmName()
     basic.sleepingBagQuestDone = C_QuestLog.IsQuestFlaggedCompleted(79976)
 
-    -- TODO: Rested %
+    -- Rested
+    restXP = GetXPExhaustion()
+    nextlevelXP = UnitXPMax("player")
+    basic.percentRest = 0
+    if restXP then
+        basic.percentRest = math.floor(restXP / nextlevelXP * 100)
+    end
+
     -- TODO: Mount
 
     return basic
@@ -51,6 +58,15 @@ function SoDA:GetBasicGui(character)
         sleepingBag:SetColor(0, 1, 0)
     end
     group:AddChild(sleepingBag)
+
+    -- Rested %
+    local restedXPLabel = self.aceGui:Create("Label")
+    local percentRest = character.basic.percentRest or 0
+    if percentRest == 150 then
+        restedXPLabel:SetColor(0, 1, 0)
+    end
+    restedXPLabel:SetText("Rested: " .. percentRest .. "%")
+    group:AddChild(restedXPLabel)
 
     return group
 end
