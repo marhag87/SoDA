@@ -45,12 +45,16 @@ function SoDA:UPDATE_INSTANCE_INFO()
 end
 
 function SoDA:ToggleGui()
-    -- TODO: Toggle
     -- TODO: Filter/remove characters
     -- TODO: LUA linting
     -- TODO: Auto release to curseforge/wago
-    SoDA:SaveData()
-    SoDA:Gui()
+    if self.frame == nil then
+        SoDA:SaveData()
+        self.frame = SoDA:Gui()
+    else
+        self.aceGui:Release(self.frame)
+        self.frame = nil
+    end
 end
 
 function SoDA:SaveData()

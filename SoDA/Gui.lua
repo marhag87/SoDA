@@ -59,6 +59,8 @@ function SoDA:Gui()
     -- Make frame closable with ESC
     _G["SoDAGui"] = f.frame
     tinsert(UISpecialFrames, "SoDAGui")
+
+    return f
 end
 
 function SoDA:Spacer()
