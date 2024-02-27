@@ -1,7 +1,20 @@
 SoDA = LibStub("AceAddon-3.0"):NewAddon("SoDA", "AceConsole-3.0", "AceEvent-3.0")
+local SoDALDB = LibStub("LibDataBroker-1.1"):NewDataObject("SoDA", {
+	type = "data source",
+	text = "Bunnies!",
+	icon = "Interface\\Icons\\Inv_misc_groupneedmore",
+	OnClick = function() SoDA:ToggleGui() end,
+})  
+local icon = LibStub("LibDBIcon-1.0")
 
 function SoDA:OnInitialize()
-    self.db = LibStub("AceDB-3.0"):New("SoDADB")
+    self.db = LibStub("AceDB-3.0"):New("SoDADB", {
+		profile = {
+			minimap = {
+				hide = false,
+			},
+		},
+	})
     self.aceGui = LibStub("AceGUI-3.0")
     SoDA:RegisterEvent("PLAYER_ENTERING_WORLD")
     SoDA:RegisterEvent("ENGRAVING_MODE_CHANGED")
@@ -9,6 +22,7 @@ function SoDA:OnInitialize()
     SoDA:RegisterEvent("UPDATE_INSTANCE_INFO")
     SoDA:RegisterChatCommand("soda", "ToggleGui")
     self.maxLevel = 40
+	icon:Register("SoDA", SoDALDB, self.db.profile.minimap)
 end
 
 function SoDA:PLAYER_ENTERING_WORLD()
@@ -32,7 +46,6 @@ end
 
 function SoDA:ToggleGui()
     -- TODO: Toggle
-    -- TODO: Minimap icon
     -- TODO: Filter/remove characters
     -- TODO: LUA linting
     -- TODO: Auto release to curseforge/wago
