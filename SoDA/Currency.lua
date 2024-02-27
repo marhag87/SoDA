@@ -18,9 +18,7 @@ function SoDA:GetCurrencyGui(character)
     end
 
     -- Header
-    local currencyHeader = self.aceGui:Create("Label")
-    currencyHeader:SetText("Currency")
-    group:AddChild(currencyHeader)
+    group:AddChild(SoDA:Header("Currency"))
 
     -- Gold
     local characterCopper = self.aceGui:Create("Label")

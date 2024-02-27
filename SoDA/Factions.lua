@@ -34,9 +34,7 @@ function SoDA:GetFactionsGui(character)
     }
 
     -- Header
-    local factionsHeader = self.aceGui:Create("Label")
-    factionsHeader:SetText("Factions")
-    group:AddChild(factionsHeader)
+    group:AddChild(SoDA:Header("Factions"))
 
     -- Phase one faction, ACA/DSL
     local phaseOneGroup = SoDA:FactionGui(phaseOne)

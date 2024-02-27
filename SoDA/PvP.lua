@@ -21,9 +21,7 @@ function SoDA:GetPvPGui(character)
     local ashenvaleWeeklyResetAt = pvp.ashenvaleWeeklyResetAt or 0
 
     -- Header
-    local pvpHeader = self.aceGui:Create("Label")
-    pvpHeader:SetText("PvP")
-    group:AddChild(pvpHeader)
+    group:AddChild(SoDA:Header("PvP"))
 
     -- Ashenvale weekly
     local ashenvaleWeekly = self.aceGui:Create("Label")

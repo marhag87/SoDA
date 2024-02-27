@@ -64,3 +64,10 @@ function SoDA:Spacer()
     spacer:SetText(" ")
     return spacer
 end
+
+function SoDA:Header(text)
+    local header = self.aceGui:Create("Label")
+    header:SetText(text)
+    header:SetFontObject(GameFontNormal)
+    return header
+end

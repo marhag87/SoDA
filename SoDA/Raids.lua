@@ -31,9 +31,7 @@ function SoDA:GetRaidsGui(character)
     local raids = character.raids or {}
 
     -- Header
-    local currencyHeader = self.aceGui:Create("Label")
-    currencyHeader:SetText("Raids")
-    group:AddChild(currencyHeader)
+    group:AddChild(SoDA:Header("Raids"))
 
     -- Blackfathom Deeps
     local bfd = raids.bfd or {

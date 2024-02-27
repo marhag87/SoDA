@@ -32,6 +32,7 @@ function SoDA:GetBasicGui(character)
     local r, g, b, _ = GetClassColor(character.basic.class)
     characterName:SetColor(r, g, b)
     characterName:SetText(character.basic.name)
+    characterName:SetFontObject(GameFontNormal)
     group:AddChild(characterName)
 
     -- Realm

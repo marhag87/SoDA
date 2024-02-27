@@ -60,9 +60,7 @@ function SoDA:GetBooksGui(character)
     local numBooksAvailable = books.numBooksAvailable or "?"
 
     -- Header
-    local booksHeader = self.aceGui:Create("Label")
-    booksHeader:SetText("Books")
-    group:AddChild(booksHeader)
+    group:AddChild(SoDA:Header("Books"))
 
     -- Books known
     local booksKnown = self.aceGui:Create("Label")
