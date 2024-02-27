@@ -53,8 +53,6 @@ function SoDA:Gui()
         group:AddChild(factions)
         group:AddChild(SoDA:Spacer())
 
-        -- TODO: Font size, separators
-
         f:AddChild(group)
     end
 
