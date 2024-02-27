@@ -9,6 +9,9 @@ function SoDA:Gui()
         numChararcters = numChararcters + 1
     end
     local width = (numChararcters * 120) + 40
+    if width < 250 then
+        width = 250
+    end
     f:SetWidth(width)
 
     -- TODO: Left spacer
