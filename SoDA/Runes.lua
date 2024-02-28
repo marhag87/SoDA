@@ -34,19 +34,41 @@ function SoDA:GetRunes()
     local faction, _ = UnitFactionGroup("player")
     runes.grizzby = C_QuestLog.IsQuestFlaggedCompleted(grizzbyQuest[faction])
 
+    -- Dark Riders
+    local darkRiderQuests = {
+        {["id"] = "80098", ["zone"] = "Deadwind Pass"},
+        {["id"] = "80147", ["zone"] = "Duskwood"},
+        {["id"] = "80148", ["zone"] = "Arathi Highlands"},
+        {["id"] = "80149", ["zone"] = "Swamp of Sorrows"},
+        {["id"] = "80150", ["zone"] = "The Barrens"},
+        {["id"] = "80151", ["zone"] = "Desolace"},
+        {["id"] = "80152", ["zone"] = "Badlands"},
+    }
+    local darkRiderMap = {}
+    local darkRiderQuestsDone = 0
+    for _, quest in pairs(darkRiderQuests) do
+        local isDone = C_QuestLog.IsQuestFlaggedCompleted(quest.id)
+        if isDone then
+            darkRiderQuestsDone = darkRiderQuestsDone + 1
+        end
+        table.insert(darkRiderMap, {["id"] = quest.id, ["zone"] = quest.zone, ["isDone"] = isDone})
+    end
+    runes.darkRiderMap = darkRiderMap
+    runes.darkRiderQuestsDone = darkRiderQuestsDone
+
     return runes
 end
 
 function SoDA:GetRunesGui(character)
     local group = self.aceGui:Create("SimpleGroup")
     local runes = character.runes or {}
-    local numRunesKnown = runes.numRunesKnown or "?"
-    local numRunesAvailable = runes.numRunesAvailable or "?"
 
     -- Header
     group:AddChild(SoDA:Header(" "))
 
     -- Runes known
+    local numRunesKnown = runes.numRunesKnown or "?"
+    local numRunesAvailable = runes.numRunesAvailable or "?"
     local runesKnown = self.aceGui:Create("Label")
     if numRunesKnown == numRunesAvailable and numRunesKnown ~= "?" then
         runesKnown:SetColor(0, 1, 0)
@@ -62,7 +84,14 @@ function SoDA:GetRunesGui(character)
     end
     group:AddChild(grizzby)
 
-    -- TODO: Dark Riders
+    -- Dark Riders
+    local darkRiderQuestsDone = runes.darkRiderQuestsDone or "?"
+    local darkRider = self.aceGui:Create("Label")
+    if darkRiderQuestsDone == 7 then
+        darkRider:SetColor(0, 1, 0)
+    end
+    darkRider:SetText(darkRiderQuestsDone .. "/" .. 7)
+    group:AddChild(darkRider)
 
     return group
 end
@@ -76,8 +105,11 @@ function SoDA:GetRunesLegend()
     -- Runes
     group:AddChild(SoDA:LegendLabel("Runes"))
 
-    -- Runes
+    -- Grizzby
     group:AddChild(SoDA:LegendLabel("Grizzby"))
+
+    -- Dark Riders
+    group:AddChild(SoDA:LegendLabel("Dark Riders"))
 
     return group
 end
