@@ -36,7 +36,7 @@ function SoDA:GetRunesGui(character)
     local numRunesAvailable = runes.numRunesAvailable or "?"
 
     -- Header
-    group:AddChild(SoDA:Header("Runes"))
+    group:AddChild(SoDA:Header(" "))
 
     -- Runes known
     local runesKnown = self.aceGui:Create("Label")
@@ -48,6 +48,18 @@ function SoDA:GetRunesGui(character)
 
     -- TODO: Grizzby
     -- TODO: Dark Riders
+
+    return group
+end
+
+function SoDA:GetRunesLegend()
+    local group = self.aceGui:Create("SimpleGroup")
+
+    -- Runes
+    group:AddChild(SoDA:Header("Runes"))
+
+    -- Runes
+    group:AddChild(SoDA:LegendLabel("Runes"))
 
     return group
 end

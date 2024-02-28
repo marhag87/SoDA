@@ -60,7 +60,7 @@ function SoDA:GetBooksGui(character)
     local numBooksAvailable = books.numBooksAvailable or "?"
 
     -- Header
-    group:AddChild(SoDA:Header("Books"))
+    group:AddChild(SoDA:Header(" "))
 
     -- Books known
     local booksKnown = self.aceGui:Create("Label")
@@ -69,6 +69,18 @@ function SoDA:GetBooksGui(character)
     end
     booksKnown:SetText(numBooksKnown .. "/" .. numBooksAvailable)
     group:AddChild(booksKnown)
+
+    return group
+end
+
+function SoDA:GetBooksLegend()
+    local group = self.aceGui:Create("SimpleGroup")
+
+    -- Books
+    group:AddChild(SoDA:Header("Books"))
+
+    -- Phase 2
+    group:AddChild(SoDA:LegendLabel("Phase 2"))
 
     return group
 end

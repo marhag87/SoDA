@@ -22,6 +22,7 @@ function SoDA:OnInitialize()
     SoDA:RegisterEvent("UPDATE_INSTANCE_INFO")
     SoDA:RegisterChatCommand("soda", "ToggleGui")
     self.maxLevel = 40
+    self.checkMark = "\124A:UI-LFG-ReadyMark:14:14\124a"
 	icon:Register("SoDA", SoDALDB, self.db.profile.minimap)
 end
 

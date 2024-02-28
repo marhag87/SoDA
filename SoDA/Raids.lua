@@ -31,7 +31,7 @@ function SoDA:GetRaidsGui(character)
     local raids = character.raids or {}
 
     -- Header
-    group:AddChild(SoDA:Header("Raids"))
+    group:AddChild(SoDA:Header(" "))
 
     -- Blackfathom Deeps
     local bfd = raids.bfd or {
@@ -67,13 +67,28 @@ function SoDA:RaidLock(raid)
     if raid.encounterProgress == raid.numEncounters and time() < raid.resetAt then
         raidLock:SetColor(0, 1, 0)
     end
-    local name = raid.name
-    if string.len(name) > 13 then
-        name = string.sub(name, 1, 13) .. "..."
-    end
-    raidLock:SetText(name)
+    -- local name = raid.name
+    -- if string.len(name) > 13 then
+    --     name = string.sub(name, 1, 13) .. "..."
+    -- end
+    raidLock:SetText(" ")
     if raid.encounterProgress ~= nil then
-        raidLock:SetText(name .. " " .. raid.encounterProgress .. "/" .. raid.numEncounters)
+        raidLock:SetText(raid.encounterProgress .. "/" .. raid.numEncounters)
     end
     return raidLock
+end
+
+function SoDA:GetRaidsLegend()
+    local group = self.aceGui:Create("SimpleGroup")
+
+    -- Raids
+    group:AddChild(SoDA:Header("Raids"))
+
+    -- BFD
+    group:AddChild(SoDA:LegendLabel("Blackfathom Deeps"))
+
+    -- Gnomeregan
+    group:AddChild(SoDA:LegendLabel("Gnomeregan"))
+
+    return group
 end

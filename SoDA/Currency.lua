@@ -18,13 +18,25 @@ function SoDA:GetCurrencyGui(character)
     end
 
     -- Header
-    group:AddChild(SoDA:Header("Currency"))
+    group:AddChild(SoDA:Header(" "))
 
     -- Gold
     local characterCopper = self.aceGui:Create("Label")
     local moneyString = GetMoneyString(character.currency.copper)
     characterCopper:SetText(moneyString)
     group:AddChild(characterCopper)
+
+    return group
+end
+
+function SoDA:GetCurrencyLegend()
+    local group = self.aceGui:Create("SimpleGroup")
+
+    -- Currency
+    group:AddChild(SoDA:Header("Currency"))  
+
+    -- Gold
+    group:AddChild(SoDA:LegendLabel("Gold"))
 
     return group
 end

@@ -8,13 +8,13 @@ function SoDA:Gui()
     for _ in pairs(self.db.global.characters) do
         numChararcters = numChararcters + 1
     end
-    local width = (numChararcters * 120) + 40
+    local width = (numChararcters * 120) + 160
     if width < 250 then
         width = 250
     end
     f:SetWidth(width)
 
-    -- TODO: Left spacer
+    f:AddChild(SoDA:Legend())
 
     local characters = self.db.global.characters
     for guid,character in SoDA:spairs(characters, function(t, a, b) return t[b].basic.level < t[a].basic.level end) do
@@ -77,4 +77,45 @@ function SoDA:Header(text)
     header:SetText(text)
     header:SetFontObject(GameFontNormal)
     return header
+end
+
+function SoDA:LegendLabel(text)
+    local label = self.aceGui:Create("Label")
+    label:SetText(text)
+    return label
+end
+
+function SoDA:Legend()
+    local legend = self.aceGui:Create("SimpleGroup")
+    legend:SetWidth(120)
+
+    -- Basic
+    legend:AddChild(SoDA:GetBasicLegend())
+    legend:AddChild(SoDA:Spacer())
+
+    -- Currency
+    legend:AddChild(SoDA:GetCurrencyLegend())
+    legend:AddChild(SoDA:Spacer())
+
+    -- Runes
+    legend:AddChild(SoDA:GetRunesLegend())
+    legend:AddChild(SoDA:Spacer())
+
+    -- Books
+    legend:AddChild(SoDA:GetBooksLegend())
+    legend:AddChild(SoDA:Spacer())
+
+    -- Raids
+    legend:AddChild(SoDA:GetRaidsLegend())
+    legend:AddChild(SoDA:Spacer())
+
+    -- PvP
+    legend:AddChild(SoDA:GetPvPLegend())
+    legend:AddChild(SoDA:Spacer())
+
+    -- Factions
+    legend:AddChild(SoDA:GetFactionsLegend())
+    legend:AddChild(SoDA:Spacer())
+
+    return legend
 end

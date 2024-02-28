@@ -21,14 +21,14 @@ function SoDA:GetPvPGui(character)
     local ashenvaleWeeklyResetAt = pvp.ashenvaleWeeklyResetAt or 0
 
     -- Header
-    group:AddChild(SoDA:Header("PvP"))
+    group:AddChild(SoDA:Header(" "))
 
     -- Ashenvale weekly
     local ashenvaleWeekly = self.aceGui:Create("Label")
+    ashenvaleWeekly:SetText(" ")
     if ashenvaleWeeklyDone == true and time() < ashenvaleWeeklyResetAt then
-        ashenvaleWeekly:SetColor(0, 1, 0)
+        ashenvaleWeekly:SetText(self.checkMark)
     end
-    ashenvaleWeekly:SetText("Ashenvale weekly")
     group:AddChild(ashenvaleWeekly)
 
     -- WSG Rep
@@ -54,6 +54,24 @@ function SoDA:GetPvPGui(character)
     }
     local abGroup = SoDA:FactionGui(ab)
     group:AddChild(abGroup)
+
+    return group
+end
+
+function SoDA:GetPvPLegend()
+    local group = self.aceGui:Create("SimpleGroup")
+
+    -- PvP
+    group:AddChild(SoDA:Header("PvP"))
+
+    -- Ashenvale weekly
+    group:AddChild(SoDA:LegendLabel("Ashenvale weekly"))
+
+    -- WSG
+    group:AddChild(SoDA:LegendLabel("Warsong Gulch"))
+
+    -- AB
+    group:AddChild(SoDA:LegendLabel("Arathi Basin"))
 
     return group
 end

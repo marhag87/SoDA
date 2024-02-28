@@ -50,13 +50,9 @@ function SoDA:GetBasicGui(character)
 
     -- Sleeping Bag
     local sleepingBag = self.aceGui:Create("Label")
-    name, _ = GetItemInfo(211527)
-    if string.len(name) > 17 then
-        name = string.sub(name, 1, 17) .. "..."
-    end
-    sleepingBag:SetText(name)
+    sleepingBag:SetText(" ")
     if character.basic.sleepingBagQuestDone then
-        sleepingBag:SetColor(0, 1, 0)
+        sleepingBag:SetText(self.checkMark)
     end
     group:AddChild(sleepingBag)
 
@@ -66,8 +62,29 @@ function SoDA:GetBasicGui(character)
     if percentRest == 150 then
         restedXPLabel:SetColor(0, 1, 0)
     end
-    restedXPLabel:SetText("Rested: " .. percentRest .. "%")
+    restedXPLabel:SetText(percentRest .. "%")
     group:AddChild(restedXPLabel)
+
+    return group
+end
+
+function SoDA:GetBasicLegend()
+    local group = self.aceGui:Create("SimpleGroup")
+
+    -- Character name, not shown
+    group:AddChild(SoDA:Header(" "))
+
+    -- Realm
+    group:AddChild(SoDA:LegendLabel("Realm"))
+
+    -- Level
+    group:AddChild(SoDA:LegendLabel("Level"))
+
+    -- Sleeping bag
+    group:AddChild(SoDA:LegendLabel("Sleeping bag"))
+
+    -- Rested
+    group:AddChild(SoDA:LegendLabel("Rested"))
 
     return group
 end

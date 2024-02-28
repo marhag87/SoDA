@@ -34,7 +34,7 @@ function SoDA:GetFactionsGui(character)
     }
 
     -- Header
-    group:AddChild(SoDA:Header("Factions"))
+    group:AddChild(SoDA:Header(" "))
 
     -- Phase one faction, ACA/DSL
     local phaseOneGroup = SoDA:FactionGui(phaseOne)
@@ -46,19 +46,23 @@ end
 function SoDA:FactionGui(faction)
     local group = self.aceGui:Create("SimpleGroup")
 
-    -- Faction name
-    local factionLabel = self.aceGui:Create("Label")
-    local standing = getglobal("FACTION_STANDING_LABEL" .. faction.standingId)
-    local name = faction.name
-    if string.len(faction.name) > 13 then
-        name = string.sub(faction.name, 1, 13) .. "..."
-    end
-    factionLabel:SetText(name)
-    group:AddChild(factionLabel)
-
     -- Faction standing
+    local standing = getglobal("FACTION_STANDING_LABEL" .. faction.standingId)
     local factionStanding = self.aceGui:Create("Label")
     factionStanding:SetText(standing .. " " .. faction.earnedValue - faction.bottomValue)
     group:AddChild(factionStanding)
+
+    return group
+end
+
+function SoDA:GetFactionsLegend()
+    local group = self.aceGui:Create("SimpleGroup")
+
+    -- Factions
+    group:AddChild(SoDA:Header("Factions"))
+
+    -- ACA/DSL
+    group:AddChild(SoDA:LegendLabel("ACA/DSL"))
+
     return group
 end
