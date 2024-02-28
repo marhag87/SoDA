@@ -1,5 +1,7 @@
 function SoDA:GetRunes()
     local runes = {}
+
+    -- Known runes
     runes.numRunesKnown = C_Engraving.GetNumRunesKnown()
     local availableRunes = {
         ["DRUID"]   = SoDA:DruidRunes(),
@@ -26,6 +28,12 @@ function SoDA:GetRunes()
     end
     runes.numRunesAvailable = numRunesAvailable
     runes.runeMap = runeMap
+
+    -- Grizzby
+    local grizzbyQuest = {["Horde"] = 78304, ["Alliance"] = 78297}
+    local faction, _ = UnitFactionGroup("player")
+    runes.grizzby = C_QuestLog.IsQuestFlaggedCompleted(grizzbyQuest[faction])
+
     return runes
 end
 
@@ -46,7 +54,14 @@ function SoDA:GetRunesGui(character)
     runesKnown:SetText(numRunesKnown .. "/" .. numRunesAvailable)
     group:AddChild(runesKnown)
 
-    -- TODO: Grizzby
+    -- Grizzby
+    local grizzby = self.aceGui:Create("Label")
+    grizzby:SetText(" ")
+    if runes.grizzby then
+        grizzby:SetText(self.checkMark)
+    end
+    group:AddChild(grizzby)
+
     -- TODO: Dark Riders
 
     return group
@@ -60,6 +75,9 @@ function SoDA:GetRunesLegend()
 
     -- Runes
     group:AddChild(SoDA:LegendLabel("Runes"))
+
+    -- Runes
+    group:AddChild(SoDA:LegendLabel("Grizzby"))
 
     return group
 end
