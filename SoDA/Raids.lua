@@ -67,10 +67,6 @@ function SoDA:RaidLock(raid)
     if raid.encounterProgress == raid.numEncounters and time() < raid.resetAt then
         raidLock:SetColor(0, 1, 0)
     end
-    -- local name = raid.name
-    -- if string.len(name) > 13 then
-    --     name = string.sub(name, 1, 13) .. "..."
-    -- end
     raidLock:SetText(" ")
     if raid.encounterProgress ~= nil then
         raidLock:SetText(raid.encounterProgress .. "/" .. raid.numEncounters)

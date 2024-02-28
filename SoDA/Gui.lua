@@ -22,39 +22,36 @@ function SoDA:Gui()
         group:SetWidth(120)
 
         -- Basic
-        local basic = SoDA:GetBasicGui(character)
-        group:AddChild(basic)
+        group:AddChild(SoDA:GetBasicGui(character))
         group:AddChild(SoDA:Spacer())
 
         -- Currency
-        local currency = SoDA:GetCurrencyGui(character)
-        group:AddChild(currency)
+        group:AddChild(SoDA:GetCurrencyGui(character))
         group:AddChild(SoDA:Spacer())
 
         -- Runes
-        local runes = SoDA:GetRunesGui(character)
-        group:AddChild(runes)
+        group:AddChild(SoDA:GetRunesGui(character))
         group:AddChild(SoDA:Spacer())
 
         -- Books
-        local books = SoDA:GetBooksGui(character)
-        group:AddChild(books)
+        group:AddChild(SoDA:GetBooksGui(character))
         group:AddChild(SoDA:Spacer())
 
         -- Raids
-        local raids = SoDA:GetRaidsGui(character)
-        group:AddChild(raids)
+        group:AddChild(SoDA:GetRaidsGui(character))
         group:AddChild(SoDA:Spacer())
 
         -- PvP
-        local pvp = SoDA:GetPvPGui(character)
-        group:AddChild(pvp)
+        group:AddChild(SoDA:GetPvPGui(character))
         group:AddChild(SoDA:Spacer())
 
         -- Factions
-        local factions = SoDA:GetFactionsGui(character)
-        group:AddChild(factions)
+        group:AddChild(SoDA:GetFactionsGui(character))
         group:AddChild(SoDA:Spacer())
+
+        -- Professions
+        -- group:AddChild(SoDA:GetProfessionsGui(character))
+        -- group:AddChild(SoDA:Spacer())
 
         f:AddChild(group)
     end
@@ -116,6 +113,10 @@ function SoDA:Legend()
     -- Factions
     legend:AddChild(SoDA:GetFactionsLegend())
     legend:AddChild(SoDA:Spacer())
+
+    -- Professions
+    -- legend:AddChild(SoDA:GetProfessionsLegend())
+    -- legend:AddChild(SoDA:Spacer())
 
     return legend
 end

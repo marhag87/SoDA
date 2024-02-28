@@ -22,6 +22,7 @@ function SoDA:OnInitialize()
     SoDA:RegisterEvent("UPDATE_INSTANCE_INFO")
     SoDA:RegisterChatCommand("soda", "ToggleGui")
     self.maxLevel = 40
+    self.maxProfessionSkill = 225
     self.checkMark = "\124A:UI-LFG-ReadyMark:14:14\124a"
 	icon:Register("SoDA", SoDALDB, self.db.profile.minimap)
 end
@@ -71,5 +72,5 @@ function SoDA:SaveData()
     self.db.global.characters[basic.guid].factions = SoDA:GetFactions()
     self.db.global.characters[basic.guid].pvp = SoDA:GetPvP()
     self.db.global.characters[basic.guid].books = SoDA:GetBooks()
-    -- TODO: Professions (epic crafting quests, progress, timers)
+    -- self.db.global.characters[basic.guid].professions = SoDA:GetProfessions()
 end
