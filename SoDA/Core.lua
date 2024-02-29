@@ -1,9 +1,13 @@
 SoDA = LibStub("AceAddon-3.0"):NewAddon("SoDA", "AceConsole-3.0", "AceEvent-3.0")
 local SoDALDB = LibStub("LibDataBroker-1.1"):NewDataObject("SoDA", {
 	type = "data source",
-	text = "Bunnies!",
+	text = "Season of Discovery Alts",
 	icon = "Interface\\Icons\\Inv_misc_groupneedmore",
 	OnClick = function() SoDA:ToggleGui() end,
+    OnTooltipShow = function(tooltip)
+        if not tooltip or not tooltip.AddLine then return end
+        tooltip:AddLine("Season of Discovery Alts")
+    end,
 })  
 local icon = LibStub("LibDBIcon-1.0")
 
