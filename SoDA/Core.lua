@@ -20,6 +20,7 @@ function SoDA:OnInitialize()
     SoDA:RegisterEvent("ENGRAVING_MODE_CHANGED")
     SoDA:RegisterEvent("QUEST_TURNED_IN")
     SoDA:RegisterEvent("UPDATE_INSTANCE_INFO")
+    SoDA:RegisterEvent("BAG_UPDATE")
     SoDA:RegisterChatCommand("soda", "ToggleGui")
     self.maxLevel = 40
     self.checkMark = "\124A:UI-LFG-ReadyMark:14:14\124a"
@@ -38,11 +39,18 @@ function SoDA:QUEST_TURNED_IN()
 end
 
 function SoDA:ENGRAVING_MODE_CHANGED()
+    if self.loggedInCharacter == nil then return end
     self.db.global.characters[self.loggedInCharacter].runes = SoDA:GetRunes()
 end
 
 function SoDA:UPDATE_INSTANCE_INFO()
+    if self.loggedInCharacter == nil then return end
     self.db.global.characters[self.loggedInCharacter].raids = SoDA:GetRaids()
+end
+
+function SoDA:BAG_UPDATE()
+    if self.loggedInCharacter == nil then return end
+    self.db.global.characters[self.loggedInCharacter].pvp = SoDA:GetPvP()
 end
 
 function SoDA:ToggleGui()

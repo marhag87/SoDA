@@ -3,12 +3,17 @@ function SoDA:GetPvP()
 
     -- Ashenvale weekly
     local ashenvaleWeeklyId = {["Alliance"] = 79090, ["Horde"] = 79098}
-    local faction = self.db.global.characters[self.loggedInCharacter].basic.faction
+    local faction, _ = UnitFactionGroup("player")
     local questId = ashenvaleWeeklyId[faction]
     pvp.ashenvaleWeekly = C_QuestLog.IsQuestFlaggedCompleted(questId)
     pvp.ashenvaleWeeklyResetAt = time() + C_DateAndTime.GetSecondsUntilWeeklyReset()
 
-    -- TODO: Blood Moon coins
+    -- Blood Moon coins
+    local bloodCoins = {}
+    bloodCoins.copper = GetItemCount(213168, true)
+    bloodCoins.silver = GetItemCount(213169, true)
+    bloodCoins.gold = GetItemCount(213170, true)
+    pvp.bloodCoins = bloodCoins
 
     return pvp
 end
@@ -22,6 +27,16 @@ function SoDA:GetPvPGui(character)
 
     -- Header
     group:AddChild(SoDA:Header(" "))
+
+    -- Blood coins
+    local bloodCoins = pvp.bloodCoins or {}
+    local copper = bloodCoins.copper or 0
+    local silver = bloodCoins.silver or 0
+    local gold = bloodCoins.gold or 0
+    local coinsString = GetMoneyString(copper + (silver * 100) + (gold * 100 * 100))
+    local bloodCoinsLabel = self.aceGui:Create("Label")
+    bloodCoinsLabel:SetText(coinsString)
+    group:AddChild(bloodCoinsLabel)
 
     -- Ashenvale weekly
     local ashenvaleWeekly = self.aceGui:Create("Label")
@@ -63,6 +78,9 @@ function SoDA:GetPvPLegend()
 
     -- PvP
     group:AddChild(SoDA:Header("PvP"))
+
+    -- Blood coins
+    group:AddChild(SoDA:LegendLabel("Blood coins"))
 
     -- Ashenvale weekly
     group:AddChild(SoDA:LegendLabel("Ashenvale weekly"))
