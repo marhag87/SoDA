@@ -60,7 +60,6 @@ end
 function SoDA:ToggleGui()
     -- TODO: Filter/remove characters
     -- TODO: LUA linting
-    -- TODO: Auto release to curseforge/wago
     if self.frame ~= nil and self.frame:IsVisible() then
         self.frame:Hide()
     else
