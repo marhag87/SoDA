@@ -17,6 +17,7 @@ PvP.lua
 Factions.lua
 Utils.lua
 Books.lua
+Config.lua
 
 Runes\Druid.lua
 Runes\Hunter.lua

@@ -3,10 +3,19 @@ local SoDALDB = LibStub("LibDataBroker-1.1"):NewDataObject("SoDA", {
     type = "data source",
     text = "Season of Discovery Alts",
     icon = "Interface\\Icons\\Inv_misc_groupneedmore",
-    OnClick = function() SoDA:ToggleGui() end,
+    OnClick = function(self, button)
+        if button == "LeftButton" then
+            SoDA:ToggleGui()
+        elseif button == "RightButton" then
+            SoDA:HideGui()
+            SoDA:OpenConfig()
+        end
+    end,
     OnTooltipShow = function(tooltip)
         if not tooltip or not tooltip.AddLine then return end
         tooltip:AddLine("Season of Discovery Alts")
+        tooltip:AddLine("|cFFCFCFCFLeft click:|r Open GUI")
+        tooltip:AddLine("|cFFCFCFCFRight click:|r Open options")
     end,
 })
 local icon = LibStub("LibDBIcon-1.0")
@@ -29,6 +38,7 @@ function SoDA:OnInitialize()
     self.maxLevel = 40
     self.checkMark = "\124A:UI-LFG-ReadyMark:14:14\124a"
     icon:Register("SoDA", SoDALDB, self.db.profile.minimap)
+    InterfaceOptions_AddCategory(SoDA:GetConfig())
 end
 
 function SoDA:PLAYER_ENTERING_WORLD()
@@ -57,8 +67,13 @@ function SoDA:BAG_UPDATE()
     self.db.global.characters[self.loggedInCharacter].pvp = SoDA:GetPvP()
 end
 
+function SoDA:HideGui()
+    if self.frame ~= nil and self.frame:IsVisible() then
+        self.frame:Hide()
+    end
+end
+
 function SoDA:ToggleGui()
-    -- TODO: Filter/remove characters
     if self.frame ~= nil and self.frame:IsVisible() then
         self.frame:Hide()
     else
