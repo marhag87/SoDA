@@ -8,8 +8,8 @@ function SoDA:GetBasicInformation()
     basic.sleepingBagQuestDone = C_QuestLog.IsQuestFlaggedCompleted(79976)
 
     -- Rested
-    restXP = GetXPExhaustion()
-    nextlevelXP = UnitXPMax("player")
+    local restXP = GetXPExhaustion()
+    local nextlevelXP = UnitXPMax("player")
     basic.percentRest = 0
     if restXP then
         basic.percentRest = math.floor(restXP / nextlevelXP * 100)

@@ -1,24 +1,24 @@
 SoDA = LibStub("AceAddon-3.0"):NewAddon("SoDA", "AceConsole-3.0", "AceEvent-3.0")
 local SoDALDB = LibStub("LibDataBroker-1.1"):NewDataObject("SoDA", {
-	type = "data source",
-	text = "Season of Discovery Alts",
-	icon = "Interface\\Icons\\Inv_misc_groupneedmore",
-	OnClick = function() SoDA:ToggleGui() end,
+    type = "data source",
+    text = "Season of Discovery Alts",
+    icon = "Interface\\Icons\\Inv_misc_groupneedmore",
+    OnClick = function() SoDA:ToggleGui() end,
     OnTooltipShow = function(tooltip)
         if not tooltip or not tooltip.AddLine then return end
         tooltip:AddLine("Season of Discovery Alts")
     end,
-})  
+})
 local icon = LibStub("LibDBIcon-1.0")
 
 function SoDA:OnInitialize()
     self.db = LibStub("AceDB-3.0"):New("SoDADB", {
-		profile = {
-			minimap = {
-				hide = false,
-			},
-		},
-	})
+        profile = {
+            minimap = {
+                hide = false,
+            },
+        },
+    })
     self.aceGui = LibStub("AceGUI-3.0")
     SoDA:RegisterEvent("PLAYER_ENTERING_WORLD")
     SoDA:RegisterEvent("ENGRAVING_MODE_CHANGED")
@@ -28,7 +28,7 @@ function SoDA:OnInitialize()
     SoDA:RegisterChatCommand("soda", "ToggleGui")
     self.maxLevel = 40
     self.checkMark = "\124A:UI-LFG-ReadyMark:14:14\124a"
-	icon:Register("SoDA", SoDALDB, self.db.profile.minimap)
+    icon:Register("SoDA", SoDALDB, self.db.profile.minimap)
 end
 
 function SoDA:PLAYER_ENTERING_WORLD()
@@ -59,7 +59,6 @@ end
 
 function SoDA:ToggleGui()
     -- TODO: Filter/remove characters
-    -- TODO: LUA linting
     if self.frame ~= nil and self.frame:IsVisible() then
         self.frame:Hide()
     else
