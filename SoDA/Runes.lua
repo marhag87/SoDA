@@ -125,7 +125,7 @@ function SoDA:RunesTooltip(frame, runes)
     GameTooltip:SetOwner(frame, "ANCHOR_CURSOR")
     GameTooltip:AddLine("Runes")
     if runes.known == nil then
-        GameTooltip:AddLine("No rune data, please log this character to refresh")
+        GameTooltip:AddLine("No rune data, please log this character and open the character sheet to refresh")
     else
         local known = runes.known or {}
         local unknown = runes.unknown or {}
