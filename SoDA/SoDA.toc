@@ -2,7 +2,7 @@
 ## Title: Season of Discovery Alts
 ## Notes: Keep track of your alts in Season of Discovery
 ## Author: marrtin
-## Version: 0.4.0
+## Version: 0.5.0
 ## SavedVariables: SoDADB
 
 embeds.xml
