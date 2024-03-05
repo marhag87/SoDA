@@ -18,13 +18,3 @@ Factions.lua
 Utils.lua
 Books.lua
 Config.lua
-
-Runes\Druid.lua
-Runes\Hunter.lua
-Runes\Mage.lua
-Runes\Paladin.lua
-Runes\Priest.lua
-Runes\Rogue.lua
-Runes\Shaman.lua
-Runes\Warlock.lua
-Runes\Warrior.lua

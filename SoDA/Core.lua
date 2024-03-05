@@ -30,13 +30,20 @@ function SoDA:OnInitialize()
     })
     self.aceGui = LibStub("AceGUI-3.0")
     SoDA:RegisterEvent("PLAYER_ENTERING_WORLD")
-    SoDA:RegisterEvent("ENGRAVING_MODE_CHANGED")
+    -- SoDA:RegisterEvent("ENGRAVING_MODE_CHANGED")
     SoDA:RegisterEvent("QUEST_TURNED_IN")
     SoDA:RegisterEvent("UPDATE_INSTANCE_INFO")
     SoDA:RegisterEvent("BAG_UPDATE")
     SoDA:RegisterChatCommand("soda", "ToggleGui")
     self.maxLevel = 40
     self.checkMark = "\124A:UI-LFG-ReadyMark:14:14\124a"
+    self.runeCategories = {
+        ["Chest"] = 5,
+        ["Hands"] = 10,
+        ["Legs"] = 7,
+        ["Feet"] = 8,
+        ["Waist"] = 6,
+    }
     icon:Register("SoDA", SoDALDB, self.db.profile.minimap)
     InterfaceOptions_AddCategory(SoDA:GetConfig())
 end
@@ -52,10 +59,10 @@ function SoDA:QUEST_TURNED_IN()
     end)
 end
 
-function SoDA:ENGRAVING_MODE_CHANGED()
-    if self.loggedInCharacter == nil then return end
-    self.db.global.characters[self.loggedInCharacter].runes = SoDA:GetRunes()
-end
+-- function SoDA:ENGRAVING_MODE_CHANGED()
+--     if self.loggedInCharacter == nil then return end
+--     self.db.global.characters[self.loggedInCharacter].runes = SoDA:GetRunes()
+-- end
 
 function SoDA:UPDATE_INSTANCE_INFO()
     if self.loggedInCharacter == nil then return end
@@ -96,5 +103,6 @@ function SoDA:SaveData()
     self.db.global.characters[basic.guid].factions = SoDA:GetFactions()
     self.db.global.characters[basic.guid].pvp = SoDA:GetPvP()
     self.db.global.characters[basic.guid].books = SoDA:GetBooks()
+    self.db.global.characters[basic.guid].runes = SoDA:GetRunes()
     -- TODO: Professions (epic crafting quests, progress, timers)
 end
