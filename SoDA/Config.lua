@@ -17,6 +17,7 @@ function SoDA:GetConfig()
     showCharacterLabel:SetText("Show characters:")
 
     -- Characters
+    -- BUG: Characters that are new and on the first login will not show up
     local characters = self.db.global.characters
     local characterNumber = 0
     for guid, character in SoDA:spairs(characters, function(t, a, b) return t[b].basic.level < t[a].basic.level end) do

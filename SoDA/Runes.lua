@@ -6,6 +6,7 @@ function SoDA:GetRunes()
     runes.numRunesAvailable = 0
     runes.known = {}
     runes.unknown = {}
+    -- BUG: Runes that are not available show up as unknown. For example Aspect of the Viper for hunters (it's a book)
     for _, category in pairs(self.runeCategories) do
         local known = C_Engraving.GetRunesForCategory(category, true)
         local all = C_Engraving.GetRunesForCategory(category, false)
