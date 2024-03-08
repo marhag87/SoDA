@@ -6,7 +6,22 @@ function SoDA:GetRunes()
     runes.numRunesAvailable = 0
     runes.known = {}
     runes.unknown = {}
-    -- BUG: Runes that are not available show up as unknown. For example Aspect of the Viper for hunters (it's a book)
+    local filter = {
+        -- Druid
+        -- Hunter
+        48859, -- Aspect of the Viper
+        -- Mage
+        -- Paladin
+        -- Priest
+        48274, -- Shadowfiend
+        -- Rogue
+        48164, -- Shadowstep (Legs)
+        -- Shaman
+        -- Warlock
+        -- Warrior
+        48334, -- Commanding Shout
+    }
+
     for _, category in pairs(self.runeCategories) do
         local known = C_Engraving.GetRunesForCategory(category, true)
         local all = C_Engraving.GetRunesForCategory(category, false)
@@ -15,16 +30,24 @@ function SoDA:GetRunes()
             table.insert(runes.known, rune)
         end
         for _, rune in pairs(all) do
+            local isFiltered = false
+            for _, filteredRune in pairs(filter) do
+                if rune.skillLineAbilityID == filteredRune then
+                    isFiltered = true
+                end
+            end
             local isKnown = false
             for _, knownRune in pairs(known) do
                 if knownRune.name == rune.name then
                     isKnown = true
                 end
             end
-            if not isKnown then
-                table.insert(runes.unknown, rune)
+            if not isFiltered then
+                if not isKnown then
+                    table.insert(runes.unknown, rune)
+                end
+                runes.numRunesAvailable = runes.numRunesAvailable + 1
             end
-            runes.numRunesAvailable = runes.numRunesAvailable + 1
         end
     end
 
