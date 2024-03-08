@@ -118,10 +118,18 @@ function SoDA:GetRunesGui(character)
     -- Dark Riders
     local darkRiderQuestsDone = runes.darkRiderQuestsDone or "?"
     local darkRider = self.aceGui:Create("Label")
+    darkRider:SetWidth(self.defaultWidth)
     if darkRiderQuestsDone == 7 then
         darkRider:SetColor(0, 1, 0)
     end
     darkRider:SetText(darkRiderQuestsDone .. "/" .. 7)
+    -- Dark Riders tooltip
+    darkRider.frame:SetScript("OnEnter", function(_)
+        SoDA:DarkRidersTooltip(darkRider.frame, runes)
+    end)
+    darkRider.frame:SetScript("OnLeave", function(_)
+        GameTooltip:Hide()
+    end)
     group:AddChild(darkRider)
 
     return group
@@ -166,6 +174,21 @@ function SoDA:RunesTooltip(frame, runes)
                     GameTooltip:AddDoubleLine(rune.name, " ")
                 end
             end
+        end
+    end
+    GameTooltip:Show()
+end
+
+function SoDA:DarkRidersTooltip(frame, runes)
+    GameTooltip:SetOwner(frame, "ANCHOR_CURSOR")
+    GameTooltip:AddLine("Dark Riders")
+    local darkRiderMap = runes.darkRiderMap or {}
+    GameTooltip:AddLine(" ")
+    for _, rider in pairs(darkRiderMap) do
+        if rider.isDone then
+            GameTooltip:AddDoubleLine(rider.zone, self.checkMark)
+        else
+            GameTooltip:AddDoubleLine(rider.zone, " ")
         end
     end
     GameTooltip:Show()
