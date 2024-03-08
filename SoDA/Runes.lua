@@ -83,7 +83,7 @@ end
 
 function SoDA:GetRunesGui(character)
     local group = self.aceGui:Create("SimpleGroup")
-    group:SetWidth(120)
+    group:SetWidth(self.defaultWidth)
     local runes = character.runes or {}
 
     -- Header
@@ -97,7 +97,7 @@ function SoDA:GetRunesGui(character)
         runesKnown:SetColor(0, 1, 0)
     end
     runesKnown:SetText(numRunesKnown .. "/" .. numRunesAvailable)
-    runesKnown:SetWidth(120)
+    runesKnown:SetWidth(self.defaultWidth)
     -- Runes tooltip
     runesKnown.frame:SetScript("OnEnter", function(_)
         SoDA:RunesTooltip(runesKnown.frame, runes)

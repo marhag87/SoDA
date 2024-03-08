@@ -44,6 +44,7 @@ function SoDA:OnInitialize()
         ["Feet"] = 8,
         ["Waist"] = 6,
     }
+    self.defaultWidth = 120
     icon:Register("SoDA", SoDALDB, self.db.profile.minimap)
     InterfaceOptions_AddCategory(SoDA:GetConfig())
 end

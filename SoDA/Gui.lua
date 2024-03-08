@@ -10,7 +10,7 @@ function SoDA:Gui()
             numChararcters = numChararcters + 1
         end
     end
-    local width = (numChararcters * 120) + 160
+    local width = (numChararcters * self.defaultWidth) + 160
     if width < 250 then
         width = 250
     end
@@ -22,7 +22,7 @@ function SoDA:Gui()
     for guid, character in SoDA:spairs(characters, function(t, a, b) return t[b].basic.level < t[a].basic.level end) do
         if not character.disabled then
             local group = self.aceGui:Create("SimpleGroup")
-            group:SetWidth(120)
+            group:SetWidth(self.defaultWidth)
 
             -- Basic
             local basic = SoDA:GetBasicGui(character)
@@ -91,7 +91,7 @@ end
 
 function SoDA:Legend()
     local legend = self.aceGui:Create("SimpleGroup")
-    legend:SetWidth(120)
+    legend:SetWidth(self.defaultWidth)
 
     -- Basic
     legend:AddChild(SoDA:GetBasicLegend())
