@@ -2,7 +2,7 @@ function SoDA:GetPvP()
     local pvp = {}
 
     -- Ashenvale weekly
-    local ashenvaleWeeklyId = {["Alliance"] = 79090, ["Horde"] = 79098}
+    local ashenvaleWeeklyId = { ["Alliance"] = 79090, ["Horde"] = 79098 }
     local faction, _ = UnitFactionGroup("player")
     local questId = ashenvaleWeeklyId[faction]
     pvp.ashenvaleWeekly = C_QuestLog.IsQuestFlaggedCompleted(questId)
@@ -20,6 +20,7 @@ end
 
 function SoDA:GetPvPGui(character)
     local group = self.aceGui:Create("SimpleGroup")
+    group:SetWidth(self.defaultWidth)
 
     local pvp = character.pvp or {}
     local ashenvaleWeeklyDone = pvp.ashenvaleWeekly or false
@@ -40,9 +41,17 @@ function SoDA:GetPvPGui(character)
 
     -- Ashenvale weekly
     local ashenvaleWeekly = self.aceGui:Create("Label")
+    ashenvaleWeekly:SetWidth(self.defaultWidth)
     ashenvaleWeekly:SetText(" ")
     if ashenvaleWeeklyDone == true and time() < ashenvaleWeeklyResetAt then
         ashenvaleWeekly:SetText(self.checkMark)
+        -- Ashenvale weekly tooltip
+        ashenvaleWeekly.frame:SetScript("OnEnter", function(_)
+            SoDA:AshenvaleWeeklyTooltip(ashenvaleWeekly.frame, ashenvaleWeeklyResetAt)
+        end)
+        ashenvaleWeekly.frame:SetScript("OnLeave", function(_)
+            GameTooltip:Hide()
+        end)
     end
     group:AddChild(ashenvaleWeekly)
 
@@ -92,4 +101,14 @@ function SoDA:GetPvPLegend()
     group:AddChild(SoDA:LegendLabel("Arathi Basin"))
 
     return group
+end
+
+function SoDA:AshenvaleWeeklyTooltip(frame, resetAt)
+    GameTooltip:SetOwner(frame, "ANCHOR_CURSOR")
+    GameTooltip:AddLine("Ashenvale weekly")
+    GameTooltip:AddLine(" ")
+    local secondsLeft = resetAt - time()
+    local resetTime = string.format(SecondsToTime(secondsLeft))
+    GameTooltip:AddLine("|cffffffff" .. "Resets in " .. resetTime .. FONT_COLOR_CODE_CLOSE)
+    GameTooltip:Show()
 end
