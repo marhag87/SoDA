@@ -46,15 +46,8 @@ function SoDA:GetRaidsGui(character)
     bfdLock:SetWidth(self.defaultWidth)
     if bfd.resetAt > 0 then
         -- Blackfathom Deeps tooltip
-        bfdLock.frame:SetScript("OnEnter", function(_)
+        SoDA:Tooltip(bfdLock.frame, function()
             SoDA:RaidsTooltip(bfdLock.frame, bfd)
-        end)
-        bfdLock.frame:SetScript("OnLeave", function(_)
-            GameTooltip:Hide()
-        end)
-        bfdLock.frame:SetScript("OnHide", function()
-            bfdLock.frame:SetScript("OnEnter", nil)
-            bfdLock.frame:SetScript("OnLeave", nil)
         end)
     end
     group:AddChild(bfdLock)
@@ -70,15 +63,8 @@ function SoDA:GetRaidsGui(character)
     gnomereganLock:SetWidth(self.defaultWidth)
     if gnomeregan.resetAt > 0 then
         -- Gnomeregan tooltip
-        gnomereganLock.frame:SetScript("OnEnter", function(_)
+        SoDA:Tooltip(gnomereganLock.frame, function()
             SoDA:RaidsTooltip(gnomereganLock.frame, gnomeregan)
-        end)
-        gnomereganLock.frame:SetScript("OnLeave", function(_)
-            GameTooltip:Hide()
-        end)
-        gnomereganLock.frame:SetScript("OnHide", function()
-            gnomereganLock.frame:SetScript("OnEnter", nil)
-            gnomereganLock.frame:SetScript("OnLeave", nil)
         end)
     end
     group:AddChild(gnomereganLock)

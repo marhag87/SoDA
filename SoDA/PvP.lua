@@ -47,15 +47,8 @@ function SoDA:GetPvPGui(character)
     if ashenvaleWeeklyDone == true and time() < ashenvaleWeeklyResetAt then
         ashenvaleWeekly:SetText(self.checkMark)
         -- Ashenvale weekly tooltip
-        ashenvaleWeekly.frame:SetScript("OnEnter", function(_)
+        SoDA:Tooltip(ashenvaleWeekly.frame, function()
             SoDA:AshenvaleWeeklyTooltip(ashenvaleWeekly.frame, ashenvaleWeeklyResetAt)
-        end)
-        ashenvaleWeekly.frame:SetScript("OnLeave", function(_)
-            GameTooltip:Hide()
-        end)
-        ashenvaleWeekly.frame:SetScript("OnHide", function()
-            ashenvaleWeekly.frame:SetScript("OnEnter", nil)
-            ashenvaleWeekly.frame:SetScript("OnLeave", nil)
         end)
     end
     group:AddChild(ashenvaleWeekly)

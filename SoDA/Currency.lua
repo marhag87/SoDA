@@ -41,15 +41,8 @@ function SoDA:GetCurrencyLegend()
     -- Gold
     local goldLabel = SoDA:LegendLabel("Gold")
     -- Gold label tooltip
-    goldLabel.frame:SetScript("OnEnter", function(_)
+    SoDA:Tooltip(goldLabel.frame, function()
         SoDA:GoldLabelTooltip(goldLabel.frame)
-    end)
-    goldLabel.frame:SetScript("OnLeave", function(_)
-        GameTooltip:Hide()
-    end)
-    goldLabel.frame:SetScript("OnHide", function()
-        goldLabel.frame:SetScript("OnEnter", nil)
-        goldLabel.frame:SetScript("OnLeave", nil)
     end)
     group:AddChild(goldLabel)
 

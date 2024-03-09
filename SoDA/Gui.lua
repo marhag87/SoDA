@@ -126,3 +126,14 @@ function SoDA:Legend()
 
     return legend
 end
+
+function SoDA:Tooltip(frame, script)
+    frame:SetScript("OnEnter", script)
+    frame:SetScript("OnLeave", function()
+        GameTooltip:Hide()
+    end)
+    frame:SetScript("OnHide", function()
+        frame:SetScript("OnEnter", nil)
+        frame:SetScript("OnLeave", nil)
+    end)
+end
