@@ -45,6 +45,7 @@ function SoDA:OnInitialize()
         ["Waist"] = 6,
     }
     self.defaultWidth = 120
+    self.weeklyReset = time() + C_DateAndTime.GetSecondsUntilWeeklyReset()
     icon:Register("SoDA", SoDALDB, self.db.profile.minimap)
     InterfaceOptions_AddCategory(SoDA:GetConfig())
 end

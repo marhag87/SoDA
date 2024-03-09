@@ -91,7 +91,14 @@ function SoDA:GetPvPLegend()
     group:AddChild(SoDA:LegendLabel("Blood coins"))
 
     -- Ashenvale weekly
-    group:AddChild(SoDA:LegendLabel("Ashenvale weekly"))
+    local ashenvaleWeeklyLabel = SoDA:LegendLabel("Ashenvale weekly")
+    -- Ashenvale weekly tooltip
+    if time() < self.weeklyReset then
+        SoDA:Tooltip(ashenvaleWeeklyLabel.frame, function()
+            SoDA:AshenvaleWeeklyTooltip(ashenvaleWeeklyLabel.frame, self.weeklyReset)
+        end)
+    end
+    group:AddChild(ashenvaleWeeklyLabel)
 
     -- WSG
     group:AddChild(SoDA:LegendLabel("Warsong Gulch"))
