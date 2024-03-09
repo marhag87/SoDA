@@ -3,8 +3,16 @@ function SoDA:OpenConfig()
 end
 
 function SoDA:GetConfig()
-    local configFrame = CreateFrame("Frame")
-    configFrame.name = "Season of Discovery Alts"
+    self.configFrame = CreateFrame("Frame")
+    self.configFrame.name = "Season of Discovery Alts"
+    self.configFrame:SetScript("OnShow", function()
+        if not self.configShown then SoDA:ShowConfig() end
+    end)
+    return self.configFrame
+end
+
+function SoDA:ShowConfig()
+    local configFrame = self.configFrame
 
     -- Title
     local title = configFrame:CreateFontString(nil, "ARTWORK", "GameFontNormalLarge")
@@ -17,7 +25,6 @@ function SoDA:GetConfig()
     showCharacterLabel:SetText("Show characters:")
 
     -- Characters
-    -- BUG: Characters that are new and on the first login will not show up
     local characters = self.db.global.characters
     local characterNumber = 0
     for guid, character in SoDA:spairs(characters, function(t, a, b) return t[b].basic.level < t[a].basic.level end) do
@@ -31,7 +38,7 @@ function SoDA:GetConfig()
         characterNumber = characterNumber + 1
     end
 
-    return configFrame
+    self.configShown = true
 end
 
 function SoDA:Checkbox(frame, label, onClick)
