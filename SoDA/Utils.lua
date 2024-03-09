@@ -21,3 +21,11 @@ function SoDA:spairs(t, order)
         end
     end
 end
+
+function SoDA:GetClassColor(class)
+    if class == "SHAMAN" then
+        return 0.0, 0.44, 0.87, "#0070DD"
+    else
+        return GetClassColor(class)
+    end
+end
