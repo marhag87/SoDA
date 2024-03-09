@@ -15,7 +15,15 @@ function SoDA:GetBasicInformation()
         basic.percentRest = math.floor(restXP / nextlevelXP * 100)
     end
 
-    -- TODO: Mount
+    -- Mount
+    basic.highestMount = 0
+    for _, mount in ipairs(SoDA:GetMounts()) do
+        if GetItemCount(mount.id, true) > 0 then
+            if mount.speed > basic.highestMount then
+                basic.highestMount = mount.speed
+            end
+        end
+    end
 
     return basic
 end
@@ -52,6 +60,18 @@ function SoDA:GetBasicGui(character)
     characterLevel:SetText(character.basic.level)
     group:AddChild(characterLevel)
 
+    -- Mount
+    local mountLabel = self.aceGui:Create("Label")
+    mountLabel:SetWidth(self.defaultWidth)
+    mountLabel:SetText(" ")
+    if character.basic.highestMount and character.basic.highestMount > 0 then
+        mountLabel:SetText(character.basic.highestMount .. "%")
+        if character.basic.highestMount >= self.maxMountSpeed then
+            mountLabel:SetColor(0, 1, 0)
+        end
+    end
+    group:AddChild(mountLabel)
+
     -- Sleeping Bag
     local sleepingBag = self.aceGui:Create("Label")
     sleepingBag:SetWidth(self.defaultWidth)
@@ -86,6 +106,9 @@ function SoDA:GetBasicLegend()
 
     -- Level
     group:AddChild(SoDA:LegendLabel("Level"))
+
+    -- Mount
+    group:AddChild(SoDA:LegendLabel("Mount"))
 
     -- Sleeping bag
     group:AddChild(SoDA:LegendLabel("Sleeping bag"))

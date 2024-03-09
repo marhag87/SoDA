@@ -36,6 +36,7 @@ function SoDA:OnInitialize()
     SoDA:RegisterEvent("BAG_UPDATE")
     SoDA:RegisterChatCommand("soda", "ToggleGui")
     self.maxLevel = 40
+    self.maxMountSpeed = 60
     self.checkMark = "\124A:UI-LFG-ReadyMark:14:14\124a"
     self.runeCategories = {
         ["Chest"] = 5,
