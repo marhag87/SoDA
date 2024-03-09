@@ -53,6 +53,10 @@ function SoDA:GetPvPGui(character)
         ashenvaleWeekly.frame:SetScript("OnLeave", function(_)
             GameTooltip:Hide()
         end)
+        ashenvaleWeekly.frame:SetScript("OnHide", function()
+            ashenvaleWeekly.frame:SetScript("OnEnter", nil)
+            ashenvaleWeekly.frame:SetScript("OnLeave", nil)
+        end)
     end
     group:AddChild(ashenvaleWeekly)
 

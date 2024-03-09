@@ -77,6 +77,10 @@ function SoDA:GetBooksGui(character)
     booksKnown.frame:SetScript("OnLeave", function(_)
         GameTooltip:Hide()
     end)
+    booksKnown.frame:SetScript("OnHide", function()
+        booksKnown.frame:SetScript("OnEnter", nil)
+        booksKnown.frame:SetScript("OnLeave", nil)
+    end)
     group:AddChild(booksKnown)
 
     return group

@@ -47,6 +47,10 @@ function SoDA:GetCurrencyLegend()
     goldLabel.frame:SetScript("OnLeave", function(_)
         GameTooltip:Hide()
     end)
+    goldLabel.frame:SetScript("OnHide", function()
+        goldLabel.frame:SetScript("OnEnter", nil)
+        goldLabel.frame:SetScript("OnLeave", nil)
+    end)
     group:AddChild(goldLabel)
 
     return group
