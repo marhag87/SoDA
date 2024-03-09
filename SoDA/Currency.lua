@@ -39,7 +39,57 @@ function SoDA:GetCurrencyLegend()
     group:AddChild(SoDA:Header("Currency"))
 
     -- Gold
-    group:AddChild(SoDA:LegendLabel("Gold"))
+    local goldLabel = SoDA:LegendLabel("Gold")
+    -- Gold label tooltip
+    goldLabel.frame:SetScript("OnEnter", function(_)
+        SoDA:GoldLabelTooltip(goldLabel.frame)
+    end)
+    goldLabel.frame:SetScript("OnLeave", function(_)
+        GameTooltip:Hide()
+    end)
+    group:AddChild(goldLabel)
 
     return group
+end
+
+function SoDA:GoldLabelTooltip(frame)
+    GameTooltip:SetOwner(frame, "ANCHOR_CURSOR")
+    GameTooltip:AddLine("Gold")
+    GameTooltip:AddLine(" ")
+    local total = 0
+    local money = {}
+    for _, character in pairs(self.db.global.characters) do
+        -- Total
+        local currency = character.currency or {}
+        local copper = currency.copper or 0
+        total = total + copper
+
+        -- Realm
+        local basic = character.basic or {}
+        local realm = basic.realm
+        local faction = basic.faction
+        if realm ~= nil and faction ~= nil then
+            if money[realm] == nil then
+                money[realm] = {}
+                money[realm].total = 0
+                money[realm].Alliance = 0
+                money[realm].Horde = 0
+            end
+            money[realm].total = money[realm].total + copper
+            money[realm][faction] = money[realm][faction] + copper
+        end
+    end
+
+    GameTooltip:AddDoubleLine("Total", GetMoneyString(total))
+    for realmName, realm in pairs(money) do
+        GameTooltip:AddLine(" ")
+        GameTooltip:AddDoubleLine(realmName, GetMoneyString(realm.total))
+        if realm.Alliance > 0 then
+            GameTooltip:AddDoubleLine("|cffffffff" .. "Alliance" .. FONT_COLOR_CODE_CLOSE, GetMoneyString(realm.Alliance))
+        end
+        if realm.Horde > 0 then
+            GameTooltip:AddDoubleLine("|cffffffff" .. "Horde" .. FONT_COLOR_CODE_CLOSE, GetMoneyString(realm.Horde))
+        end
+    end
+    GameTooltip:Show()
 end
