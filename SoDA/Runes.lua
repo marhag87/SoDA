@@ -109,6 +109,7 @@ function SoDA:GetRunesGui(character)
 
     -- Grizzby
     local grizzby = self.aceGui:Create("Label")
+    grizzby:SetWidth(self.defaultWidth)
     grizzby:SetText(" ")
     if runes.grizzby then
         grizzby:SetText(self.checkMark)
@@ -137,6 +138,7 @@ end
 
 function SoDA:GetRunesLegend()
     local group = self.aceGui:Create("SimpleGroup")
+    group:SetWidth(self.defaultWidth)
 
     -- Runes
     group:AddChild(SoDA:Header("Runes"))

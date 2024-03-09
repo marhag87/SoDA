@@ -36,6 +36,7 @@ function SoDA:GetPvPGui(character)
     local gold = bloodCoins.gold or 0
     local coinsString = GetMoneyString(copper + (silver * 100) + (gold * 100 * 100))
     local bloodCoinsLabel = self.aceGui:Create("Label")
+    bloodCoinsLabel:SetWidth(self.defaultWidth)
     bloodCoinsLabel:SetText(coinsString)
     group:AddChild(bloodCoinsLabel)
 
@@ -84,6 +85,7 @@ end
 
 function SoDA:GetPvPLegend()
     local group = self.aceGui:Create("SimpleGroup")
+    group:SetWidth(self.defaultWidth)
 
     -- PvP
     group:AddChild(SoDA:Header("PvP"))

@@ -22,6 +22,7 @@ end
 
 function SoDA:GetBasicGui(character)
     local group = self.aceGui:Create("SimpleGroup")
+    group:SetWidth(self.defaultWidth)
 
     if character.basic == nil then
         return group
@@ -29,6 +30,7 @@ function SoDA:GetBasicGui(character)
 
     -- Character name
     local characterName = self.aceGui:Create("Label")
+    characterName:SetWidth(self.defaultWidth)
     local r, g, b, _ = GetClassColor(character.basic.class)
     characterName:SetColor(r, g, b)
     characterName:SetText(character.basic.name)
@@ -37,11 +39,13 @@ function SoDA:GetBasicGui(character)
 
     -- Realm
     local realmName = self.aceGui:Create("Label")
+    realmName:SetWidth(self.defaultWidth)
     realmName:SetText(character.basic.realm)
     group:AddChild(realmName)
 
     -- Level
     local characterLevel = self.aceGui:Create("Label")
+    characterLevel:SetWidth(self.defaultWidth)
     if character.basic.level == self.maxLevel then
         characterLevel:SetColor(0, 1, 0)
     end
@@ -50,6 +54,7 @@ function SoDA:GetBasicGui(character)
 
     -- Sleeping Bag
     local sleepingBag = self.aceGui:Create("Label")
+    sleepingBag:SetWidth(self.defaultWidth)
     sleepingBag:SetText(" ")
     if character.basic.sleepingBagQuestDone then
         sleepingBag:SetText(self.checkMark)
@@ -58,6 +63,7 @@ function SoDA:GetBasicGui(character)
 
     -- Rested %
     local restedXPLabel = self.aceGui:Create("Label")
+    restedXPLabel:SetWidth(self.defaultWidth)
     local percentRest = character.basic.percentRest or 0
     if percentRest == 150 then
         restedXPLabel:SetColor(0, 1, 0)
@@ -70,6 +76,7 @@ end
 
 function SoDA:GetBasicLegend()
     local group = self.aceGui:Create("SimpleGroup")
+    group:SetWidth(self.defaultWidth)
 
     -- Character name, not shown
     group:AddChild(SoDA:Header(" "))

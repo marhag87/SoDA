@@ -2,7 +2,7 @@ function SoDA:GetCurrency()
     local currency = {}
     local copper = SoDA:GetCopper()
     currency.copper = copper
-    return currency    
+    return currency
 end
 
 function SoDA:GetCopper()
@@ -12,6 +12,7 @@ end
 
 function SoDA:GetCurrencyGui(character)
     local group = self.aceGui:Create("SimpleGroup")
+    group:SetWidth(self.defaultWidth)
 
     if character.currency == nil then
         return group
@@ -22,6 +23,7 @@ function SoDA:GetCurrencyGui(character)
 
     -- Gold
     local characterCopper = self.aceGui:Create("Label")
+    characterCopper:SetWidth(self.defaultWidth)
     local moneyString = GetMoneyString(character.currency.copper)
     characterCopper:SetText(moneyString)
     group:AddChild(characterCopper)
@@ -31,9 +33,10 @@ end
 
 function SoDA:GetCurrencyLegend()
     local group = self.aceGui:Create("SimpleGroup")
+    group:SetWidth(self.defaultWidth)
 
     -- Currency
-    group:AddChild(SoDA:Header("Currency"))  
+    group:AddChild(SoDA:Header("Currency"))
 
     -- Gold
     group:AddChild(SoDA:LegendLabel("Gold"))

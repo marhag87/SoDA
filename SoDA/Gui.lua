@@ -72,12 +72,14 @@ end
 
 function SoDA:Spacer()
     local spacer = self.aceGui:Create("Label")
+    spacer:SetWidth(self.defaultWidth)
     spacer:SetText(" ")
     return spacer
 end
 
 function SoDA:Header(text)
     local header = self.aceGui:Create("Label")
+    header:SetWidth(self.defaultWidth)
     header:SetText(text)
     header:SetFontObject(GameFontNormal)
     return header
@@ -85,6 +87,7 @@ end
 
 function SoDA:LegendLabel(text)
     local label = self.aceGui:Create("Label")
+    label:SetWidth(self.defaultWidth)
     label:SetText(text)
     return label
 end

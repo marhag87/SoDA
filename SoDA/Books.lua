@@ -84,6 +84,7 @@ end
 
 function SoDA:GetBooksLegend()
     local group = self.aceGui:Create("SimpleGroup")
+    group:SetWidth(self.defaultWidth)
 
     -- Books
     group:AddChild(SoDA:Header("Books"))

@@ -28,6 +28,7 @@ end
 
 function SoDA:GetRaidsGui(character)
     local group = self.aceGui:Create("SimpleGroup")
+    group:SetWidth(self.defaultWidth)
     local raids = character.raids or {}
 
     -- Header
@@ -97,6 +98,7 @@ end
 
 function SoDA:GetRaidsLegend()
     local group = self.aceGui:Create("SimpleGroup")
+    group:SetWidth(self.defaultWidth)
 
     -- Raids
     group:AddChild(SoDA:Header("Raids"))
