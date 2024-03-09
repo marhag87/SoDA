@@ -24,6 +24,13 @@ function SoDA:GetBasicInformation()
             end
         end
     end
+    for _, mount in ipairs(SoDA:GetMountSpells()) do
+        if IsSpellKnown(mount.id) then
+            if mount.speed > basic.highestMount then
+                basic.highestMount = mount.speed
+            end
+        end
+    end
 
     return basic
 end
