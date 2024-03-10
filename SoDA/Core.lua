@@ -34,6 +34,7 @@ function SoDA:OnInitialize()
     SoDA:RegisterEvent("QUEST_TURNED_IN")
     SoDA:RegisterEvent("UPDATE_INSTANCE_INFO")
     SoDA:RegisterEvent("BAG_UPDATE")
+    SoDA:RegisterEvent("PLAYER_LOGOUT")
     SoDA:RegisterChatCommand("soda", "ToggleGui")
     self.maxLevel = 40
     self.maxMountSpeed = 60
@@ -77,6 +78,11 @@ function SoDA:BAG_UPDATE()
     self.db.global.characters[self.loggedInCharacter].pvp = SoDA:GetPvP()
 end
 
+function SoDA:PLAYER_LOGOUT()
+    if self.loggedInCharacter == nil then return end
+    self.db.global.characters[self.loggedInCharacter].aura = SoDA:GetAuras()
+end
+
 function SoDA:HideGui()
     if self.frame ~= nil and self.frame:IsVisible() then
         self.frame:Hide()
@@ -106,5 +112,6 @@ function SoDA:SaveData()
     self.db.global.characters[basic.guid].factions = SoDA:GetFactions()
     self.db.global.characters[basic.guid].pvp = SoDA:GetPvP()
     self.db.global.characters[basic.guid].books = SoDA:GetBooks()
+    self.db.global.characters[basic.guid].auras = SoDA:GetAuras()
     -- TODO: Professions (epic crafting quests, progress, timers)
 end

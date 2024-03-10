@@ -9,6 +9,7 @@ embeds.xml
 
 Core.lua
 Mounts.lua
+Auras.lua
 Basic.lua
 Currency.lua
 Gui.lua

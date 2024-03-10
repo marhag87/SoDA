@@ -6,6 +6,8 @@ function SoDA:GetBasicInformation()
     basic.faction, basic.factionLocalized = UnitFactionGroup("player")
     basic.realm = GetRealmName()
     basic.sleepingBagQuestDone = C_QuestLog.IsQuestFlaggedCompleted(79976)
+    local started, duration, _ = C_Container.GetItemCooldown(211527)
+    basic.sleepingBagReset = started + duration
 
     -- Rested
     local restXP = GetXPExhaustion()
@@ -83,8 +85,17 @@ function SoDA:GetBasicGui(character)
     local sleepingBag = self.aceGui:Create("Label")
     sleepingBag:SetWidth(self.defaultWidth)
     sleepingBag:SetText(" ")
-    if character.basic.sleepingBagQuestDone then
+    local sleepingBagQuestDone = character.basic.sleepingBagQuestDone or false
+    if sleepingBagQuestDone then
         sleepingBag:SetText(self.checkMark)
+    end
+    -- Sleeping bag tooltip
+    local auras = character.auras or {}
+    local reset = character.basic.sleepingBagReset or 0
+    if (auras.sleepingBagBuff and auras.sleepingBagBuff.count > 0) or sleepingBagQuestDone then
+        SoDA:Tooltip(sleepingBag.frame, function()
+            SoDA:SleepingBagTooltip(sleepingBag.frame, sleepingBagQuestDone, auras.sleepingBagBuff, reset)
+        end)
     end
     group:AddChild(sleepingBag)
 
@@ -124,4 +135,22 @@ function SoDA:GetBasicLegend()
     group:AddChild(SoDA:LegendLabel("Rested"))
 
     return group
+end
+
+function SoDA:SleepingBagTooltip(frame, sleepingBagQuestDone, sleepingBagBuff, reset)
+    GameTooltip:SetOwner(frame, "ANCHOR_CURSOR")
+    GameTooltip:AddLine("Sleeping bag")
+    GameTooltip:AddLine(" ")
+    local resetTime = reset - GetTime()
+    local resetString = string.format(SecondsToTime(resetTime))
+    if sleepingBagQuestDone and resetTime > 0 then
+        GameTooltip:AddLine("|cffffffff" .. "Cooldown remaining: " .. resetString .. FONT_COLOR_CODE_CLOSE)
+    end
+    if sleepingBagBuff ~= nil and sleepingBagBuff.count ~= nil and sleepingBagBuff.count > 0 then
+        local stacks = sleepingBagBuff.count or 0
+        local duration = sleepingBagBuff.duration or 0
+        local durationString = string.format(SecondsToTime(duration))
+        GameTooltip:AddLine("|cffffffff" .. "Buff: " .. stacks .. "%, " .. durationString .. FONT_COLOR_CODE_CLOSE)
+    end
+    GameTooltip:Show()
 end
