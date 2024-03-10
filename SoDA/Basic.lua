@@ -92,7 +92,7 @@ function SoDA:GetBasicGui(character)
     -- Sleeping bag tooltip
     local auras = character.auras or {}
     local reset = character.basic.sleepingBagReset or 0
-    if (auras.sleepingBagBuff and auras.sleepingBagBuff.count > 0) or sleepingBagQuestDone then
+    if (auras.sleepingBagBuff and auras.sleepingBagBuff.count > 0) or (sleepingBagQuestDone and reset > GetTime()) then
         SoDA:Tooltip(sleepingBag.frame, function()
             SoDA:SleepingBagTooltip(sleepingBag.frame, sleepingBagQuestDone, auras.sleepingBagBuff, reset)
         end)
