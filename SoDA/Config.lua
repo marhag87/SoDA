@@ -22,7 +22,7 @@ function SoDA:ShowConfig()
     -- Which characters to show
     local showCharacterLabel = configFrame:CreateFontString(nil, "ARTWORK", "GameFontNormal")
     showCharacterLabel:SetPoint("TOPLEFT", title, "BOTTOMLEFT", 0, -8)
-    showCharacterLabel:SetText("Show characters:")
+    showCharacterLabel:SetText(self.L["Show characters"] .. ":")
 
     -- Characters
     local characters = self.db.global.characters

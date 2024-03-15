@@ -56,7 +56,7 @@ function SoDA:GetPvPGui(character)
     -- WSG Rep
     local factions = character.factions or {}
     local wsg = factions.wsg or {
-        ["name"] = "WSG",
+        ["name"] = self.L["Warsong Gulch"],
         ["standingId"] = 4,
         ["earnedValue"] = 0,
         ["bottomValue"] = 0,
@@ -68,7 +68,7 @@ function SoDA:GetPvPGui(character)
     -- AB Rep
     local factions = character.factions or {}
     local ab = factions.ab or {
-        ["name"] = "AB",
+        ["name"] = self.L["Arathi Basin"],
         ["standingId"] = 4,
         ["earnedValue"] = 0,
         ["bottomValue"] = 0,
@@ -85,13 +85,13 @@ function SoDA:GetPvPLegend()
     group:SetWidth(self.defaultWidth)
 
     -- PvP
-    group:AddChild(SoDA:Header("PvP"))
+    group:AddChild(SoDA:Header(self.L["PvP"]))
 
     -- Blood coins
-    group:AddChild(SoDA:LegendLabel("Blood coins"))
+    group:AddChild(SoDA:LegendLabel(self.L["Blood coins"]))
 
     -- Ashenvale weekly
-    local ashenvaleWeeklyLabel = SoDA:LegendLabel("Ashenvale weekly")
+    local ashenvaleWeeklyLabel = SoDA:LegendLabel(self.L["Ashenvale weekly"])
     -- Ashenvale weekly tooltip
     if time() < self.weeklyReset then
         SoDA:Tooltip(ashenvaleWeeklyLabel.frame, function()
@@ -101,17 +101,17 @@ function SoDA:GetPvPLegend()
     group:AddChild(ashenvaleWeeklyLabel)
 
     -- WSG
-    group:AddChild(SoDA:LegendLabel("Warsong Gulch"))
+    group:AddChild(SoDA:LegendLabel(self.L["Warsong Gulch"]))
 
     -- AB
-    group:AddChild(SoDA:LegendLabel("Arathi Basin"))
+    group:AddChild(SoDA:LegendLabel(self.L["Arathi Basin"]))
 
     return group
 end
 
 function SoDA:AshenvaleWeeklyTooltip(frame, resetAt)
     GameTooltip:SetOwner(frame, "ANCHOR_CURSOR")
-    GameTooltip:AddLine("Ashenvale weekly")
+    GameTooltip:AddLine(self.L["Ashenvale weekly"])
     GameTooltip:AddLine(" ")
     local secondsLeft = resetAt - time()
     local resetTime = string.format(SecondsToTime(secondsLeft))

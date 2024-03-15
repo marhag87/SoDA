@@ -122,14 +122,14 @@ function SoDA:GetProfessionsLegend()
     group:SetWidth(self.defaultWidth)
 
     -- Professions
-    group:AddChild(SoDA:Header("Professions"))
+    group:AddChild(SoDA:Header(self.L["Professions"]))
 
     -- First primary
-    group:AddChild(SoDA:LegendLabel("First primary"))
+    group:AddChild(SoDA:LegendLabel(self.L["First primary"]))
     group:AddChild(SoDA:LegendLabel(" "))
 
     -- Second primary
-    group:AddChild(SoDA:LegendLabel("Second primary"))
+    group:AddChild(SoDA:LegendLabel(self.L["Second primary"]))
     group:AddChild(SoDA:LegendLabel(" "))
 
     -- Cooking

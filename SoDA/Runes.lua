@@ -135,31 +135,31 @@ function SoDA:GetRunesLegend()
     group:SetWidth(self.defaultWidth)
 
     -- Runes
-    group:AddChild(SoDA:Header("Runes"))
+    group:AddChild(SoDA:Header(self.L["Runes"]))
 
     -- Runes
-    group:AddChild(SoDA:LegendLabel("Runes"))
+    group:AddChild(SoDA:LegendLabel(self.L["Runes"]))
 
     -- Grizzby
     group:AddChild(SoDA:LegendLabel("Grizzby"))
 
     -- Dark Riders
-    group:AddChild(SoDA:LegendLabel("Dark Riders"))
+    group:AddChild(SoDA:LegendLabel(self.L["Dark Riders"]))
 
     return group
 end
 
 function SoDA:RunesTooltip(frame, runes)
     GameTooltip:SetOwner(frame, "ANCHOR_CURSOR")
-    GameTooltip:AddLine("Runes")
+    GameTooltip:AddLine(self.L["Runes"])
     if runes.known == nil then
-        GameTooltip:AddLine("No rune data, please log this character and open the character sheet to refresh")
+        GameTooltip:AddLine(self.L["No rune data"])
     else
         local known = runes.known or {}
         local unknown = runes.unknown or {}
         for categoryName, category in pairs(self.runeCategories) do
             GameTooltip:AddLine(" ")
-            GameTooltip:AddLine("|cffffffff" .. categoryName .. FONT_COLOR_CODE_CLOSE)
+            GameTooltip:AddLine("|cffffffff" .. self.L[categoryName] .. FONT_COLOR_CODE_CLOSE)
             for _, rune in ipairs(known) do
                 if rune.equipmentSlot == category then
                     GameTooltip:AddDoubleLine(rune.name, self.checkMark)
@@ -177,7 +177,7 @@ end
 
 function SoDA:DarkRidersTooltip(frame, runes)
     GameTooltip:SetOwner(frame, "ANCHOR_CURSOR")
-    GameTooltip:AddLine("Dark Riders")
+    GameTooltip:AddLine(self.L["Dark Riders"])
     local darkRiderMap = runes.darkRiderMap or {}
     GameTooltip:AddLine(" ")
     for _, rider in pairs(darkRiderMap) do

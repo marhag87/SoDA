@@ -1,4 +1,5 @@
 SoDA = LibStub("AceAddon-3.0"):NewAddon("SoDA", "AceConsole-3.0", "AceEvent-3.0")
+local L = LibStub("AceLocale-3.0"):GetLocale("SoDALocale")
 local SoDALDB = LibStub("LibDataBroker-1.1"):NewDataObject("SoDA", {
     type = "data source",
     text = "Season of Discovery Alts",
@@ -14,8 +15,8 @@ local SoDALDB = LibStub("LibDataBroker-1.1"):NewDataObject("SoDA", {
     OnTooltipShow = function(tooltip)
         if not tooltip or not tooltip.AddLine then return end
         tooltip:AddLine("Season of Discovery Alts")
-        tooltip:AddLine("|cFFCFCFCFLeft click:|r Open GUI")
-        tooltip:AddLine("|cFFCFCFCFRight click:|r Open options")
+        tooltip:AddLine("|cFFCFCFCF" .. L["Left click"] .. ":|r " .. L["Open GUI"])
+        tooltip:AddLine("|cFFCFCFCF" .. L["Right click"] .. ":|r " .. L["Open options"])
     end,
 })
 local icon = LibStub("LibDBIcon-1.0")

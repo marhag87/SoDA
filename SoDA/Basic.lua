@@ -120,37 +120,38 @@ function SoDA:GetBasicLegend()
     group:AddChild(SoDA:Header(" "))
 
     -- Realm
-    group:AddChild(SoDA:LegendLabel("Realm"))
+    group:AddChild(SoDA:LegendLabel(self.L["Realm"]))
 
     -- Level
-    group:AddChild(SoDA:LegendLabel("Level"))
+    group:AddChild(SoDA:LegendLabel(self.L["Level"]))
 
     -- Mount
-    group:AddChild(SoDA:LegendLabel("Mount"))
+    group:AddChild(SoDA:LegendLabel(self.L["Mount"]))
 
     -- Sleeping bag
-    group:AddChild(SoDA:LegendLabel("Sleeping bag"))
+    group:AddChild(SoDA:LegendLabel(self.L["Sleeping bag"]))
 
     -- Rested
-    group:AddChild(SoDA:LegendLabel("Rested"))
+    group:AddChild(SoDA:LegendLabel(self.L["Rested"]))
 
     return group
 end
 
 function SoDA:SleepingBagTooltip(frame, sleepingBagQuestDone, sleepingBagBuff, reset)
     GameTooltip:SetOwner(frame, "ANCHOR_CURSOR")
-    GameTooltip:AddLine("Sleeping bag")
+    GameTooltip:AddLine(self.L["Sleeping bag"])
     GameTooltip:AddLine(" ")
     local resetTime = reset - GetTime()
     local resetString = string.format(SecondsToTime(resetTime))
     if sleepingBagQuestDone and resetTime > 0 then
-        GameTooltip:AddLine("|cffffffff" .. "Cooldown remaining: " .. resetString .. FONT_COLOR_CODE_CLOSE)
+        GameTooltip:AddLine("|cffffffff" .. self.L["Cooldown remaining"] .. ": " .. resetString .. FONT_COLOR_CODE_CLOSE)
     end
     if sleepingBagBuff ~= nil and sleepingBagBuff.count ~= nil and sleepingBagBuff.count > 0 then
         local stacks = sleepingBagBuff.count or 0
         local duration = sleepingBagBuff.duration or 0
         local durationString = string.format(SecondsToTime(duration))
-        GameTooltip:AddLine("|cffffffff" .. "Buff: " .. stacks .. "%, " .. durationString .. FONT_COLOR_CODE_CLOSE)
+        GameTooltip:AddLine("|cffffffff" ..
+        self.L["Buff"] .. ": " .. stacks .. "%, " .. durationString .. FONT_COLOR_CODE_CLOSE)
     end
     GameTooltip:Show()
 end

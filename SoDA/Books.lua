@@ -84,17 +84,17 @@ function SoDA:GetBooksLegend()
     group:SetWidth(self.defaultWidth)
 
     -- Books
-    group:AddChild(SoDA:Header("Books"))
+    group:AddChild(SoDA:Header(self.L["Books"]))
 
     -- Phase 2
-    group:AddChild(SoDA:LegendLabel("Phase 2"))
+    group:AddChild(SoDA:LegendLabel(self.L["Phase 2"]))
 
     return group
 end
 
 function SoDA:BooksTooltip(frame, books)
     GameTooltip:SetOwner(frame, "ANCHOR_CURSOR")
-    GameTooltip:AddLine("Books")
+    GameTooltip:AddLine(self.L["Books"])
     local bookMap = books.bookMap or {}
     GameTooltip:AddLine(" ")
     for _, book in ipairs(bookMap) do

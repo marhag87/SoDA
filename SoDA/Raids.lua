@@ -95,7 +95,7 @@ function SoDA:GetRaidsLegend()
     group:SetWidth(self.defaultWidth)
 
     -- Raids
-    group:AddChild(SoDA:Header("Raids"))
+    group:AddChild(SoDA:Header(self.L["Raids"]))
 
     -- BFD
     group:AddChild(SoDA:LegendLabel("Blackfathom Deeps"))

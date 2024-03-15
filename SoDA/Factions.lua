@@ -28,7 +28,7 @@ function SoDA:GetFactionsGui(character)
 
     local factions = character.factions or {}
     local phaseOne = factions.phaseOne or {
-        ["name"] = "ACA/DSL",
+        ["name"] = self.L["ACA/DSL"],
         ["standingId"] = 4,
         ["earnedValue"] = 0,
         ["bottomValue"] = 0,
@@ -64,10 +64,10 @@ function SoDA:GetFactionsLegend()
     group:SetWidth(self.defaultWidth)
 
     -- Factions
-    group:AddChild(SoDA:Header("Factions"))
+    group:AddChild(SoDA:Header(self.L["Factions"]))
 
     -- ACA/DSL
-    group:AddChild(SoDA:LegendLabel("ACA/DSL"))
+    group:AddChild(SoDA:LegendLabel(self.L["ACA/DSL"]))
 
     return group
 end
