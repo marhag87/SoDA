@@ -59,6 +59,11 @@ function SoDA:Gui()
             group:AddChild(factions)
             group:AddChild(SoDA:Spacer())
 
+            -- Professions
+            local professions = SoDA:GetProfessionsGui(character)
+            group:AddChild(professions)
+            group:AddChild(SoDA:Spacer())
+
             f:AddChild(group)
         end
     end
@@ -124,6 +129,9 @@ function SoDA:Legend()
     legend:AddChild(SoDA:GetFactionsLegend())
     legend:AddChild(SoDA:Spacer())
 
+    -- Professions
+    legend:AddChild(SoDA:GetProfessionsLegend())
+    legend:AddChild(SoDA:Spacer())
     return legend
 end
 

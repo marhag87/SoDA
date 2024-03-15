@@ -35,9 +35,11 @@ function SoDA:OnInitialize()
     SoDA:RegisterEvent("UPDATE_INSTANCE_INFO")
     SoDA:RegisterEvent("BAG_UPDATE")
     SoDA:RegisterEvent("PLAYER_LOGOUT")
+    SoDA:RegisterEvent("TRADE_SKILL_UPDATE")
     SoDA:RegisterChatCommand("soda", "ToggleGui")
     self.maxLevel = 40
     self.maxMountSpeed = 60
+    self.maxProfessionRank = 225
     self.checkMark = "\124A:UI-LFG-ReadyMark:14:14\124a"
     self.runeCategories = {
         ["Chest"] = 5,
@@ -83,6 +85,11 @@ function SoDA:PLAYER_LOGOUT()
     self.db.global.characters[self.loggedInCharacter].aura = SoDA:GetAuras()
 end
 
+function SoDA:TRADE_SKILL_UPDATE()
+    if self.loggedInCharacter == nil then return end
+    self.db.global.characters[self.loggedInCharacter].professions = SoDA:GetProfessions()
+end
+
 function SoDA:HideGui()
     if self.frame ~= nil and self.frame:IsVisible() then
         self.frame:Hide()
@@ -113,5 +120,5 @@ function SoDA:SaveData()
     self.db.global.characters[basic.guid].pvp = SoDA:GetPvP()
     self.db.global.characters[basic.guid].books = SoDA:GetBooks()
     self.db.global.characters[basic.guid].auras = SoDA:GetAuras()
-    -- TODO: Professions (epic crafting quests, progress, timers)
+    self.db.global.characters[basic.guid].professions = SoDA:GetProfessions()
 end

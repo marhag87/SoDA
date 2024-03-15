@@ -19,4 +19,5 @@ PvP.lua
 Factions.lua
 Utils.lua
 Books.lua
+Professions.lua
 Config.lua
