@@ -1,14 +1,14 @@
 function SoDA:GetProfessions()
     local primaryProfessions = {
-        "Alchemy",
-        "Blacksmithing",
-        "Enchanting",
-        "Engineering",
-        "Herbalism",
-        "Leatherworking",
-        "Mining",
-        "Skinning",
-        "Tailoring",
+        self.L["Alchemy"],
+        self.L["Blacksmithing"],
+        self.L["Enchanting"],
+        self.L["Engineering"],
+        self.L["Herbalism"],
+        self.L["Leatherworking"],
+        self.L["Mining"],
+        self.L["Skinning"],
+        self.L["Tailoring"],
     }
     local professions = {}
 
@@ -32,13 +32,13 @@ function SoDA:GetProfessions()
                     end
                 end
             end
-            if skillName == "Cooking" then
+            if skillName == self.L["Cooking"] then
                 professions.cooking = skill
             end
-            if skillName == "First Aid" then
+            if skillName == self.L["First Aid"] then
                 professions.firstAid = skill
             end
-            if skillName == "Fishing" then
+            if skillName == self.L["Fishing"] then
                 professions.fishing = skill
             end
         end
@@ -133,14 +133,14 @@ function SoDA:GetProfessionsLegend()
     group:AddChild(SoDA:LegendLabel(" "))
 
     -- Cooking
-    group:AddChild(SoDA:LegendLabel("Cooking"))
+    group:AddChild(SoDA:LegendLabel(self.L["Cooking"]))
 
     -- First Aid
-    group:AddChild(SoDA:LegendLabel("First Aid"))
+    group:AddChild(SoDA:LegendLabel(self.L["First Aid"]))
 
 
     -- Fishing
-    group:AddChild(SoDA:LegendLabel("Fishing"))
+    group:AddChild(SoDA:LegendLabel(self.L["Fishing"]))
 
     return group
 end

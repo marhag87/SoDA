@@ -115,6 +115,6 @@ function SoDA:AshenvaleWeeklyTooltip(frame, resetAt)
     GameTooltip:AddLine(" ")
     local secondsLeft = resetAt - time()
     local resetTime = string.format(SecondsToTime(secondsLeft))
-    GameTooltip:AddLine("|cffffffff" .. "Resets in " .. resetTime .. FONT_COLOR_CODE_CLOSE)
+    GameTooltip:AddLine("|cffffffff" .. self.L["Resets in"] .. " " .. resetTime .. FONT_COLOR_CODE_CLOSE)
     GameTooltip:Show()
 end

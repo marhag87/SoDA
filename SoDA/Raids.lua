@@ -112,6 +112,6 @@ function SoDA:RaidsTooltip(frame, raid)
     GameTooltip:AddLine(" ")
     local secondsLeft = raid.resetAt - time()
     local resetTime = string.format(SecondsToTime(secondsLeft))
-    GameTooltip:AddLine("|cffffffff" .. "Resets in " .. resetTime .. FONT_COLOR_CODE_CLOSE)
+    GameTooltip:AddLine("|cffffffff" .. self.L["Resets in"] .. " " .. resetTime .. FONT_COLOR_CODE_CLOSE)
     GameTooltip:Show()
 end

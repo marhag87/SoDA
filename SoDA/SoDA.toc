@@ -6,6 +6,7 @@
 ## SavedVariables: SoDADB
 
 embeds.xml
+locales.xml
 
 Core.lua
 Mounts.lua

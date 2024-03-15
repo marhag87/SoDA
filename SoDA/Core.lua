@@ -52,6 +52,7 @@ function SoDA:OnInitialize()
     self.weeklyReset = time() + C_DateAndTime.GetSecondsUntilWeeklyReset()
     icon:Register("SoDA", SoDALDB, self.db.profile.minimap)
     InterfaceOptions_AddCategory(SoDA:GetConfig())
+    self.L = LibStub("AceLocale-3.0"):GetLocale("SoDALocale")
 end
 
 function SoDA:PLAYER_ENTERING_WORLD()
