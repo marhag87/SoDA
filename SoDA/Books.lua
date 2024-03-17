@@ -56,6 +56,7 @@ end
 function SoDA:GetBooksGui(character)
     local group = self.aceGui:Create("SimpleGroup")
     group:SetWidth(self.defaultWidth)
+    local s = self.db.global.settings
     local books = character.books or {}
     local numBooksKnown = books.numBooksKnown or "?"
     local numBooksAvailable = books.numBooksAvailable or "?"
@@ -74,7 +75,9 @@ function SoDA:GetBooksGui(character)
     SoDA:Tooltip(booksKnown.frame, function()
         SoDA:BooksTooltip(booksKnown.frame, books)
     end)
-    group:AddChild(booksKnown)
+    if s["Phase 2"] == nil or s["Phase 2"] then
+        group:AddChild(booksKnown)
+    end
 
     return group
 end
@@ -82,12 +85,15 @@ end
 function SoDA:GetBooksLegend()
     local group = self.aceGui:Create("SimpleGroup")
     group:SetWidth(self.defaultWidth)
+    local s = self.db.global.settings
 
     -- Books
     group:AddChild(SoDA:Header(self.L["Books"]))
 
     -- Phase 2
-    group:AddChild(SoDA:LegendLabel(self.L["Phase 2"]))
+    if s["Phase 2"] == nil or s["Phase 2"] then
+        group:AddChild(SoDA:LegendLabel(self.L["Phase 2"]))
+    end
 
     return group
 end
@@ -106,4 +112,11 @@ function SoDA:BooksTooltip(frame, books)
         end
     end
     GameTooltip:Show()
+end
+
+function SoDA:BooksEnabled()
+    local s = self.db.global.settings
+    local phaseTwo = s["Phase 2"]
+    if phaseTwo == nil then phaseTwo = true end
+    return phaseTwo
 end

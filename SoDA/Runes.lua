@@ -85,6 +85,7 @@ function SoDA:GetRunesGui(character)
     local group = self.aceGui:Create("SimpleGroup")
     group:SetWidth(self.defaultWidth)
     local runes = character.runes or {}
+    local s = self.db.global.settings
 
     -- Header
     group:AddChild(SoDA:Header(" "))
@@ -102,7 +103,9 @@ function SoDA:GetRunesGui(character)
     SoDA:Tooltip(runesKnown.frame, function()
         SoDA:RunesTooltip(runesKnown.frame, runes)
     end)
-    group:AddChild(runesKnown)
+    if s.Runes == nil or s.Runes then
+        group:AddChild(runesKnown)
+    end
 
     -- Grizzby
     local grizzby = self.aceGui:Create("Label")
@@ -111,7 +114,9 @@ function SoDA:GetRunesGui(character)
     if runes.grizzby then
         grizzby:SetText(self.checkMark)
     end
-    group:AddChild(grizzby)
+    if s.Grizzby == nil or s.Grizzby then
+        group:AddChild(grizzby)
+    end
 
     -- Dark Riders
     local darkRiderQuestsDone = runes.darkRiderQuestsDone or "?"
@@ -125,7 +130,9 @@ function SoDA:GetRunesGui(character)
     SoDA:Tooltip(darkRider.frame, function()
         SoDA:DarkRidersTooltip(darkRider.frame, runes)
     end)
-    group:AddChild(darkRider)
+    if s["Dark Riders"] == nil or s["Dark Riders"] then
+        group:AddChild(darkRider)
+    end
 
     return group
 end
@@ -133,18 +140,25 @@ end
 function SoDA:GetRunesLegend()
     local group = self.aceGui:Create("SimpleGroup")
     group:SetWidth(self.defaultWidth)
+    local s = self.db.global.settings
 
     -- Runes
     group:AddChild(SoDA:Header(self.L["Runes"]))
 
     -- Runes
-    group:AddChild(SoDA:LegendLabel(self.L["Runes"]))
+    if s.Runes == nil or s.Runes then
+        group:AddChild(SoDA:LegendLabel(self.L["Runes"]))
+    end
 
     -- Grizzby
-    group:AddChild(SoDA:LegendLabel("Grizzby"))
+    if s.Grizzby == nil or s.Grizzby then
+        group:AddChild(SoDA:LegendLabel("Grizzby"))
+    end
 
     -- Dark Riders
-    group:AddChild(SoDA:LegendLabel(self.L["Dark Riders"]))
+    if s["Dark Riders"] == nil or s["Dark Riders"] then
+        group:AddChild(SoDA:LegendLabel(self.L["Dark Riders"]))
+    end
 
     return group
 end
@@ -188,4 +202,15 @@ function SoDA:DarkRidersTooltip(frame, runes)
         end
     end
     GameTooltip:Show()
+end
+
+function SoDA:RunesEnabled()
+    local s = self.db.global.settings
+    local runes = s.Runes
+    if runes == nil then runes = true end
+    local grizzby = s.Grizzby
+    if grizzby == nil then grizzby = true end
+    local darkRiders = s["Dark Riders"]
+    if darkRiders == nil then darkRiders = true end
+    return runes or grizzby or darkRiders
 end

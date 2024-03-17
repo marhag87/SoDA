@@ -29,6 +29,7 @@ end
 function SoDA:GetRaidsGui(character)
     local group = self.aceGui:Create("SimpleGroup")
     group:SetWidth(self.defaultWidth)
+    local s = self.db.global.settings
     local raids = character.raids or {}
 
     -- Header
@@ -50,7 +51,9 @@ function SoDA:GetRaidsGui(character)
             SoDA:RaidsTooltip(bfdLock.frame, bfd)
         end)
     end
-    group:AddChild(bfdLock)
+    if s["Blackfathom Deeps"] == nil or s["Blackfathom Deeps"] then
+        group:AddChild(bfdLock)
+    end
 
     -- Gnomeregan
     local gnomeregan = raids.gnomeregan or {
@@ -67,7 +70,9 @@ function SoDA:GetRaidsGui(character)
             SoDA:RaidsTooltip(gnomereganLock.frame, gnomeregan)
         end)
     end
-    group:AddChild(gnomereganLock)
+    if s.Gnomeregan == nil or s.Gnomeregan then
+        group:AddChild(gnomereganLock)
+    end
 
     return group
 end
@@ -93,15 +98,20 @@ end
 function SoDA:GetRaidsLegend()
     local group = self.aceGui:Create("SimpleGroup")
     group:SetWidth(self.defaultWidth)
+    local s = self.db.global.settings
 
     -- Raids
     group:AddChild(SoDA:Header(self.L["Raids"]))
 
     -- BFD
-    group:AddChild(SoDA:LegendLabel("Blackfathom Deeps"))
+    if s["Blackfathom Deeps"] == nil or s["Blackfathom Deeps"] then
+        group:AddChild(SoDA:LegendLabel("Blackfathom Deeps"))
+    end
 
     -- Gnomeregan
-    group:AddChild(SoDA:LegendLabel("Gnomeregan"))
+    if s.Gnomeregan == nil or s.Gnomeregan then
+        group:AddChild(SoDA:LegendLabel("Gnomeregan"))
+    end
 
     return group
 end
@@ -114,4 +124,13 @@ function SoDA:RaidsTooltip(frame, raid)
     local resetTime = string.format(SecondsToTime(secondsLeft))
     GameTooltip:AddLine("|cffffffff" .. self.L["Resets in"] .. " " .. resetTime .. FONT_COLOR_CODE_CLOSE)
     GameTooltip:Show()
+end
+
+function SoDA:RaidsEnabled()
+    local s = self.db.global.settings
+    local bfd = s["Blackfathom Deeps"]
+    if bfd == nil then bfd = true end
+    local gnomeregan = s.Gnomeregan
+    if gnomeregan == nil then gnomeregan = true end
+    return bfd or gnomeregan
 end

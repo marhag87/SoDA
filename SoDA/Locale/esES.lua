@@ -4,6 +4,11 @@ if not L then return end
 
 -- General
 L["Resets in"] = "Reinicio en"
+L["Alliance"] = true
+L["Horde"] = true
+
+-- Basic
+L["Basic"] = true
 L["Realm"] = true
 L["Level"] = true
 L["Mount"] = true
@@ -11,8 +16,6 @@ L["Sleeping bag"] = true
 L["Cooldown remaining"] = true
 L["Buff"] = true
 L["Rested"] = true
-L["Alliance"] = true
-L["Horde"] = true
 
 -- Currency
 L["Total"] = true
@@ -22,6 +25,7 @@ L["Gold"] = true
 -- Runes
 L["Runes"] = true
 L["Dark Riders"] = true
+L["Grizzby"] = true
 L["No rune data"] = true
 L["Chest"] = true
 L["Hands"] = true
@@ -67,6 +71,7 @@ L["Fishing"] = "Pesca"
 
 -- Config
 L["Show characters"] = true
+L["Show sections"] = true
 
 -- Minimap button
 L["Left click"] = true

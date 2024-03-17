@@ -26,6 +26,7 @@ function SoDA:GetFactionsGui(character)
     local group = self.aceGui:Create("SimpleGroup")
     group:SetWidth(self.defaultWidth)
 
+    local s = self.db.global.settings
     local factions = character.factions or {}
     local phaseOne = factions.phaseOne or {
         ["name"] = self.L["ACA/DSL"],
@@ -40,7 +41,9 @@ function SoDA:GetFactionsGui(character)
 
     -- Phase one faction, ACA/DSL
     local phaseOneGroup = SoDA:FactionGui(phaseOne)
-    group:AddChild(phaseOneGroup)
+    if s["ACA/DSL"] == nil or s["ACA/DSL"] then
+        group:AddChild(phaseOneGroup)
+    end
 
     return group
 end
@@ -48,6 +51,7 @@ end
 function SoDA:FactionGui(faction)
     local group = self.aceGui:Create("SimpleGroup")
     group:SetWidth(self.defaultWidth)
+    local s = self.db.global.settings
 
     -- Faction standing
     local standing = getglobal("FACTION_STANDING_LABEL" .. faction.standingId)
@@ -62,12 +66,22 @@ end
 function SoDA:GetFactionsLegend()
     local group = self.aceGui:Create("SimpleGroup")
     group:SetWidth(self.defaultWidth)
+    local s = self.db.global.settings
 
     -- Factions
     group:AddChild(SoDA:Header(self.L["Factions"]))
 
     -- ACA/DSL
-    group:AddChild(SoDA:LegendLabel(self.L["ACA/DSL"]))
+    if s["ACA/DSL"] == nil or s["ACA/DSL"] then
+        group:AddChild(SoDA:LegendLabel(self.L["ACA/DSL"]))
+    end
 
     return group
+end
+
+function SoDA:FactionsEnabled()
+    local s = self.db.global.settings
+    local acaDsl = s["ACA/DSL"]
+    if acaDsl == nil then acaDsl = true end
+    return acaDsl
 end

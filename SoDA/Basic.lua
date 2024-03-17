@@ -44,6 +44,7 @@ function SoDA:GetBasicGui(character)
     if character.basic == nil then
         return group
     end
+    local s = self.db.global.settings
 
     -- Character name
     local characterName = self.aceGui:Create("Label")
@@ -58,7 +59,7 @@ function SoDA:GetBasicGui(character)
     local realmName = self.aceGui:Create("Label")
     realmName:SetWidth(self.defaultWidth)
     realmName:SetText(character.basic.realm)
-    group:AddChild(realmName)
+    if s.Realm == nil or s.Realm then group:AddChild(realmName) end
 
     -- Level
     local characterLevel = self.aceGui:Create("Label")
@@ -67,7 +68,7 @@ function SoDA:GetBasicGui(character)
         characterLevel:SetColor(0, 1, 0)
     end
     characterLevel:SetText(character.basic.level)
-    group:AddChild(characterLevel)
+    if s.Level == nil or s.Level then group:AddChild(characterLevel) end
 
     -- Mount
     local mountLabel = self.aceGui:Create("Label")
@@ -79,7 +80,7 @@ function SoDA:GetBasicGui(character)
             mountLabel:SetColor(0, 1, 0)
         end
     end
-    group:AddChild(mountLabel)
+    if s.Mount == nil or s.Mount then group:AddChild(mountLabel) end
 
     -- Sleeping Bag
     local sleepingBag = self.aceGui:Create("Label")
@@ -97,7 +98,7 @@ function SoDA:GetBasicGui(character)
             SoDA:SleepingBagTooltip(sleepingBag.frame, sleepingBagQuestDone, auras.sleepingBagBuff, reset)
         end)
     end
-    group:AddChild(sleepingBag)
+    if s["Sleeping bag"] == nil or s["Sleeping bag"] then group:AddChild(sleepingBag) end
 
     -- Rested %
     local restedXPLabel = self.aceGui:Create("Label")
@@ -107,7 +108,7 @@ function SoDA:GetBasicGui(character)
         restedXPLabel:SetColor(0, 1, 0)
     end
     restedXPLabel:SetText(percentRest .. "%")
-    group:AddChild(restedXPLabel)
+    if s.Rested == nil or s.Rested then group:AddChild(restedXPLabel) end
 
     return group
 end
@@ -119,20 +120,31 @@ function SoDA:GetBasicLegend()
     -- Character name, not shown
     group:AddChild(SoDA:Header(" "))
 
+    local s = self.db.global.settings
     -- Realm
-    group:AddChild(SoDA:LegendLabel(self.L["Realm"]))
+    if s.Realm == nil or s.Realm then
+        group:AddChild(SoDA:LegendLabel(self.L["Realm"]))
+    end
 
     -- Level
-    group:AddChild(SoDA:LegendLabel(self.L["Level"]))
+    if s.Level == nil or s.Level then
+        group:AddChild(SoDA:LegendLabel(self.L["Level"]))
+    end
 
     -- Mount
-    group:AddChild(SoDA:LegendLabel(self.L["Mount"]))
+    if s.Mount == nil or s.Mount then
+        group:AddChild(SoDA:LegendLabel(self.L["Mount"]))
+    end
 
     -- Sleeping bag
-    group:AddChild(SoDA:LegendLabel(self.L["Sleeping bag"]))
+    if s["Sleeping bag"] == nil or s["Sleeping bag"] then
+        group:AddChild(SoDA:LegendLabel(self.L["Sleeping bag"]))
+    end
 
     -- Rested
-    group:AddChild(SoDA:LegendLabel(self.L["Rested"]))
+    if s.Rested == nil or s.Rested then
+        group:AddChild(SoDA:LegendLabel(self.L["Rested"]))
+    end
 
     return group
 end
@@ -151,7 +163,22 @@ function SoDA:SleepingBagTooltip(frame, sleepingBagQuestDone, sleepingBagBuff, r
         local duration = sleepingBagBuff.duration or 0
         local durationString = string.format(SecondsToTime(duration))
         GameTooltip:AddLine("|cffffffff" ..
-        self.L["Buff"] .. ": " .. stacks .. "%, " .. durationString .. FONT_COLOR_CODE_CLOSE)
+            self.L["Buff"] .. ": " .. stacks .. "%, " .. durationString .. FONT_COLOR_CODE_CLOSE)
     end
     GameTooltip:Show()
+end
+
+function SoDA:BasicEnabled()
+    local s = self.db.global.settings
+    local realm = s.Realm
+    if realm == nil then realm = true end
+    local level = s.Level
+    if level == nil then level = true end
+    local mount = s.Mount
+    if mount == nil then mount = true end
+    local sleepingBag = s["Sleeping bag"]
+    if sleepingBag == nil then sleepingBag = true end
+    local rested = s.Rested
+    if rested == nil then rested = true end
+    return realm or level or mount or sleepingBag or rested
 end

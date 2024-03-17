@@ -51,25 +51,36 @@ function SoDA:GetProfessionsGui(character)
     local group = self.aceGui:Create("SimpleGroup")
     group:SetWidth(self.defaultWidth)
 
+    local s = self.db.global.settings
     local professions = character.professions or {}
 
     -- Header
     group:AddChild(SoDA:Header(" "))
 
     -- First Primary
-    group:AddChild(SoDA:GetSkillGui(professions.firstPrimary, true))
+    if s["First primary"] == nil or s["First primary"] then
+        group:AddChild(SoDA:GetSkillGui(professions.firstPrimary, true))
+    end
 
     -- Second Primary
-    group:AddChild(SoDA:GetSkillGui(professions.secondPrimary, true))
+    if s["Second primary"] == nil or s["Second primary"] then
+        group:AddChild(SoDA:GetSkillGui(professions.secondPrimary, true))
+    end
 
     -- Cooking
-    group:AddChild(SoDA:GetSkillGui(professions.cooking, false))
+    if s.Cooking == nil or s.Cooking then
+        group:AddChild(SoDA:GetSkillGui(professions.cooking, false))
+    end
 
     -- First Aid
-    group:AddChild(SoDA:GetSkillGui(professions.firstAid, false))
+    if s["First Aid"] == nil or s["First Aid"] then
+        group:AddChild(SoDA:GetSkillGui(professions.firstAid, false))
+    end
 
     -- Fishing
-    group:AddChild(SoDA:GetSkillGui(professions.fishing, false))
+    if s.Fishing == nil or s.Fishing then
+        group:AddChild(SoDA:GetSkillGui(professions.fishing, false))
+    end
 
     return group
 end
@@ -121,26 +132,52 @@ function SoDA:GetProfessionsLegend()
     local group = self.aceGui:Create("SimpleGroup")
     group:SetWidth(self.defaultWidth)
 
+    local s = self.db.global.settings
+
     -- Professions
     group:AddChild(SoDA:Header(self.L["Professions"]))
 
     -- First primary
-    group:AddChild(SoDA:LegendLabel(self.L["First primary"]))
-    group:AddChild(SoDA:LegendLabel(" "))
+    if s["First primary"] == nil or s["First primary"] then
+        group:AddChild(SoDA:LegendLabel(self.L["First primary"]))
+        group:AddChild(SoDA:LegendLabel(" "))
+    end
 
     -- Second primary
-    group:AddChild(SoDA:LegendLabel(self.L["Second primary"]))
-    group:AddChild(SoDA:LegendLabel(" "))
+    if s["Second primary"] == nil or s["Second primary"] then
+        group:AddChild(SoDA:LegendLabel(self.L["Second primary"]))
+        group:AddChild(SoDA:LegendLabel(" "))
+    end
 
     -- Cooking
-    group:AddChild(SoDA:LegendLabel(self.L["Cooking"]))
+    if s.Cooking == nil or s.Cooking then
+        group:AddChild(SoDA:LegendLabel(self.L["Cooking"]))
+    end
 
     -- First Aid
-    group:AddChild(SoDA:LegendLabel(self.L["First Aid"]))
-
+    if s["First Aid"] == nil or s["First Aid"] then
+        group:AddChild(SoDA:LegendLabel(self.L["First Aid"]))
+    end
 
     -- Fishing
-    group:AddChild(SoDA:LegendLabel(self.L["Fishing"]))
+    if s.Fishing == nil or s.Fishing then
+        group:AddChild(SoDA:LegendLabel(self.L["Fishing"]))
+    end
 
     return group
+end
+
+function SoDA:ProfessionsEnabled()
+    local s = self.db.global.settings
+    local firstPrimary = s["First primary"]
+    if firstPrimary == nil then firstPrimary = true end
+    local secondPrimary = s["Second primary"]
+    if secondPrimary == nil then secondPrimary = true end
+    local cooking = s["Cooking"]
+    if cooking == nil then cooking = true end
+    local firstAid = s["First Aid"]
+    if firstAid == nil then firstAid = true end
+    local fishing = s["Fishing"]
+    if fishing == nil then fishing = true end
+    return firstPrimary or secondPrimary or cooking or firstAid or fishing
 end

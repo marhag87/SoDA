@@ -4,6 +4,11 @@ if not L then return end
 
 -- General
 L["Resets in"] = "Resets in"
+L["Alliance"] = "Alliance"
+L["Horde"] = "Horde"
+
+-- Basic
+L["Basic"] = "Basic"
 L["Realm"] = "Realm"
 L["Level"] = "Level"
 L["Mount"] = "Mount"
@@ -11,8 +16,6 @@ L["Sleeping bag"] = "Sleeping bag"
 L["Cooldown remaining"] = "Cooldown remaining"
 L["Buff"] = "Buff"
 L["Rested"] = "Rested"
-L["Alliance"] = "Alliance"
-L["Horde"] = "Horde"
 
 -- Currency
 L["Total"] = "Total"
@@ -21,6 +24,7 @@ L["Gold"] = "Gold"
 
 -- Runes
 L["Runes"] = "Runes"
+L["Grizzby"] = true
 L["Dark Riders"] = "Dark Riders"
 L["No rune data"] = "No rune data, please log this character and open the character sheet to refresh"
 L["Chest"] = "Chest"
@@ -35,6 +39,8 @@ L["Phase 2"] = "Phase 2"
 
 -- Raids
 L["Raids"] = "Raids"
+L["Blackfathom Deeps"] = true
+L["Gnomeregan"] = true
 
 -- PvP
 L["PvP"] = "PvP"
@@ -66,7 +72,8 @@ L["First Aid"] = "First Aid"
 L["Fishing"] = "Fishing"
 
 -- Config
-L["Show characters"] = "Show characters"
+L["Show characters"] = true
+L["Show sections"] = true
 
 -- Minimap button
 L["Left click"] = "Left click"

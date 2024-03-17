@@ -18,6 +18,8 @@ function SoDA:Gui()
 
     f:AddChild(SoDA:Legend())
 
+    local s = self.db.global.settings
+
     local characters = self.db.global.characters
     for guid, character in SoDA:spairs(characters, function(t, a, b) return t[b].basic.level < t[a].basic.level end) do
         if not character.disabled then
@@ -27,42 +29,56 @@ function SoDA:Gui()
             -- Basic
             local basic = SoDA:GetBasicGui(character)
             group:AddChild(basic)
-            group:AddChild(SoDA:Spacer())
+            if SoDA:BasicEnabled() then group:AddChild(SoDA:Spacer()) end
 
             -- Currency
             local currency = SoDA:GetCurrencyGui(character)
-            group:AddChild(currency)
-            group:AddChild(SoDA:Spacer())
+            if SoDA:CurrencyEnabled() then
+                group:AddChild(currency)
+                group:AddChild(SoDA:Spacer())
+            end
 
             -- Runes
             local runes = SoDA:GetRunesGui(character)
-            group:AddChild(runes)
-            group:AddChild(SoDA:Spacer())
+            if SoDA:RunesEnabled() then
+                group:AddChild(runes)
+                group:AddChild(SoDA:Spacer())
+            end
 
             -- Books
             local books = SoDA:GetBooksGui(character)
-            group:AddChild(books)
-            group:AddChild(SoDA:Spacer())
+            if SoDA:BooksEnabled() then
+                group:AddChild(books)
+                group:AddChild(SoDA:Spacer())
+            end
 
             -- Raids
             local raids = SoDA:GetRaidsGui(character)
-            group:AddChild(raids)
-            group:AddChild(SoDA:Spacer())
+            if SoDA:RaidsEnabled() then
+                group:AddChild(raids)
+                group:AddChild(SoDA:Spacer())
+            end
 
             -- PvP
             local pvp = SoDA:GetPvPGui(character)
-            group:AddChild(pvp)
-            group:AddChild(SoDA:Spacer())
+            if SoDA:PvPEnabled() then
+                group:AddChild(pvp)
+                group:AddChild(SoDA:Spacer())
+            end
 
             -- Factions
             local factions = SoDA:GetFactionsGui(character)
-            group:AddChild(factions)
-            group:AddChild(SoDA:Spacer())
+            if SoDA:FactionsEnabled() then
+                group:AddChild(factions)
+                group:AddChild(SoDA:Spacer())
+            end
 
             -- Professions
             local professions = SoDA:GetProfessionsGui(character)
-            group:AddChild(professions)
-            group:AddChild(SoDA:Spacer())
+            if SoDA:ProfessionsEnabled() then
+                group:AddChild(professions)
+                group:AddChild(SoDA:Spacer())
+            end
 
             f:AddChild(group)
         end
@@ -103,35 +119,50 @@ function SoDA:Legend()
 
     -- Basic
     legend:AddChild(SoDA:GetBasicLegend())
-    legend:AddChild(SoDA:Spacer())
+    if SoDA:BasicEnabled() then legend:AddChild(SoDA:Spacer()) end
 
     -- Currency
-    legend:AddChild(SoDA:GetCurrencyLegend())
-    legend:AddChild(SoDA:Spacer())
+    if SoDA:CurrencyEnabled() then
+        legend:AddChild(SoDA:GetCurrencyLegend())
+        legend:AddChild(SoDA:Spacer())
+    end
 
     -- Runes
-    legend:AddChild(SoDA:GetRunesLegend())
-    legend:AddChild(SoDA:Spacer())
+    if SoDA:RunesEnabled() then
+        legend:AddChild(SoDA:GetRunesLegend())
+        legend:AddChild(SoDA:Spacer())
+    end
 
     -- Books
-    legend:AddChild(SoDA:GetBooksLegend())
-    legend:AddChild(SoDA:Spacer())
+    if SoDA:BooksEnabled() then
+        legend:AddChild(SoDA:GetBooksLegend())
+        legend:AddChild(SoDA:Spacer())
+    end
 
     -- Raids
-    legend:AddChild(SoDA:GetRaidsLegend())
-    legend:AddChild(SoDA:Spacer())
+    if SoDA:RaidsEnabled() then
+        legend:AddChild(SoDA:GetRaidsLegend())
+        legend:AddChild(SoDA:Spacer())
+    end
 
     -- PvP
-    legend:AddChild(SoDA:GetPvPLegend())
-    legend:AddChild(SoDA:Spacer())
+    if SoDA:PvPEnabled() then
+        legend:AddChild(SoDA:GetPvPLegend())
+        legend:AddChild(SoDA:Spacer())
+    end
 
     -- Factions
-    legend:AddChild(SoDA:GetFactionsLegend())
-    legend:AddChild(SoDA:Spacer())
+    if SoDA:FactionsEnabled() then
+        legend:AddChild(SoDA:GetFactionsLegend())
+        legend:AddChild(SoDA:Spacer())
+    end
 
     -- Professions
-    legend:AddChild(SoDA:GetProfessionsLegend())
-    legend:AddChild(SoDA:Spacer())
+    if SoDA:ProfessionsEnabled() then
+        legend:AddChild(SoDA:GetProfessionsLegend())
+        legend:AddChild(SoDA:Spacer())
+    end
+
     return legend
 end
 

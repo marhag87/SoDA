@@ -13,6 +13,7 @@ end
 function SoDA:GetCurrencyGui(character)
     local group = self.aceGui:Create("SimpleGroup")
     group:SetWidth(self.defaultWidth)
+    local s = self.db.global.settings
 
     if character.currency == nil then
         return group
@@ -26,7 +27,9 @@ function SoDA:GetCurrencyGui(character)
     characterCopper:SetWidth(self.defaultWidth)
     local moneyString = GetMoneyString(character.currency.copper)
     characterCopper:SetText(moneyString)
-    group:AddChild(characterCopper)
+    if s.Gold == nil or s.Gold then
+        group:AddChild(characterCopper)
+    end
 
     return group
 end
@@ -34,6 +37,7 @@ end
 function SoDA:GetCurrencyLegend()
     local group = self.aceGui:Create("SimpleGroup")
     group:SetWidth(self.defaultWidth)
+    local s = self.db.global.settings
 
     -- Currency
     group:AddChild(SoDA:Header(self.L["Currency"]))
@@ -44,7 +48,9 @@ function SoDA:GetCurrencyLegend()
     SoDA:Tooltip(goldLabel.frame, function()
         SoDA:GoldLabelTooltip(goldLabel.frame)
     end)
-    group:AddChild(goldLabel)
+    if s.Gold == nil or s.Gold then
+        group:AddChild(goldLabel)
+    end
 
     return group
 end
@@ -91,4 +97,11 @@ function SoDA:GoldLabelTooltip(frame)
         end
     end
     GameTooltip:Show()
+end
+
+function SoDA:CurrencyEnabled()
+    local s = self.db.global.settings
+    local gold = s.Gold
+    if gold == nil then gold = true end
+    return gold
 end

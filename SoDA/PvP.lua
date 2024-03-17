@@ -22,6 +22,7 @@ function SoDA:GetPvPGui(character)
     local group = self.aceGui:Create("SimpleGroup")
     group:SetWidth(self.defaultWidth)
 
+    local s = self.db.global.settings
     local pvp = character.pvp or {}
     local ashenvaleWeeklyDone = pvp.ashenvaleWeekly or false
     local ashenvaleWeeklyResetAt = pvp.ashenvaleWeeklyResetAt or 0
@@ -38,7 +39,9 @@ function SoDA:GetPvPGui(character)
     local bloodCoinsLabel = self.aceGui:Create("Label")
     bloodCoinsLabel:SetWidth(self.defaultWidth)
     bloodCoinsLabel:SetText(coinsString)
-    group:AddChild(bloodCoinsLabel)
+    if s["Blood coins"] == nil or s["Blood coins"] then
+        group:AddChild(bloodCoinsLabel)
+    end
 
     -- Ashenvale weekly
     local ashenvaleWeekly = self.aceGui:Create("Label")
@@ -51,7 +54,9 @@ function SoDA:GetPvPGui(character)
             SoDA:AshenvaleWeeklyTooltip(ashenvaleWeekly.frame, ashenvaleWeeklyResetAt)
         end)
     end
-    group:AddChild(ashenvaleWeekly)
+    if s["Ashenvale weekly"] == nil or s["Ashenvale weekly"] then
+        group:AddChild(ashenvaleWeekly)
+    end
 
     -- WSG Rep
     local factions = character.factions or {}
@@ -63,7 +68,9 @@ function SoDA:GetPvPGui(character)
         ["topValue"] = 3000,
     }
     local wsgGroup = SoDA:FactionGui(wsg)
-    group:AddChild(wsgGroup)
+    if s["Warsong Gulch"] == nil or s["Warsong Gulch"] then
+        group:AddChild(wsgGroup)
+    end
 
     -- AB Rep
     local factions = character.factions or {}
@@ -75,7 +82,9 @@ function SoDA:GetPvPGui(character)
         ["topValue"] = 3000,
     }
     local abGroup = SoDA:FactionGui(ab)
-    group:AddChild(abGroup)
+    if s["Arathi Basin"] == nil or s["Arathi Basin"] then
+        group:AddChild(abGroup)
+    end
 
     return group
 end
@@ -83,12 +92,15 @@ end
 function SoDA:GetPvPLegend()
     local group = self.aceGui:Create("SimpleGroup")
     group:SetWidth(self.defaultWidth)
+    local s = self.db.global.settings
 
     -- PvP
     group:AddChild(SoDA:Header(self.L["PvP"]))
 
     -- Blood coins
-    group:AddChild(SoDA:LegendLabel(self.L["Blood coins"]))
+    if s["Blood coins"] == nil or s["Blood coins"] then
+        group:AddChild(SoDA:LegendLabel(self.L["Blood coins"]))
+    end
 
     -- Ashenvale weekly
     local ashenvaleWeeklyLabel = SoDA:LegendLabel(self.L["Ashenvale weekly"])
@@ -98,13 +110,19 @@ function SoDA:GetPvPLegend()
             SoDA:AshenvaleWeeklyTooltip(ashenvaleWeeklyLabel.frame, self.weeklyReset)
         end)
     end
-    group:AddChild(ashenvaleWeeklyLabel)
+    if s["Ashenvale weekly"] == nil or s["Ashenvale weekly"] then
+        group:AddChild(ashenvaleWeeklyLabel)
+    end
 
     -- WSG
-    group:AddChild(SoDA:LegendLabel(self.L["Warsong Gulch"]))
+    if s["Warsong Gulch"] == nil or s["Warsong Gulch"] then
+        group:AddChild(SoDA:LegendLabel(self.L["Warsong Gulch"]))
+    end
 
     -- AB
-    group:AddChild(SoDA:LegendLabel(self.L["Arathi Basin"]))
+    if s["Arathi Basin"] == nil or s["Arathi Basin"] then
+        group:AddChild(SoDA:LegendLabel(self.L["Arathi Basin"]))
+    end
 
     return group
 end
@@ -117,4 +135,17 @@ function SoDA:AshenvaleWeeklyTooltip(frame, resetAt)
     local resetTime = string.format(SecondsToTime(secondsLeft))
     GameTooltip:AddLine("|cffffffff" .. self.L["Resets in"] .. " " .. resetTime .. FONT_COLOR_CODE_CLOSE)
     GameTooltip:Show()
+end
+
+function SoDA:PvPEnabled()
+    local s = self.db.global.settings
+    local bloodCoins = s["Blood coins"]
+    if bloodCoins == nil then bloodCoins = true end
+    local ashenvaleWeekly = s["Ashenvale weekly"]
+    if ashenvaleWeekly == nil then ashenvaleWeekly = true end
+    local warsongGulch = s["Warsong Gulch"]
+    if warsongGulch == nil then warsongGulch = true end
+    local arathiBasin = s["Arathi Basin"]
+    if arathiBasin == nil then arathiBasin = true end
+    return bloodCoins or ashenvaleWeekly or warsongGulch or arathiBasin
 end

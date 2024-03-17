@@ -22,6 +22,7 @@ local SoDALDB = LibStub("LibDataBroker-1.1"):NewDataObject("SoDA", {
 local icon = LibStub("LibDBIcon-1.0")
 
 function SoDA:OnInitialize()
+    self.L = LibStub("AceLocale-3.0"):GetLocale("SoDALocale")
     self.db = LibStub("AceDB-3.0"):New("SoDADB", {
         profile = {
             minimap = {
@@ -52,8 +53,7 @@ function SoDA:OnInitialize()
     self.defaultWidth = 120
     self.weeklyReset = time() + C_DateAndTime.GetSecondsUntilWeeklyReset()
     icon:Register("SoDA", SoDALDB, self.db.profile.minimap)
-    InterfaceOptions_AddCategory(SoDA:GetConfig())
-    self.L = LibStub("AceLocale-3.0"):GetLocale("SoDALocale")
+    SoDA:SetupConfig()
 end
 
 function SoDA:PLAYER_ENTERING_WORLD()
