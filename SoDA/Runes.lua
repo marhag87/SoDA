@@ -22,9 +22,9 @@ function SoDA:GetRunes()
         48334, -- Commanding Shout
     }
 
-    for _, category in pairs(self.runeCategories) do
-        local known = C_Engraving.GetRunesForCategory(category, true)
-        local all = C_Engraving.GetRunesForCategory(category, false)
+    for _, runeCategory in pairs(self.runeCategories) do
+        local known = C_Engraving.GetRunesForCategory(runeCategory.category, true)
+        local all = C_Engraving.GetRunesForCategory(runeCategory.category, false)
         for _, rune in pairs(known) do
             runes.numRunesKnown = runes.numRunesKnown + 1
             table.insert(runes.known, rune)
@@ -171,16 +171,16 @@ function SoDA:RunesTooltip(frame, runes)
     else
         local known = runes.known or {}
         local unknown = runes.unknown or {}
-        for categoryName, category in pairs(self.runeCategories) do
+        for _, runeCategory in pairs(self.runeCategories) do
             GameTooltip:AddLine(" ")
-            GameTooltip:AddLine("|cffffffff" .. self.L[categoryName] .. FONT_COLOR_CODE_CLOSE)
+            GameTooltip:AddLine("|cffffffff" .. self.L[runeCategory.name] .. FONT_COLOR_CODE_CLOSE)
             for _, rune in ipairs(known) do
-                if rune.equipmentSlot == category then
+                if rune.equipmentSlot == runeCategory.category then
                     GameTooltip:AddDoubleLine(rune.name, self.checkMark)
                 end
             end
             for _, rune in ipairs(unknown) do
-                if rune.equipmentSlot == category then
+                if rune.equipmentSlot == runeCategory.category then
                     GameTooltip:AddDoubleLine(rune.name, " ")
                 end
             end

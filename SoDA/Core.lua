@@ -44,13 +44,13 @@ function SoDA:OnInitialize()
     self.maxProfessionRank = 300
     self.checkMark = "\124A:UI-LFG-ReadyMark:14:14\124a"
     self.runeCategories = {
-        ["Head"] = 1,
-        ["Chest"] = 5,
-        ["Wrist"] = 9,
-        ["Hands"] = 10,
-        ["Legs"] = 7,
-        ["Feet"] = 8,
-        ["Waist"] = 6,
+        { ["name"] = "Head",  ["category"] = 1 },
+        { ["name"] = "Chest", ["category"] = 5 },
+        { ["name"] = "Wrist", ["category"] = 9 },
+        { ["name"] = "Hands", ["category"] = 10 },
+        { ["name"] = "Waist", ["category"] = 6 },
+        { ["name"] = "Legs",  ["category"] = 7 },
+        { ["name"] = "Feet",  ["category"] = 8 },
     }
     self.defaultWidth = 120
     self.weeklyReset = time() + C_DateAndTime.GetSecondsUntilWeeklyReset()
