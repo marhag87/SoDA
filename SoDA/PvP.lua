@@ -1,12 +1,12 @@
 function SoDA:GetPvP()
     local pvp = {}
 
-    -- Ashenvale weekly
-    local ashenvaleWeeklyId = { ["Alliance"] = 79090, ["Horde"] = 79098 }
+    -- Ashenvale daily
+    local ashenvaleDailyId = { ["Alliance"] = 79090, ["Horde"] = 79098 }
     local faction, _ = UnitFactionGroup("player")
-    local questId = ashenvaleWeeklyId[faction]
-    pvp.ashenvaleWeekly = C_QuestLog.IsQuestFlaggedCompleted(questId)
-    pvp.ashenvaleWeeklyResetAt = time() + C_DateAndTime.GetSecondsUntilWeeklyReset()
+    local questId = ashenvaleDailyId[faction]
+    pvp.ashenvaleDaily = C_QuestLog.IsQuestFlaggedCompleted(questId)
+    pvp.ashenvaleDailyResetAt = time() + C_DateAndTime.GetSecondsUntilDailyReset()
 
     -- Blood Moon coins
     local bloodCoins = {}
@@ -24,8 +24,8 @@ function SoDA:GetPvPGui(character)
 
     local s = self.db.global.settings
     local pvp = character.pvp or {}
-    local ashenvaleWeeklyDone = pvp.ashenvaleWeekly or false
-    local ashenvaleWeeklyResetAt = pvp.ashenvaleWeeklyResetAt or 0
+    local ashenvaleDailyDone = pvp.ashenvaleDaily or false
+    local ashenvaleDailyResetAt = pvp.ashenvaleDailyResetAt or 0
 
     -- Header
     group:AddChild(SoDA:Header(" "))
@@ -43,19 +43,19 @@ function SoDA:GetPvPGui(character)
         group:AddChild(bloodCoinsLabel)
     end
 
-    -- Ashenvale weekly
-    local ashenvaleWeekly = self.aceGui:Create("Label")
-    ashenvaleWeekly:SetWidth(self.defaultWidth)
-    ashenvaleWeekly:SetText(" ")
-    if ashenvaleWeeklyDone == true and time() < ashenvaleWeeklyResetAt then
-        ashenvaleWeekly:SetText(self.checkMark)
-        -- Ashenvale weekly tooltip
-        SoDA:Tooltip(ashenvaleWeekly.frame, function()
-            SoDA:AshenvaleWeeklyTooltip(ashenvaleWeekly.frame, ashenvaleWeeklyResetAt)
+    -- Ashenvale daily
+    local ashenvaleDaily = self.aceGui:Create("Label")
+    ashenvaleDaily:SetWidth(self.defaultWidth)
+    ashenvaleDaily:SetText(" ")
+    if ashenvaleDailyDone == true and time() < ashenvaleDailyResetAt then
+        ashenvaleDaily:SetText(self.checkMark)
+        -- Ashenvale daily tooltip
+        SoDA:Tooltip(ashenvaleDaily.frame, function()
+            SoDA:AshenvaleDailyTooltip(ashenvaleDaily.frame, ashenvaleDailyResetAt)
         end)
     end
-    if s["Ashenvale weekly"] == nil or s["Ashenvale weekly"] then
-        group:AddChild(ashenvaleWeekly)
+    if s["Ashenvale daily"] == nil or s["Ashenvale daily"] then
+        group:AddChild(ashenvaleDaily)
     end
 
     -- WSG Rep
@@ -102,16 +102,16 @@ function SoDA:GetPvPLegend()
         group:AddChild(SoDA:LegendLabel(self.L["Blood coins"]))
     end
 
-    -- Ashenvale weekly
-    local ashenvaleWeeklyLabel = SoDA:LegendLabel(self.L["Ashenvale weekly"])
-    -- Ashenvale weekly tooltip
-    if time() < self.weeklyReset then
-        SoDA:Tooltip(ashenvaleWeeklyLabel.frame, function()
-            SoDA:AshenvaleWeeklyTooltip(ashenvaleWeeklyLabel.frame, self.weeklyReset)
+    -- Ashenvale daily
+    local ashenvaleDailyLabel = SoDA:LegendLabel(self.L["Ashenvale daily"])
+    -- Ashenvale daily tooltip
+    if time() < self.dailyReset then
+        SoDA:Tooltip(ashenvaleDailyLabel.frame, function()
+            SoDA:AshenvaleDailyTooltip(ashenvaleDailyLabel.frame, self.dailyReset)
         end)
     end
-    if s["Ashenvale weekly"] == nil or s["Ashenvale weekly"] then
-        group:AddChild(ashenvaleWeeklyLabel)
+    if s["Ashenvale daily"] == nil or s["Ashenvale daily"] then
+        group:AddChild(ashenvaleDailyLabel)
     end
 
     -- WSG
@@ -127,9 +127,9 @@ function SoDA:GetPvPLegend()
     return group
 end
 
-function SoDA:AshenvaleWeeklyTooltip(frame, resetAt)
+function SoDA:AshenvaleDailyTooltip(frame, resetAt)
     GameTooltip:SetOwner(frame, "ANCHOR_CURSOR")
-    GameTooltip:AddLine(self.L["Ashenvale weekly"])
+    GameTooltip:AddLine(self.L["Ashenvale daily"])
     GameTooltip:AddLine(" ")
     local secondsLeft = resetAt - time()
     local resetTime = string.format(SecondsToTime(secondsLeft))
@@ -141,11 +141,11 @@ function SoDA:PvPEnabled()
     local s = self.db.global.settings
     local bloodCoins = s["Blood coins"]
     if bloodCoins == nil then bloodCoins = true end
-    local ashenvaleWeekly = s["Ashenvale weekly"]
-    if ashenvaleWeekly == nil then ashenvaleWeekly = true end
+    local ashenvaleDaily = s["Ashenvale daily"]
+    if ashenvaleDaily == nil then ashenvaleDaily = true end
     local warsongGulch = s["Warsong Gulch"]
     if warsongGulch == nil then warsongGulch = true end
     local arathiBasin = s["Arathi Basin"]
     if arathiBasin == nil then arathiBasin = true end
-    return bloodCoins or ashenvaleWeekly or warsongGulch or arathiBasin
+    return bloodCoins or ashenvaleDaily or warsongGulch or arathiBasin
 end

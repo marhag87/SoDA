@@ -43,7 +43,7 @@ L["Raids"] = true
 -- PvP
 L["PvP"] = true
 L["Blood coins"] = true
-L["Ashenvale weekly"] = true
+L["Ashenvale daily"] = true
 L["Warsong Gulch"] = true
 L["Arathi Basin"] = true
 L["Alterac Valley"] = true

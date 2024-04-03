@@ -52,6 +52,7 @@ function SoDA:OnInitialize()
     }
     self.defaultWidth = 120
     self.weeklyReset = time() + C_DateAndTime.GetSecondsUntilWeeklyReset()
+    self.dailyReset = time() + C_DateAndTime.GetSecondsUntilDailyReset()
     icon:Register("SoDA", SoDALDB, self.db.profile.minimap)
     SoDA:SetupConfig()
 end

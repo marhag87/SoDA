@@ -82,10 +82,10 @@ function SoDA:GetSectionConfig()
     pvpLabel:SetText(self.L["PvP"])
     -- Blood coins
     local bloodCoinsFrame = SoDA:SectionCheckbox(self.sectionConfigFrame, pvpLabel, "Blood coins", 0)
-    -- Ashenvale weekly
-    local ashenvaleWeeklyFrame = SoDA:SectionCheckbox(self.sectionConfigFrame, bloodCoinsFrame, "Ashenvale weekly")
+    -- Ashenvale daily
+    local ashenvaleDailyFrame = SoDA:SectionCheckbox(self.sectionConfigFrame, bloodCoinsFrame, "Ashenvale daily")
     -- Warsong Gulch
-    local warsongGulchFrame = SoDA:SectionCheckbox(self.sectionConfigFrame, ashenvaleWeeklyFrame, "Warsong Gulch")
+    local warsongGulchFrame = SoDA:SectionCheckbox(self.sectionConfigFrame, ashenvaleDailyFrame, "Warsong Gulch")
     -- Arathi Basin
     local arathiBasinFrame = SoDA:SectionCheckbox(self.sectionConfigFrame, warsongGulchFrame, "Arathi Basin")
 
