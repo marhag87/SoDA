@@ -41,10 +41,12 @@ function SoDA:GetSectionConfig()
     local sleepingBagFrame = SoDA:SectionCheckbox(self.sectionConfigFrame, mountFrame, "Sleeping bag")
     -- Rested
     local restedFrame = SoDA:SectionCheckbox(self.sectionConfigFrame, sleepingBagFrame, "Rested")
+    -- Dual spec
+    local dualSpecFrame = SoDA:SectionCheckbox(self.sectionConfigFrame, restedFrame, "Dual spec")
 
     -- Currency
     local currencyLabel = self.sectionConfigFrame:CreateFontString(nil, "ARTWORK", "GameFontNormal")
-    currencyLabel:SetPoint("TOPLEFT", restedFrame, "BOTTOMLEFT", 0, -8)
+    currencyLabel:SetPoint("TOPLEFT", dualSpecFrame, "BOTTOMLEFT", 0, -8)
     currencyLabel:SetText(self.L["Currency"])
     -- Gold
     local goldFrame = SoDA:SectionCheckbox(self.sectionConfigFrame, currencyLabel, "Gold", 0)

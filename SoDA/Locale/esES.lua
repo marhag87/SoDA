@@ -16,6 +16,7 @@ L["Sleeping bag"] = true
 L["Cooldown remaining"] = true
 L["Buff"] = true
 L["Rested"] = true
+L["Dual spec"] = true
 
 -- Currency
 L["Total"] = true

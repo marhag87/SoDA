@@ -34,6 +34,9 @@ function SoDA:GetBasicInformation()
         end
     end
 
+    -- Dual spec
+    basic.dualSpec = GetNumTalentGroups() == 2
+
     return basic
 end
 
@@ -110,6 +113,15 @@ function SoDA:GetBasicGui(character)
     restedXPLabel:SetText(percentRest .. "%")
     if s.Rested == nil or s.Rested then group:AddChild(restedXPLabel) end
 
+    -- Dual spec
+    local dualSpecLabel = self.aceGui:Create("Label")
+    dualSpecLabel:SetWidth(self.defaultWidth)
+    dualSpecLabel:SetText(" ")
+    if character.basic.dualSpec then
+        dualSpecLabel:SetText(self.checkMark)
+    end
+    if s["Dual spec"] == nil or s["Dual spec"] then group:AddChild(dualSpecLabel) end
+
     return group
 end
 
@@ -146,6 +158,11 @@ function SoDA:GetBasicLegend()
         group:AddChild(SoDA:LegendLabel(self.L["Rested"]))
     end
 
+    -- Dual spec
+    if s["Dual spec"] == nil or s["Dual spec"] then
+        group:AddChild(SoDA:LegendLabel(self.L["Dual spec"]))
+    end
+
     return group
 end
 
@@ -180,5 +197,7 @@ function SoDA:BasicEnabled()
     if sleepingBag == nil then sleepingBag = true end
     local rested = s.Rested
     if rested == nil then rested = true end
-    return realm or level or mount or sleepingBag or rested
+    local dualSpec = s["Dual spec"]
+    if dualSpec == nil then dualSpec = true end
+    return realm or level or mount or sleepingBag or rested or dualSpec
 end
