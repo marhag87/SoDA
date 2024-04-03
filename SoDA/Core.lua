@@ -44,7 +44,9 @@ function SoDA:OnInitialize()
     self.maxProfessionRank = 300
     self.checkMark = "\124A:UI-LFG-ReadyMark:14:14\124a"
     self.runeCategories = {
+        ["Head"] = 1,
         ["Chest"] = 5,
+        ["Wrist"] = 9,
         ["Hands"] = 10,
         ["Legs"] = 7,
         ["Feet"] = 8,
