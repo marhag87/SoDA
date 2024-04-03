@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.0] - 2024-04-03
+
+- Convert ashenvale weekly into a daily
+- Add head and wrist runes
+- Ensure rune tooltip order follows character sheet
+- Add dual spec
+- Add Emerald Wardens
+- Update max character level and profession
+- Show exalted factions as green without numbers
+- Update TOC for 1.15.2
+
 ## [0.8.0] - 2024-03-17
 
 - Add option to hide sections
