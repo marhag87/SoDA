@@ -57,7 +57,12 @@ function SoDA:FactionGui(faction)
     local standing = getglobal("FACTION_STANDING_LABEL" .. faction.standingId)
     local factionStanding = self.aceGui:Create("Label")
     factionStanding:SetWidth(self.defaultWidth)
-    factionStanding:SetText(standing .. " " .. faction.earnedValue - faction.bottomValue)
+    if faction.standingId >= 8 then
+        factionStanding:SetText(standing)
+        factionStanding:SetColor(0, 1, 0)
+    else
+        factionStanding:SetText(standing .. " " .. faction.earnedValue - faction.bottomValue)
+    end
     group:AddChild(factionStanding)
 
     return group
