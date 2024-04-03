@@ -97,10 +97,12 @@ function SoDA:GetSectionConfig()
     factionsLabel:SetText(self.L["Factions"])
     -- ACA/DSL
     local acaDslFrame = SoDA:SectionCheckbox(self.sectionConfigFrame, factionsLabel, "ACA/DSL", 0)
+    -- Emerald Wardens
+    local emeraldWardensFrame = SoDA:SectionCheckbox(self.sectionConfigFrame, acaDslFrame, "Emerald Wardens")
 
     -- Professions
     local professionsLabel = self.sectionConfigFrame:CreateFontString(nil, "ARTWORK", "GameFontNormal")
-    professionsLabel:SetPoint("TOPLEFT", acaDslFrame, "BOTTOMLEFT", 0, -8)
+    professionsLabel:SetPoint("TOPLEFT", emeraldWardensFrame, "BOTTOMLEFT", 0, -8)
     professionsLabel:SetText(self.L["Professions"])
     -- First primary
     local firstPrimaryFrame = SoDA:SectionCheckbox(self.sectionConfigFrame, professionsLabel, "First primary", 0)

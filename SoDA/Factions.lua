@@ -7,17 +7,19 @@ function SoDA:GetFactions()
         faction.name, _, faction.standingId, faction.bottomValue, faction.topValue, faction.earnedValue, _, _, _, _, _, _, _, factionId, _, _ =
             GetFactionInfo(i)
         -- Phase one
-        if factionId == 2587 then factions.phaseOne = faction end -- Durotar Supply and Logistics
-        if factionId == 2586 then factions.phaseOne = faction end -- Azeroth Commerce Authority
+        if factionId == 2587 then factions.phaseOne = faction end       -- Durotar Supply and Logistics
+        if factionId == 2586 then factions.phaseOne = faction end       -- Azeroth Commerce Authority
+        -- Phase 3
+        if factionId == 2641 then factions.emeraldWardens = faction end -- Emerald Wardens
         -- Warsong Gulch
-        if factionId == 890 then factions.wsg = faction end       -- Silverwing Sentinels
-        if factionId == 889 then factions.wsg = faction end       -- Warsong Outriders
+        if factionId == 890 then factions.wsg = faction end             -- Silverwing Sentinels
+        if factionId == 889 then factions.wsg = faction end             -- Warsong Outriders
         -- Arathi Basin
-        if factionId == 509 then factions.ab = faction end        -- The League of Arathor
-        if factionId == 510 then factions.ab = faction end        -- The Defilers
+        if factionId == 509 then factions.ab = faction end              -- The League of Arathor
+        if factionId == 510 then factions.ab = faction end              -- The Defilers
         -- Alterac Valley
-        if factionId == 730 then factions.av = faction end        -- Stormpike Guard
-        if factionId == 729 then factions.av = faction end        -- Frostwolf Clan
+        if factionId == 730 then factions.av = faction end              -- Stormpike Guard
+        if factionId == 729 then factions.av = faction end              -- Frostwolf Clan
     end
     return factions
 end
@@ -43,6 +45,19 @@ function SoDA:GetFactionsGui(character)
     local phaseOneGroup = SoDA:FactionGui(phaseOne)
     if s["ACA/DSL"] == nil or s["ACA/DSL"] then
         group:AddChild(phaseOneGroup)
+    end
+
+    -- Phase 3, Emerald Wardens
+    local emeraldWardens = factions.emeraldWardens or {
+        ["name"] = self.L["Emerald Wardens"],
+        ["standingId"] = 4,
+        ["earnedValue"] = 0,
+        ["bottomValue"] = 0,
+        ["topValue"] = 3000,
+    }
+    local emeraldWardensGroup = SoDA:FactionGui(emeraldWardens)
+    if s["Emerald Wardens"] == nil or s["Emerald Wardens"] then
+        group:AddChild(emeraldWardensGroup)
     end
 
     return group
@@ -81,6 +96,11 @@ function SoDA:GetFactionsLegend()
         group:AddChild(SoDA:LegendLabel(self.L["ACA/DSL"]))
     end
 
+    -- Emerald Wardens
+    if s["Emerald Wardens"] == nil or s["Emerald Wardens"] then
+        group:AddChild(SoDA:LegendLabel(self.L["Emerald Wardens"]))
+    end
+
     return group
 end
 
@@ -88,5 +108,7 @@ function SoDA:FactionsEnabled()
     local s = self.db.global.settings
     local acaDsl = s["ACA/DSL"]
     if acaDsl == nil then acaDsl = true end
-    return acaDsl
+    local emeraldWardens = s["Emerald Wardens"]
+    if emeraldWardens == nil then emeraldWardens = true end
+    return acaDsl or emeraldWardens
 end

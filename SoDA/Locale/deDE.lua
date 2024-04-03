@@ -54,6 +54,7 @@ L["Alterac Valley"] = true
 -- Factions
 L["Factions"] = true
 L["ACA/DSL"] = true
+L["Emerald Wardens"] = true
 
 -- Professions
 L["Professions"] = true
