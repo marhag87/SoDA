@@ -39,9 +39,9 @@ function SoDA:OnInitialize()
     SoDA:RegisterEvent("PLAYER_LOGOUT")
     SoDA:RegisterEvent("TRADE_SKILL_UPDATE")
     SoDA:RegisterChatCommand("soda", "ToggleGui")
-    self.maxLevel = 40
+    self.maxLevel = 50
     self.maxMountSpeed = 60
-    self.maxProfessionRank = 225
+    self.maxProfessionRank = 300
     self.checkMark = "\124A:UI-LFG-ReadyMark:14:14\124a"
     self.runeCategories = {
         ["Chest"] = 5,
