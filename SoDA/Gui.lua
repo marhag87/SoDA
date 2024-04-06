@@ -15,6 +15,7 @@ function SoDA:Gui()
         width = 250
     end
     f:SetWidth(width)
+    f:SetHeight(550)
 
     f:AddChild(SoDA:Legend())
 

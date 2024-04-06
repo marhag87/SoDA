@@ -21,6 +21,11 @@ function SoDA:GetFactions()
         if factionId == 730 then factions.av = faction end              -- Stormpike Guard
         if factionId == 729 then factions.av = faction end              -- Frostwolf Clan
     end
+
+    -- Emerald Wardens daily
+    factions.incursionDaily = C_QuestLog.IsQuestFlaggedCompleted(82068)
+    factions.incursionDailyResetAt = time() + C_DateAndTime.GetSecondsUntilDailyReset()
+
     return factions
 end
 
@@ -58,6 +63,23 @@ function SoDA:GetFactionsGui(character)
     local emeraldWardensGroup = SoDA:FactionGui(emeraldWardens)
     if s["Emerald Wardens"] == nil or s["Emerald Wardens"] then
         group:AddChild(emeraldWardensGroup)
+    end
+
+    -- Emerald Wardens daily
+    local incursionDailyDone = factions.incursionDaily or false
+    local incursionDailyResetAt = factions.incursionDailyResetAt or 0
+    local incursionDailyLabel = self.aceGui:Create("Label")
+    incursionDailyLabel:SetWidth(self.defaultWidth)
+    incursionDailyLabel:SetText(" ")
+    if incursionDailyDone == true and time() < incursionDailyResetAt then
+        incursionDailyLabel:SetText(self.checkMark)
+        -- Incursion daily tooltip
+        SoDA:Tooltip(incursionDailyLabel.frame, function()
+            SoDA:IncursionDailyTooltip(incursionDailyLabel.frame, incursionDailyResetAt)
+        end)
+    end
+    if s["Incursion daily"] == nil or s["Incursion daily"] then
+        group:AddChild(incursionDailyLabel)
     end
 
     return group
@@ -101,6 +123,18 @@ function SoDA:GetFactionsLegend()
         group:AddChild(SoDA:LegendLabel(self.L["Emerald Wardens"]))
     end
 
+    -- Emerald Wardens daily
+    local incursionDailyLabel = SoDA:LegendLabel(self.L["Incursion daily"])
+    -- Emerald Wardens daily tooltip
+    if time() < self.dailyReset then
+        SoDA:Tooltip(incursionDailyLabel.frame, function()
+            SoDA:IncursionDailyTooltip(incursionDailyLabel.frame, self.dailyReset)
+        end)
+    end
+    if s["Incursion daily"] == nil or s["Incursion daily"] then
+        group:AddChild(incursionDailyLabel)
+    end
+
     return group
 end
 
@@ -110,5 +144,17 @@ function SoDA:FactionsEnabled()
     if acaDsl == nil then acaDsl = true end
     local emeraldWardens = s["Emerald Wardens"]
     if emeraldWardens == nil then emeraldWardens = true end
-    return acaDsl or emeraldWardens
+    local incursionDaily = s["Incursion daily"]
+    if incursionDaily == nil then incursionDaily = true end
+    return acaDsl or emeraldWardens or incursionDaily
+end
+
+function SoDA:IncursionDailyTooltip(frame, resetAt)
+    GameTooltip:SetOwner(frame, "ANCHOR_CURSOR")
+    GameTooltip:AddLine(self.L["Incursion daily"])
+    GameTooltip:AddLine(" ")
+    local secondsLeft = resetAt - time()
+    local resetTime = string.format(SecondsToTime(secondsLeft))
+    GameTooltip:AddLine("|cffffffff" .. self.L["Resets in"] .. " " .. resetTime .. FONT_COLOR_CODE_CLOSE)
+    GameTooltip:Show()
 end
