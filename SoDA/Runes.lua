@@ -134,6 +134,9 @@ function SoDA:GetRunesGui(character)
         group:AddChild(darkRider)
     end
 
+    -- Spacer
+    group:AddChild(SoDA:Spacer())
+
     return group
 end
 
@@ -159,6 +162,9 @@ function SoDA:GetRunesLegend()
     if s["Dark Riders"] == nil or s["Dark Riders"] then
         group:AddChild(SoDA:LegendLabel(self.L["Dark Riders"]))
     end
+
+    -- Spacer
+    group:AddChild(SoDA:Spacer())
 
     return group
 end

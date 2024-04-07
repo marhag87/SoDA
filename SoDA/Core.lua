@@ -42,7 +42,7 @@ function SoDA:OnInitialize()
     self.maxLevel = 50
     self.maxMountSpeed = 60
     self.maxProfessionRank = 300
-    self.checkMark = "\124A:UI-LFG-ReadyMark:14:14\124a"
+    self.checkMark = "\124A:UI-LFG-ReadyMark:12:12\124a"
     self.runeCategories = {
         { ["name"] = "Head",  ["category"] = 1 },
         { ["name"] = "Chest", ["category"] = 5 },

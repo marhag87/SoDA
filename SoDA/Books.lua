@@ -79,6 +79,9 @@ function SoDA:GetBooksGui(character)
         group:AddChild(booksKnown)
     end
 
+    -- Spacer
+    group:AddChild(SoDA:Spacer())
+
     return group
 end
 
@@ -94,6 +97,9 @@ function SoDA:GetBooksLegend()
     if s["Phase 2"] == nil or s["Phase 2"] then
         group:AddChild(SoDA:LegendLabel(self.L["Phase 2"]))
     end
+
+    -- Spacer
+    group:AddChild(SoDA:Spacer())
 
     return group
 end

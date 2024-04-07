@@ -82,6 +82,9 @@ function SoDA:GetProfessionsGui(character)
         group:AddChild(SoDA:GetSkillGui(professions.fishing, false))
     end
 
+    -- Spacer
+    group:AddChild(SoDA:Spacer())
+
     return group
 end
 
@@ -163,6 +166,9 @@ function SoDA:GetProfessionsLegend()
     if s.Fishing == nil or s.Fishing then
         group:AddChild(SoDA:LegendLabel(self.L["Fishing"]))
     end
+
+    -- Spacer
+    group:AddChild(SoDA:Spacer())
 
     return group
 end

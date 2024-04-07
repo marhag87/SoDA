@@ -31,6 +31,9 @@ function SoDA:GetCurrencyGui(character)
         group:AddChild(characterCopper)
     end
 
+    -- Spacer
+    group:AddChild(SoDA:Spacer())
+
     return group
 end
 
@@ -43,14 +46,17 @@ function SoDA:GetCurrencyLegend()
     group:AddChild(SoDA:Header(self.L["Currency"]))
 
     -- Gold
-    local goldLabel = SoDA:LegendLabel(self.L["Gold"])
-    -- Gold label tooltip
-    SoDA:Tooltip(goldLabel.frame, function()
-        SoDA:GoldLabelTooltip(goldLabel.frame)
-    end)
     if s.Gold == nil or s.Gold then
+        local goldLabel = SoDA:LegendLabel(self.L["Gold"])
+        -- Gold label tooltip
+        SoDA:Tooltip(goldLabel.frame, function()
+            SoDA:GoldLabelTooltip(goldLabel.frame)
+        end)
         group:AddChild(goldLabel)
     end
+
+    -- Spacer
+    group:AddChild(SoDA:Spacer())
 
     return group
 end

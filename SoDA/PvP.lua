@@ -86,6 +86,9 @@ function SoDA:GetPvPGui(character)
         group:AddChild(abGroup)
     end
 
+    -- Spacer
+    group:AddChild(SoDA:Spacer())
+
     return group
 end
 
@@ -123,6 +126,9 @@ function SoDA:GetPvPLegend()
     if s["Arathi Basin"] == nil or s["Arathi Basin"] then
         group:AddChild(SoDA:LegendLabel(self.L["Arathi Basin"]))
     end
+
+    -- Spacer
+    group:AddChild(SoDA:Spacer())
 
     return group
 end

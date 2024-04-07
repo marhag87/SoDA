@@ -163,6 +163,9 @@ function SoDA:GetBasicLegend()
         group:AddChild(SoDA:LegendLabel(self.L["Dual spec"]))
     end
 
+    -- Spacer
+    group:AddChild(SoDA:Spacer())
+
     return group
 end
 

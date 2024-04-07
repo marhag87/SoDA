@@ -82,6 +82,9 @@ function SoDA:GetFactionsGui(character)
         group:AddChild(incursionDailyLabel)
     end
 
+    -- Spacer
+    group:AddChild(SoDA:Spacer())
+
     return group
 end
 
@@ -134,6 +137,9 @@ function SoDA:GetFactionsLegend()
     if s["Incursion daily"] == nil or s["Incursion daily"] then
         group:AddChild(incursionDailyLabel)
     end
+
+    -- Spacer
+    group:AddChild(SoDA:Spacer())
 
     return group
 end

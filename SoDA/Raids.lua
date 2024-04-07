@@ -74,6 +74,9 @@ function SoDA:GetRaidsGui(character)
         group:AddChild(gnomereganLock)
     end
 
+    -- Spacer
+    group:AddChild(SoDA:Spacer())
+
     return group
 end
 
@@ -112,6 +115,9 @@ function SoDA:GetRaidsLegend()
     if s.Gnomeregan == nil or s.Gnomeregan then
         group:AddChild(SoDA:LegendLabel("Gnomeregan"))
     end
+
+    -- Spacer
+    group:AddChild(SoDA:Spacer())
 
     return group
 end
