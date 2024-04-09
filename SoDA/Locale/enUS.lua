@@ -44,6 +44,7 @@ L["Phase 2"] = true
 L["Raids"] = true
 L["Blackfathom Deeps"] = true
 L["Gnomeregan"] = true
+L["Sunken Temple"] = true
 
 -- PvP
 L["PvP"] = true

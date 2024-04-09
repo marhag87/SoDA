@@ -77,6 +77,8 @@ function SoDA:GetSectionConfig()
     local bfdFrame = SoDA:SectionCheckbox(self.sectionConfigFrame, raidsLabel, "Blackfathom Deeps", 0)
     -- Gnomeregan
     local gnomereganFrame = SoDA:SectionCheckbox(self.sectionConfigFrame, bfdFrame, "Gnomeregan")
+    -- Sunken Temple
+    local sunkenTempleFrame = SoDA:SectionCheckbox(self.sectionConfigFrame, gnomereganFrame, "Sunken Temple")
 
     -- PvP
     local pvpLabel = self.sectionConfigFrame:CreateFontString(nil, "ARTWORK", "GameFontNormal")

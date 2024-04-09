@@ -5,21 +5,19 @@ function SoDA:GetRaids()
         for i = 1, numSavedInstances do
             local name, _, reset, _, _, _, _, _, _, _, numEncounters, encounterProgress, _, instanceId =
                 GetSavedInstanceInfo(i)
+            local raid = {}
+            raid.resetAt = time() + reset
+            raid.encounterProgress = encounterProgress
+            raid.numEncounters = numEncounters
+            raid.name = name
             if instanceId == 48 then -- Blackfathom Deeps
-                local bfd = {}
-                bfd.resetAt = time() + reset
-                bfd.encounterProgress = encounterProgress
-                bfd.numEncounters = numEncounters
-                bfd.name = name
-                raids.bfd = bfd
+                raids.bfd = raid
             end
             if instanceId == 90 then -- Gnomeregan
-                local gnomeregan = {}
-                gnomeregan.resetAt = time() + reset
-                gnomeregan.encounterProgress = encounterProgress
-                gnomeregan.numEncounters = numEncounters
-                gnomeregan.name = name
-                raids.gnomeregan = gnomeregan
+                raids.gnomeregan = raid
+            end
+            if instanceId == 109 then -- Sunken Temple
+                raids.sunkenTemple = raid
             end
         end
     end
@@ -74,6 +72,25 @@ function SoDA:GetRaidsGui(character)
         group:AddChild(gnomereganLock)
     end
 
+    -- Sunken Temple
+    local sunkenTemple = raids.sunkenTemple or {
+        ["encounterProgress"] = nil,
+        ["numEncounters"] = 8,
+        ["name"] = "Sunken Temple",
+        ["resetAt"] = 0,
+    }
+    local sunkenTempleLock = SoDA:RaidLock(sunkenTemple)
+    sunkenTempleLock:SetWidth(self.defaultWidth)
+    if sunkenTemple.resetAt > 0 then
+        -- Sunken Temple tooltip
+        SoDA:Tooltip(sunkenTempleLock.frame, function()
+            SoDA:RaidsTooltip(sunkenTempleLock.frame, sunkenTemple)
+        end)
+    end
+    if s["Sunken Temple"] == nil or s["Sunken Temple"] then
+        group:AddChild(sunkenTempleLock)
+    end
+
     -- Spacer
     group:AddChild(SoDA:Spacer())
 
@@ -116,6 +133,11 @@ function SoDA:GetRaidsLegend()
         group:AddChild(SoDA:LegendLabel("Gnomeregan"))
     end
 
+    -- Sunken Temple
+    if s["Sunken Temple"] == nil or s["Sunken Temple"] then
+        group:AddChild(SoDA:LegendLabel("Sunken Temple"))
+    end
+
     -- Spacer
     group:AddChild(SoDA:Spacer())
 
@@ -138,5 +160,7 @@ function SoDA:RaidsEnabled()
     if bfd == nil then bfd = true end
     local gnomeregan = s.Gnomeregan
     if gnomeregan == nil then gnomeregan = true end
-    return bfd or gnomeregan
+    local sunkenTemple = s["Sunken Temple"]
+    if sunkenTemple == nil then sunkenTemple = true end
+    return bfd or gnomeregan or sunkenTemple
 end
