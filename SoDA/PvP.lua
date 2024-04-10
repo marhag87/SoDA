@@ -15,6 +15,13 @@ function SoDA:GetPvP()
     bloodCoins.gold = GetItemCount(213170, true)
     pvp.bloodCoins = bloodCoins
 
+    -- Massacre coins
+    local massacreCoins = {}
+    massacreCoins.copper = GetItemCount(221364, true)
+    massacreCoins.silver = GetItemCount(221365, true)
+    massacreCoins.gold = GetItemCount(221366, true)
+    pvp.massacreCoins = massacreCoins
+
     return pvp
 end
 
@@ -41,6 +48,19 @@ function SoDA:GetPvPGui(character)
     bloodCoinsLabel:SetText(coinsString)
     if s["Blood coins"] == nil or s["Blood coins"] then
         group:AddChild(bloodCoinsLabel)
+    end
+
+    -- Massacre coins
+    local massacreCoins = pvp.massacreCoins or {}
+    local copper = massacreCoins.copper or 0
+    local silver = massacreCoins.silver or 0
+    local gold = massacreCoins.gold or 0
+    local coinsString = GetMoneyString(copper + (silver * 100) + (gold * 100 * 100))
+    local massacreCoinsLabel = self.aceGui:Create("Label")
+    massacreCoinsLabel:SetWidth(self.defaultWidth)
+    massacreCoinsLabel:SetText(coinsString)
+    if s["Massacre coins"] == nil or s["Massacre coins"] then
+        group:AddChild(massacreCoinsLabel)
     end
 
     -- Ashenvale daily
@@ -105,6 +125,11 @@ function SoDA:GetPvPLegend()
         group:AddChild(SoDA:LegendLabel(self.L["Blood coins"]))
     end
 
+    -- Massacre coins
+    if s["Massacre coins"] == nil or s["Massacre coins"] then
+        group:AddChild(SoDA:LegendLabel(self.L["Massacre coins"]))
+    end
+
     -- Ashenvale daily
     local ashenvaleDailyLabel = SoDA:LegendLabel(self.L["Ashenvale daily"])
     -- Ashenvale daily tooltip
@@ -147,11 +172,13 @@ function SoDA:PvPEnabled()
     local s = self.db.global.settings
     local bloodCoins = s["Blood coins"]
     if bloodCoins == nil then bloodCoins = true end
+    local massacreCoins = s["Massacre coins"]
+    if massacreCoins == nil then massacreCoins = true end
     local ashenvaleDaily = s["Ashenvale daily"]
     if ashenvaleDaily == nil then ashenvaleDaily = true end
     local warsongGulch = s["Warsong Gulch"]
     if warsongGulch == nil then warsongGulch = true end
     local arathiBasin = s["Arathi Basin"]
     if arathiBasin == nil then arathiBasin = true end
-    return bloodCoins or ashenvaleDaily or warsongGulch or arathiBasin
+    return bloodCoins or massacreCoins or ashenvaleDaily or warsongGulch or arathiBasin
 end
