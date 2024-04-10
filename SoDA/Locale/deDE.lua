@@ -22,6 +22,7 @@ L["Dual spec"] = true
 L["Total"] = true
 L["Currency"] = true
 L["Gold"] = true
+L["Wild Offering"] = true
 
 -- Runes
 L["Runes"] = true

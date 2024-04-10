@@ -50,10 +50,12 @@ function SoDA:GetSectionConfig()
     currencyLabel:SetText(self.L["Currency"])
     -- Gold
     local goldFrame = SoDA:SectionCheckbox(self.sectionConfigFrame, currencyLabel, "Gold", 0)
+    -- Wild Offering
+    local wildOfferingFrame = SoDA:SectionCheckbox(self.sectionConfigFrame, goldFrame, "Wild Offering")
 
     -- Runes
     local runesLabel = self.sectionConfigFrame:CreateFontString(nil, "ARTWORK", "GameFontNormal")
-    runesLabel:SetPoint("TOPLEFT", goldFrame, "BOTTOMLEFT", 0, -8)
+    runesLabel:SetPoint("TOPLEFT", wildOfferingFrame, "BOTTOMLEFT", 0, -8)
     runesLabel:SetText(self.L["Runes"])
     -- Runes
     local runesFrame = SoDA:SectionCheckbox(self.sectionConfigFrame, runesLabel, "Runes", 0)

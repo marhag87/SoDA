@@ -1,13 +1,14 @@
 function SoDA:GetCurrency()
     local currency = {}
-    local copper = SoDA:GetCopper()
-    currency.copper = copper
-    return currency
-end
 
-function SoDA:GetCopper()
+    -- Gold
     local copper = GetMoney()
-    return copper
+    currency.copper = copper
+
+    -- Wild Offering
+    currency.wildOffering = GetItemCount(221262, true)
+
+    return currency
 end
 
 function SoDA:GetCurrencyGui(character)
@@ -29,6 +30,15 @@ function SoDA:GetCurrencyGui(character)
     characterCopper:SetText(moneyString)
     if s.Gold == nil or s.Gold then
         group:AddChild(characterCopper)
+    end
+
+    -- Wild Offering
+    local wildOffering = character.currency.wildOffering or 0
+    local wildOfferingLabel = self.aceGui:Create("Label")
+    wildOfferingLabel:SetWidth(self.defaultWidth)
+    wildOfferingLabel:SetText(wildOffering)
+    if s["Wild Offering"] == nil or s["Wild Offering"] then
+        group:AddChild(wildOfferingLabel)
     end
 
     -- Spacer
@@ -53,6 +63,11 @@ function SoDA:GetCurrencyLegend()
             SoDA:GoldLabelTooltip(goldLabel.frame)
         end)
         group:AddChild(goldLabel)
+    end
+
+    -- Wild Offering
+    if s["Wild Offering"] == nil or s["Wild Offering"] then
+        group:AddChild(SoDA:LegendLabel(self.L["Wild Offering"]))
     end
 
     -- Spacer
@@ -109,5 +124,7 @@ function SoDA:CurrencyEnabled()
     local s = self.db.global.settings
     local gold = s.Gold
     if gold == nil then gold = true end
-    return gold
+    local wildOffering = s["Wild Offering"]
+    if wildOffering == nil then wildOffering = true end
+    return gold or wildOffering
 end
