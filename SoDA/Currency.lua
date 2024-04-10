@@ -8,6 +8,9 @@ function SoDA:GetCurrency()
     -- Wild Offering
     currency.wildOffering = GetItemCount(221262, true)
 
+    -- Emerald Chip
+    currency.emeraldChip = GetItemCount(219927, true)
+
     return currency
 end
 
@@ -41,6 +44,15 @@ function SoDA:GetCurrencyGui(character)
         group:AddChild(wildOfferingLabel)
     end
 
+    -- Wild Offering
+    local emeraldChip = character.currency.emeraldChip or 0
+    local emeraldChipLabel = self.aceGui:Create("Label")
+    emeraldChipLabel:SetWidth(self.defaultWidth)
+    emeraldChipLabel:SetText(emeraldChip)
+    if s["Emerald Chip"] == nil or s["Emerald Chip"] then
+        group:AddChild(emeraldChipLabel)
+    end
+
     -- Spacer
     group:AddChild(SoDA:Spacer())
 
@@ -68,6 +80,11 @@ function SoDA:GetCurrencyLegend()
     -- Wild Offering
     if s["Wild Offering"] == nil or s["Wild Offering"] then
         group:AddChild(SoDA:LegendLabel(self.L["Wild Offering"]))
+    end
+
+    -- Emerald Chip
+    if s["Emerald Chip"] == nil or s["Emerald Chip"] then
+        group:AddChild(SoDA:LegendLabel(self.L["Emerald Chip"]))
     end
 
     -- Spacer
@@ -126,5 +143,7 @@ function SoDA:CurrencyEnabled()
     if gold == nil then gold = true end
     local wildOffering = s["Wild Offering"]
     if wildOffering == nil then wildOffering = true end
-    return gold or wildOffering
+    local emeraldChip = s["Emerald Chip"]
+    if emeraldChip == nil then emeraldChip = true end
+    return gold or wildOffering or emeraldChip
 end

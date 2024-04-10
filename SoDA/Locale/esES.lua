@@ -23,6 +23,7 @@ L["Total"] = true
 L["Currency"] = true
 L["Gold"] = true
 L["Wild Offering"] = true
+L["Emerald Chip"] = true
 
 -- Runes
 L["Runes"] = true
