@@ -44,7 +44,7 @@ function SoDA:GetCurrencyGui(character)
         group:AddChild(wildOfferingLabel)
     end
 
-    -- Wild Offering
+    -- Emerald Chip
     local emeraldChip = character.currency.emeraldChip or 0
     local emeraldChipLabel = self.aceGui:Create("Label")
     emeraldChipLabel:SetWidth(self.defaultWidth)
