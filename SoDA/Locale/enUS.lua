@@ -50,6 +50,7 @@ L["Sunken Temple"] = true
 
 -- PvP
 L["PvP"] = true
+L["Rank"] = true
 L["Blood coins"] = true
 L["Massacre coins"] = true
 L["Ashenvale daily"] = true

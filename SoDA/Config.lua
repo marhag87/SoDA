@@ -88,8 +88,10 @@ function SoDA:GetSectionConfig()
     local pvpLabel = self.sectionConfigFrame:CreateFontString(nil, "ARTWORK", "GameFontNormal")
     pvpLabel:SetPoint("TOPLEFT", title, "BOTTOMLEFT", 300, -8)
     pvpLabel:SetText(self.L["PvP"])
+    -- Rank
+    local rankFrame = SoDA:SectionCheckbox(self.sectionConfigFrame, pvpLabel, "Rank", 0)
     -- Blood coins
-    local bloodCoinsFrame = SoDA:SectionCheckbox(self.sectionConfigFrame, pvpLabel, "Blood coins", 0)
+    local bloodCoinsFrame = SoDA:SectionCheckbox(self.sectionConfigFrame, rankFrame, "Blood coins")
     -- Massacre coins
     local massacreCoinsFrame = SoDA:SectionCheckbox(self.sectionConfigFrame, bloodCoinsFrame, "Massacre coins")
     -- Ashenvale daily

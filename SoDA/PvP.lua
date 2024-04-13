@@ -1,6 +1,14 @@
 function SoDA:GetPvP()
     local pvp = {}
 
+    -- Rank
+    local rank = UnitPVPRank("player")
+    if rank > 0 then
+        pvp.honor = {}
+        pvp.honor.rankName, pvp.honor.rankNumber = GetPVPRankInfo(rank)
+        pvp.honor.progress = GetPVPRankProgress()
+    end
+
     -- Ashenvale daily
     local ashenvaleDailyId = { ["Alliance"] = 79090, ["Horde"] = 79098 }
     local faction, _ = UnitFactionGroup("player")
@@ -36,6 +44,22 @@ function SoDA:GetPvPGui(character)
 
     -- Header
     group:AddChild(SoDA:Header(" "))
+
+    -- Rank
+    local honor = pvp.honor or {}
+    local honorLabel = self.aceGui:Create("Label")
+    honorLabel:SetWidth(self.defaultWidth)
+    honorLabel:SetText(" ")
+    if honor.rankNumber ~= nil and honor.rankNumber > 0 then
+        if honor.rankNumber >= self.maxHonorRank then
+            honorLabel:SetText("|cff00ff00" .. honor.rankNumber .. FONT_COLOR_CODE_CLOSE)
+        else
+            honorLabel:SetText(honor.rankNumber .. ", " .. honor.progress .. "%")
+        end
+    end
+    if s.Rank == nil or s.Rank then
+        group:AddChild(honorLabel)
+    end
 
     -- Blood coins
     local bloodCoins = pvp.bloodCoins or {}
@@ -120,6 +144,11 @@ function SoDA:GetPvPLegend()
     -- PvP
     group:AddChild(SoDA:Header(self.L["PvP"]))
 
+    -- Rank
+    if s.Rank == nil or s.Rank then
+        group:AddChild(SoDA:LegendLabel(self.L["Rank"]))
+    end
+
     -- Blood coins
     if s["Blood coins"] == nil or s["Blood coins"] then
         group:AddChild(SoDA:LegendLabel(self.L["Blood coins"]))
@@ -170,6 +199,8 @@ end
 
 function SoDA:PvPEnabled()
     local s = self.db.global.settings
+    local rank = s.Rank
+    if rank == nil then rank = true end
     local bloodCoins = s["Blood coins"]
     if bloodCoins == nil then bloodCoins = true end
     local massacreCoins = s["Massacre coins"]
@@ -180,5 +211,5 @@ function SoDA:PvPEnabled()
     if warsongGulch == nil then warsongGulch = true end
     local arathiBasin = s["Arathi Basin"]
     if arathiBasin == nil then arathiBasin = true end
-    return bloodCoins or massacreCoins or ashenvaleDaily or warsongGulch or arathiBasin
+    return rank or bloodCoins or massacreCoins or ashenvaleDaily or warsongGulch or arathiBasin
 end
