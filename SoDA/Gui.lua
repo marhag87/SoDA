@@ -106,6 +106,9 @@ function SoDA:Legend()
     local legend = self.aceGui:Create("SimpleGroup")
     legend:SetWidth(self.defaultWidth)
 
+    -- Character name
+    legend:AddChild(SoDA:Header(" "))
+
     -- Basic
     if SoDA:BasicEnabled() then
         legend:AddChild(SoDA:GetBasicLegend())

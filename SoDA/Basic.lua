@@ -129,9 +129,6 @@ function SoDA:GetBasicLegend()
     local group = self.aceGui:Create("SimpleGroup")
     group:SetWidth(self.defaultWidth)
 
-    -- Character name, not shown
-    group:AddChild(SoDA:Header(" "))
-
     local s = self.db.global.settings
     -- Realm
     if s.Realm == nil or s.Realm then
