@@ -27,7 +27,6 @@ L["Emerald Chip"] = true
 
 -- Runes
 L["Runes"] = true
-L["Grizzby"] = true
 L["Dark Riders"] = true
 L["No rune data"] = "No rune data, please log this character and open the character sheet to refresh"
 L["Head"] = true

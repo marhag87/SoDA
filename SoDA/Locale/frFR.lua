@@ -28,7 +28,6 @@ L["Emerald Chip"] = true
 -- Runes
 L["Runes"] = true
 L["Dark Riders"] = true
-L["Grizzby"] = true
 L["No rune data"] = true
 L["Head"] = true
 L["Chest"] = true

@@ -61,10 +61,8 @@ function SoDA:GetSectionConfig()
     runesLabel:SetText(self.L["Runes"])
     -- Runes
     local runesFrame = SoDA:SectionCheckbox(self.sectionConfigFrame, runesLabel, "Runes", 0)
-    -- Grizzby
-    local grizzbyFrame = SoDA:SectionCheckbox(self.sectionConfigFrame, runesFrame, "Grizzby")
     -- Dark Riders
-    local darkRidersFrame = SoDA:SectionCheckbox(self.sectionConfigFrame, grizzbyFrame, "Dark Riders")
+    local darkRidersFrame = SoDA:SectionCheckbox(self.sectionConfigFrame, runesFrame, "Dark Riders")
 
     -- Books
     local booksLabel = self.sectionConfigFrame:CreateFontString(nil, "ARTWORK", "GameFontNormal")

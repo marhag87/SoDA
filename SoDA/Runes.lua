@@ -51,11 +51,6 @@ function SoDA:GetRunes()
         end
     end
 
-    -- Grizzby
-    local grizzbyQuest = { ["Horde"] = 78304, ["Alliance"] = 78297 }
-    local faction, _ = UnitFactionGroup("player")
-    runes.grizzby = C_QuestLog.IsQuestFlaggedCompleted(grizzbyQuest[faction])
-
     -- Dark Riders
     local darkRiderQuests = {
         { ["id"] = "80098", ["zone"] = "Deadwind Pass" },
@@ -107,17 +102,6 @@ function SoDA:GetRunesGui(character)
         group:AddChild(runesKnown)
     end
 
-    -- Grizzby
-    local grizzby = self.aceGui:Create("Label")
-    grizzby:SetWidth(self.defaultWidth)
-    grizzby:SetText(" ")
-    if runes.grizzby then
-        grizzby:SetText(self.checkMark)
-    end
-    if s.Grizzby == nil or s.Grizzby then
-        group:AddChild(grizzby)
-    end
-
     -- Dark Riders
     local darkRiderQuestsDone = runes.darkRiderQuestsDone or "?"
     local darkRider = self.aceGui:Create("Label")
@@ -151,11 +135,6 @@ function SoDA:GetRunesLegend()
     -- Runes
     if s.Runes == nil or s.Runes then
         group:AddChild(SoDA:LegendLabel(self.L["Runes"]))
-    end
-
-    -- Grizzby
-    if s.Grizzby == nil or s.Grizzby then
-        group:AddChild(SoDA:LegendLabel("Grizzby"))
     end
 
     -- Dark Riders
@@ -214,9 +193,7 @@ function SoDA:RunesEnabled()
     local s = self.db.global.settings
     local runes = s.Runes
     if runes == nil then runes = true end
-    local grizzby = s.Grizzby
-    if grizzby == nil then grizzby = true end
     local darkRiders = s["Dark Riders"]
     if darkRiders == nil then darkRiders = true end
-    return runes or grizzby or darkRiders
+    return runes or darkRiders
 end
